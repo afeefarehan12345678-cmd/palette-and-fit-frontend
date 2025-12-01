@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Palette and Fit – Splash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Same fonts as landing page -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Style+Script&family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      /* colours aligned with landing page */
+      --accent: #ad00e2;
+      --accent-soft: #c2a1ff;
+      --bg-light: #fdf5ff;
+      --bg-mid: #f3ddff;
+      --text-main: #4a1366;
+      --text-soft: #5e5770;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(194, 161, 255, 0.22), transparent 55%),
+        radial-gradient(circle at 84% 82%, rgba(173, 0, 226, 0.24), transparent 55%),
+        linear-gradient(135deg, var(--bg-light), var(--bg-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      padding: 1.6rem;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    /* smooth fade when leaving */
+    body.fade-out {
+      opacity: 0;
+      transform: translateY(10px) scale(1.01);
+    }
+
+    .splash-card {
+      width: min(360px, 100%);
+      padding: clamp(1.8rem, 4vw, 2.2rem);
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 18px 45px rgba(142, 77, 255, 0.18);
+      backdrop-filter: blur(18px);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      animation: card-in 0.7s ease-out;
+    }
+
+    @keyframes card-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .logo-animation {
+      width: min(220px, 65vw);
+      max-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* BRAND NAME – same font feel as landing main-heading */
+    .brand-name {
+      font-family: "Style Script", cursive;
+      font-size: clamp(2.3rem, 7vw, 3.4rem);
+      font-weight: 400;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, #5a00c2, #b800ff);
+      -webkit-background-clip: text;
+      color: transparent;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 100%;
+      border-right: 3px solid rgba(90, 0, 194, 0.9); /* typing cursor */
+      animation:
+        typing 4.2s steps(24, end),
+        blink-caret 0.75s step-end infinite;
+      text-shadow:
+        0 0 26px #fff,
+        0 8px 28px #c2a1ff7c,
+        0 2px 8px #fff9;
+    }
+
+    .tagline {
+      font-size: clamp(0.9rem, 2.2vw, 1rem);
+      color: var(--text-soft);
+      margin-top: 0.1rem;
+      opacity: 0;
+      animation: fade-up 0.8s ease-out 2.1s forwards;
+    }
+
+    .bottom-hint {
+      font-size: 0.78rem;
+      color: rgba(74, 19, 102, 0.75);
+      margin-top: 0.4rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fade-up 0.8s ease-out 2.6s forwards;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes blink-caret {
+      from,
+      to {
+        border-color: transparent;
+      }
+      50% {
+        border-color: rgba(90, 0, 194, 0.9);
+      }
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1.2rem;
+      }
+      .splash-card {
+        border-radius: 22px;
+        padding: 1.7rem;
+        gap: 1rem;
+      }
+      .logo-animation {
+        width: 60vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="splash-card">
+    <div class="logo-animation">
+      <!-- Lottie animation file (humans.json same folder) -->
+      <lottie-player
+        src="humans.json"
+        background="transparent"
+        speed="1"
+        loop
+        autoplay
+        style="width: 100%; height: 100%;"
+      ></lottie-player>
+    </div>
+
+    <div class="brand-name">Palette and Fit</div>
+    <div class="tagline">
+      Aesthetic Fashion Tailoring &amp; Every Shape and Shade for Pakistan
+    </div>
+    <div class="bottom-hint">loading your perfect look...</div>
+  </div>
+
+  <!-- Lottie player script -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <script>
+    // ------- ROUTING LOGIC AFTER SPLASH -------
+
+    // if user not logged in → guest-home.html
+    // if logged in (localStorage has user_email / pf_user_email / signupEmail) → homepage1.html
+    const LANDING_URL  = "guest-home.html";   // not logged-in → guest landing
+    const LOGGEDIN_URL = "homepage1.html";    // logged-in → main logged-in home
+
+    const SPLASH_DURATION_MS = 4600;  // splash show time
+    const FADE_DURATION_MS   = 600;   // fade-out time
+
+    function isUserLoggedIn() {
+      const email =
+        localStorage.getItem("user_email") ||
+        localStorage.getItem("pf_user_email") ||
+        localStorage.getItem("signupEmail");
+      return !!email;
+    }
+
+    window.addEventListener("load", function () {
+      setTimeout(() => {
+        // smooth fade-out
+        document.body.classList.add("fade-out");
+
+        setTimeout(() => {
+          if (isUserLoggedIn()) {
+            window.location.href = LOGGEDIN_URL;
+          } else {
+            window.location.href = LANDING_URL;
+          }
+        }, FADE_DURATION_MS);
+      }, SPLASH_DURATION_MS);
+    });
+  </script>
+</body>
+</html>

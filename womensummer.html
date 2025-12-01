@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Palette and Fit – Women Summer Collection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-light: #f7f4ee;
+      --bg-mid: #ece5db;
+      --bg-dark: #23242a;
+      --accent: #ad00e2;
+      --accent2: #c2a1ff;
+      --heading: #ad00e2;
+      --nav-bg: #ece5db;
+      --text: #23242a;
+      --button-bg: #ad00e2;
+      --button-text: #fff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-light);
+      color: var(--text);
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
+    }
+
+    body.dark-mode {
+      --bg-light: #18181b;
+      --bg-mid: #23242a;
+      --bg-dark: #121214;
+      --nav-bg: #23242a;
+      --text: #ffffff;
+      --heading: #ad00e2;
+      --accent: #ad00e2;
+      --accent2: #c2a1ff;
+      --button-bg: #5f5cff;
+      --button-text: #ffffff;
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    /* ========== GUEST HEADER & NAV (same as homepage1) ========== */
+
+    header.guest-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.9rem 2.4rem;
+      background: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 14px #0001;
+      font-weight: 600;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .logo img {
+      height: 56px;
+      width: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .logo-text {
+      font-family: 'Style Script', cursive;
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: #ad00e2;
+      line-height: 1.05;
+    }
+
+    @media (max-width: 600px) {
+      header.guest-header {
+        padding-inline: 1.2rem;
+      }
+      .logo img {
+        height: 44px;
+        width: 44px;
+      }
+      .logo-text {
+        font-size: 1.6rem;
+      }
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-weight: 400;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .nav a {
+      color: #2a024d;
+      text-decoration: none;
+      font-size: 1.02rem;
+      padding: 0.25rem 0;
+      cursor: pointer;
+      transition: color 0.18s, font-weight 0.18s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .pill-btn {
+      background: #7a2df6;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 0.5rem 1.6rem;
+      font-size: 0.98rem;
+      font-weight: 500;
+      box-shadow: 0 2px 12px #a673fa29;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.18s, transform 0.12s;
+      min-height: 36px;
+      white-space: nowrap;
+      text-decoration: none;
+      justify-content: center;
+      min-width: 140px;
+    }
+
+    .pill-btn:hover,
+    .pill-btn:focus {
+      background: #ad00e2;
+      color: #fff;
+      box-shadow: 0 6px 24px #a673fa49;
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    body.dark-mode .pill-btn {
+      background: #2a024d;
+    }
+
+    body.dark-mode .pill-btn:hover,
+    body.dark-mode .pill-btn:focus {
+      background: #7a2df6;
+    }
+
+    .darkmode-btn span:first-child {
+      font-size: 1.1em;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+
+    .hamburger-box {
+      position: relative;
+      width: 20px;
+      height: 2px;
+    }
+
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: #7a2df6;
+      transition: transform 0.28s cubic-bezier(.55,.06,.68,.19), top 0.2s, opacity 0.2s;
+    }
+
+    .hamburger-inner { top: 0; }
+    .hamburger-inner::before { top: -6px; }
+    .hamburger-inner::after  { top:  6px; }
+
+    .hamburger.is-active .hamburger-inner {
+      transform: rotate(45deg);
+    }
+    .hamburger.is-active .hamburger-inner::before {
+      top: 0;
+      transform: rotate(-90deg);
+    }
+    .hamburger.is-active .hamburger-inner::after {
+      top: 0;
+      opacity: 0;
+    }
+
+    body.dark-mode .nav a {
+      color: #ffffff;
+    }
+    body.dark-mode .nav a:hover,
+    body.dark-mode .nav a.active {
+      color: var(--accent);
+    }
+
+    /* guest drawer */
+
+    .nav-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 120;
+    }
+
+    .nav-drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(320px, 80vw);
+      background: var(--bg-light);
+      box-shadow: -16px 0 38px rgba(0, 0, 0, 0.28);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 130;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1.4rem 1.6rem;
+    }
+
+    body.dark-mode .nav-drawer {
+      background: var(--bg-dark);
+    }
+
+    .nav-drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+
+    .drawer-title {
+      font-family: 'Style Script', cursive;
+      font-size: 1.55rem;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .drawer-close {
+      background: none;
+      border: none;
+      font-size: 1.35rem;
+      line-height: 1;
+      padding: 0.15rem 0.4rem;
+      border-radius: 999px;
+      cursor: pointer;
+      color: #e3c7ff;
+      transition: background 0.18s, transform 0.18s, color 0.18s;
+    }
+
+    .drawer-close:hover {
+      background: rgba(173, 0, 226, 0.16);
+      color: #ffffff;
+      transform: rotate(90deg);
+    }
+
+    .drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 0.2rem 0 1.6rem;
+    }
+
+    .drawer-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1.05rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.18s, color 0.18s, transform 0.1s;
+    }
+
+    .drawer-icon {
+      width: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drawer-icon i {
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+
+    .drawer-label {
+      flex: 1;
+    }
+
+    .drawer-links a:hover,
+    .drawer-links a:focus {
+      background: rgba(173, 0, 226, 0.12);
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    .drawer-links a.active {
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(173, 0, 226, 0.16);
+    }
+
+    body.dark-mode .drawer-links a {
+      color: #f7f4ee;
+    }
+
+    body.dark-mode .drawer-links a:hover,
+    body.dark-mode .drawer-links a:focus {
+      background: rgba(194, 161, 255, 0.18);
+      color: #ffffff;
+    }
+
+    .drawer-actions {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.1rem;
+    }
+
+    .drawer-actions .pill-btn {
+      width: 100%;
+    }
+
+    .drawer-links a.active .drawer-icon i {
+      color: #ad00e2;
+    }
+
+    body.dark-mode .drawer-links a.active {
+      background: rgba(194, 161, 255, 0.25);
+      color: #ffffff;
+    }
+
+    body.dark-mode .drawer-links a.active .drawer-icon i {
+      color: #ffffff;
+    }
+
+    @media (max-width: 1200px) {
+      header.guest-header {
+        padding: 0.8rem 1.2rem;
+        justify-content: space-between;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .header-actions {
+        gap: 0.4rem;
+      }
+
+      .hamburger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border-radius: 8px;
+        border: 1px solid rgba(173, 0, 226, 0.25);
+        background: transparent;
+      }
+
+      .header-actions .pill-btn {
+        min-width: 0;
+        padding-inline: 1.3rem;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      .hamburger {
+        display: none !important;
+      }
+    }
+
+    /* ========== LOGGED-IN HEADER (same as homepage1, with Categories) ========== */
+
+    header.logged-header {
+      background: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 14px #0001;
+      font-weight: 600;
+      padding: 0.9rem 2.4rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+    }
+
+    .nav-logged {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      justify-content: center;
+      font-weight: 400;
+    }
+
+    .nav-logged a {
+      color: #2a024d;
+      text-decoration: none;
+      font-size: 1.02rem;
+      padding: 0.25rem 0;
+      cursor: pointer;
+      transition: color 0.18s, font-weight 0.18s;
+    }
+
+    .nav-logged a:hover,
+    .nav-logged a.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .wishlist-link {
+      font-size: 1.08rem;
+    }
+
+    /* desktop Categories dropdown */
+
+    .nav-logged .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-toggle {
+      background: none;
+      border: none;
+      font: inherit;
+      color: #2a024d;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      padding: 0.25rem 0;
+    }
+
+    .nav-dropdown-chevron {
+      font-size: 0.75rem;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 50%;
+      transform: translate(-50%, 6px);
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      padding: 0.45rem 0.35rem;
+      min-width: 130px;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 99;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 0.4rem 0.9rem;
+      border-radius: 10px;
+      white-space: nowrap;
+      font-size: 0.95rem;
+    }
+
+    .nav-dropdown-menu a:hover {
+      background: rgba(173,0,226,0.08);
+      color: var(--accent);
+    }
+
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, 0);
+    }
+
+    .nav-dropdown:hover .nav-dropdown-chevron,
+    .nav-dropdown:focus-within .nav-dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    body.dark-mode .nav-logged a {
+      color: #ffffff;
+    }
+    body.dark-mode .nav-logged a:hover,
+    body.dark-mode .nav-logged a.active {
+      color: var(--accent);
+    }
+
+    body.dark-mode .nav-dropdown-toggle {
+      color: #ffffff;
+    }
+
+    body.dark-mode .nav-dropdown-menu {
+      background: #23242a;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.7);
+    }
+
+    body.dark-mode .nav-dropdown-menu a {
+      color: #f5f5f5;
+    }
+
+    body.dark-mode .nav-dropdown-menu a:hover {
+      background: rgba(194,161,255,0.2);
+      color: #ffffff;
+    }
+
+    .profile-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0.2rem;
+      background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%);
+      border: 2.2px solid #fff;
+      overflow: hidden;
+      padding: 0;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .profile-icon svg {
+      width: 23px;
+      height: 23px;
+    }
+    .profile-icon:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    }
+    body.dark-mode .profile-icon {
+      border-color: #ad00e2;
+    }
+
+    .profile-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      min-width: 160px;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 10px 32px rgba(0,0,0,0.22);
+      padding: 0.45rem 0.35rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 20;
+    }
+    .profile-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .profile-menu a {
+      display: block;
+      padding: 0.45rem 0.9rem;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      white-space: nowrap;
+      transition: background 0.16s ease, color 0.16s ease;
+    }
+    .profile-menu a:hover {
+      background: rgba(173,0,226,0.08);
+      color: var(--accent);
+    }
+
+    body.dark-mode .profile-menu {
+      background: #23242a;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+    }
+    body.dark-mode .profile-menu a {
+      color: #f5f5f5;
+    }
+    body.dark-mode .profile-menu a:hover {
+      background: rgba(194,161,255,0.2);
+      color: #ffffff;
+    }
+
+    .header-actions-logged {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .darkmode-btn .dm-icon {
+      font-size: 1.1em;
+    }
+
+    .hamburger-logged {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+    .hamburger-logged-box {
+      position: relative;
+      width: 20px;
+      height: 2px;
+    }
+    .hamburger-logged-inner,
+    .hamburger-logged-inner::before,
+    .hamburger-logged-inner::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: #7a2df6;
+      transition: transform 0.28s cubic-bezier(.55,.06,.68,.19), top 0.2s, opacity 0.2s;
+    }
+    .hamburger-logged-inner { top: 0; }
+    .hamburger-logged-inner::before { top: -6px; }
+    .hamburger-logged-inner::after  { top:  6px; }
+
+    .hamburger-logged.is-active .hamburger-logged-inner {
+      transform: rotate(45deg);
+    }
+    .hamburger-logged.is-active .hamburger-logged-inner::before {
+      top: 0;
+      transform: rotate(-90deg);
+    }
+    .hamburger-logged.is-active .hamburger-logged-inner::after {
+      top: 0;
+      opacity: 0;
+    }
+
+    @media (max-width: 1200px) {
+      header.logged-header {
+        padding: 0.8rem 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-logged {
+        display: none;
+      }
+      .header-actions-logged {
+        gap: 0.4rem;
+      }
+      .hamburger-logged {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border-radius: 8px;
+        border: 1px solid rgba(173, 0, 226, 0.25);
+        background: transparent;
+      }
+      .header-actions-logged .darkmode-btn {
+        display: none; /* DM in drawer on mobile */
+      }
+      .profile-wrapper {
+        display: none; /* profile goes in drawer on mobile */
+      }
+    }
+
+    /* logged-in drawer */
+
+    .nav-drawer-logged {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(320px, 80vw);
+      background: var(--bg-light);
+      box-shadow: -16px 0 38px rgba(0, 0, 0, 0.28);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 130;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1.4rem 1.6rem;
+    }
+    body.dark-mode .nav-drawer-logged {
+      background: var(--bg-dark);
+    }
+    .nav-drawer-logged.open {
+      transform: translateX(0);
+    }
+
+    .nav-drawer-backdrop-logged {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 120;
+    }
+    .nav-drawer-backdrop-logged.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-links-logged {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 0.2rem 0 1.6rem;
+    }
+
+    .drawer-links-logged a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1.05rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.18s, color 0.18s, transform 0.1s;
+    }
+
+    .drawer-links-logged a:hover,
+    .drawer-links-logged a:focus {
+      background: rgba(173, 0, 226, 0.12);
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    .drawer-links-logged a.active {
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(173, 0, 226, 0.16);
+    }
+
+    body.dark-mode .drawer-links-logged a {
+      color: #f7f4ee;
+    }
+
+    body.dark-mode .drawer-links-logged a:hover,
+    body.dark-mode .drawer-links-logged a:focus {
+      background: rgba(194, 161, 255, 0.18);
+      color: #ffffff;
+    }
+
+    body.dark-mode .drawer-links-logged a.active {
+      background: rgba(194,161,255,0.25);
+      color: #ffffff;
+    }
+
+    .drawer-actions-logged {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.1rem;
+    }
+    .drawer-actions-logged .pill-btn {
+      width: 100%;
+      min-width: 0;
+    }
+
+    /* drawer Shop accordion */
+
+    .drawer-group {
+      margin-bottom: 0.25rem;
+    }
+
+    .drawer-group-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 1.05rem;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.18s, color 0.18s, transform 0.1s;
+    }
+
+    .drawer-group-toggle:hover,
+    .drawer-group-toggle:focus {
+      background: rgba(173,0,226,0.12);
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    .drawer-chevron {
+      margin-left: auto;
+      font-size: 0.8rem;
+      transition: transform 0.18s ease;
+    }
+
+    .drawer-group-menu {
+      display: none;
+      padding: 0.2rem 0 0.3rem 2.4rem;
+    }
+
+    .drawer-group-menu a {
+      padding: 0.4rem 0.2rem;
+      font-size: 0.97rem;
+      border-radius: 999px;
+    }
+
+    .drawer-group.open .drawer-group-menu {
+      display: block;
+    }
+
+    .drawer-group.open .drawer-chevron {
+      transform: rotate(180deg);
+    }
+
+    body.dark-mode .drawer-group-toggle {
+      color: #f7f4ee;
+    }
+    body.dark-mode .drawer-group-toggle:hover,
+    body.dark-mode .drawer-group-toggle:focus {
+      background: rgba(194,161,255,0.18);
+      color: #ffffff;
+    }
+
+    /* ========== HERO (Women summer) ========== */
+
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 360px;
+      background: #f5eee6;
+      padding: 1.5rem 0 0 0;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-content {
+      max-width: 440px;
+      padding-left: 3.7rem;
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .hero-content h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1.12;
+      margin: 0 0 1.1rem 0;
+      letter-spacing: 0.4px;
+      color: #2d1046;
+    }
+
+    .hero-content p {
+      font-size: 1.15rem;
+      color: #5e5451;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-btn {
+      margin-top: 1.3rem;
+      padding: 0.85em 2.1em;
+      font-size: 1.12rem;
+      border-radius: 28px;
+      border: none;
+      background: linear-gradient(92deg, #ad00e2 60%, #c2a1ff 100%);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 3px 16px #ad00e220;
+      cursor: pointer;
+      transition: background .2s, box-shadow .2s, transform .13s;
+    }
+    .hero-btn:hover {
+      background: #ad00e2;
+      transform: translateY(-2px) scale(1.06);
+    }
+
+    .hero-carousel-3d {
+      flex: 0 0 295px;
+      height: 255px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+      z-index: 1;
+      margin-right: 50px;
+    }
+
+    .carousel-3d-track {
+      position: relative;
+      width: 195px;
+      height: 235px;
+      transform-style: preserve-3d;
+      transition: transform 1.18s cubic-bezier(.8,.06,.23,1.07);
+      will-change: transform;
+    }
+
+    .carousel-3d-track img {
+      position: absolute;
+      width: 180px;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 22px;
+      left: 0; top: 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 2px 4px #bbb8;
+      background: #fff;
+      border: 2.5px solid #f5eee6;
+      filter: grayscale(12%) brightness(1.08);
+      opacity: 0.85;
+      transition:
+        transform 1.1s cubic-bezier(.88,.14,.16,.96),
+        filter 0.42s,
+        box-shadow 0.39s,
+        opacity 1.0s;
+      will-change: transform, filter, box-shadow, opacity;
+    }
+
+    .carousel-3d-track img.focused {
+      filter: none;
+      opacity: 1;
+      box-shadow: 0 10px 38px #ad00e295, 0 2px 14px #c2a1ff80;
+      border-color: #c2a1ff;
+      z-index: 10;
+    }
+    .carousel-3d-track img.side {
+      filter: grayscale(45%) blur(1.5px);
+      opacity: 0.68;
+    }
+    .carousel-3d-track img.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 1050px) {
+      .hero-section { flex-direction: column; padding: 2rem 0 1.2rem; }
+      .hero-carousel-3d { margin: 1.8rem 0 0 0; }
+      .hero-content { padding-left: 1.4rem; padding-right: 1.4rem; text-align: center; }
+    }
+
+    /* ========== PRODUCTS GRID ========== */
+
+    .carousel-section {
+      padding: 2.2rem 0 0;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .carousel-section h2 {
+      color: var(--accent);
+      font-size: 2.1rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 2.2rem;
+      letter-spacing: 0.3px;
+    }
+
+    .products-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 2.2rem;
+      padding: 0 1.2rem 2.4rem;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 21px;
+      box-shadow: 0 2px 14px #ad00e220;
+      padding: 1.4rem 1.2rem 1.1rem;
+      text-align: center;
+      transition: box-shadow .2s, transform .18s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-7px) scale(1.03);
+      box-shadow: 0 8px 28px #ad00e232;
+    }
+
+    .product-card img {
+      width: 120px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 10px #dacaf7a1;
+      background: #eee;
+    }
+
+    .product-card .title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #2d1046;
+      margin-bottom: 0.4em;
+    }
+    .product-card .desc {
+      color: #666;
+      font-size: 0.96rem;
+      margin-bottom: 1.1em;
+    }
+
+    .wishlist-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.45em;
+      position: absolute;
+      top: 14px;
+      right: 15px;
+      z-index: 2;
+      color: #ad00e2;
+      transition: color .17s;
+    }
+    .wishlist-btn .wishlist-heart {
+      pointer-events: none;
+    }
+    .wishlist-btn.active .wishlist-heart {
+      color: #e60023;
+    }
+
+    /* ========== MODAL ========== */
+
+    #previewModal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #18181bcc;
+      backdrop-filter: blur(2px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    #modalContent {
+      background: #fff;
+      max-width: 410px;
+      width: 95vw;
+      border-radius: 28px;
+      padding: 2.3rem 1.7rem 1.7rem;
+      box-shadow: 0 12px 44px #ad00e295;
+      position: relative;
+    }
+
+    #closeModalBtn {
+      position: absolute;
+      top: 1.1em;
+      right: 1.5em;
+      font-size: 1.7em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ad00e2;
+    }
+
+    #modalImg {
+      width: 200px;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+      margin: 0 auto 1.3em auto;
+      box-shadow: 0 6px 24px #ad00e235;
+    }
+
+    #modalTitle {
+      text-align: center;
+      color: #ad00e2;
+      margin-bottom: 0.7em;
+      font-size: 1.35em;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+    }
+
+    #modalDesc {
+      text-align: center;
+      color: #4c3557;
+      font-size: 1.05em;
+      margin-bottom: 1.1em;
+    }
+
+    #modalSuggestBtn {
+      width: 100%;
+      margin-top: 0.6em;
+      font-size: 1.02em;
+    }
+
+    /* ========== FOOTER ========== */
+
+    footer {
+      background: #444b4b;
+      color: #eee;
+      padding: 2.5rem 0 1.2rem;
+      margin-top: 2rem;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    footer strong {
+      color: #fff;
+    }
+
+    .footer-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 0 1.4rem;
+      font-size: 0.96rem;
+    }
+
+    .footer-col {
+      flex: 1 1 200px;
+      min-width: 180px;
+    }
+
+    body.dark-mode footer {
+      background: #18181b;
+      color: #ccc;
+    }
+    body.dark-mode footer a {
+      color: #aaa;
+    }
+
+    @media (max-width: 800px) {
+      .footer-main {
+        flex-direction: column;
+        gap: 0.7rem;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .footer-main {
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== GUEST HEADER (markup only, guests get redirected) ========== -->
+  <header class="guest-header" id="guestHeader">
+    <div class="logo">
+      <img src="palette and fit logo.png" alt="Palette and Fit logo">
+      <span class="logo-text">Palette and Fit</span>
+    </div>
+
+    <nav class="nav">
+      <a href="guest-home.html">Home</a>
+      <a href="aboutus.html">About us</a>
+      <a href="contactus.html">Contact us</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="landing.html" class="pill-btn" id="guestRegisterBtn">Register</a>
+
+      <button class="pill-btn darkmode-btn" id="guestDarkModeToggle" aria-pressed="false">
+        <span>🌙</span>
+        <span>Dark Mode</span>
+      </button>
+
+      <button class="hamburger" id="guestNavToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Guest drawer + backdrop -->
+  <div class="nav-drawer-backdrop" id="guestNavBackdrop"></div>
+
+  <aside class="nav-drawer" id="guestNavDrawer" aria-hidden="true">
+    <div class="drawer-header">
+      <span class="drawer-title">Palette &amp; Fit</span>
+      <button class="drawer-close" id="guestDrawerClose" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="drawer-links">
+      <a href="guest-home.html">
+        <span class="drawer-icon"><i class="fa-solid fa-house"></i></span>
+        <span class="drawer-label">Home</span>
+      </a>
+      <a href="aboutus.html">
+        <span class="drawer-icon"><i class="fa-solid fa-circle-info"></i></span>
+        <span class="drawer-label">About us</span>
+      </a>
+      <a href="contactus.html">
+        <span class="drawer-icon"><i class="fa-solid fa-envelope"></i></span>
+        <span class="drawer-label">Contact us</span>
+      </a>
+      <a href="privacy.html">
+        <span class="drawer-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <span class="drawer-label">Privacy policy</span>
+      </a>
+      <a href="terms.html">
+        <span class="drawer-icon"><i class="fa-regular fa-file-lines"></i></span>
+        <span class="drawer-label">Terms &amp; Conditions</span>
+      </a>
+    </div>
+
+    <div class="drawer-actions" id="guestDrawerActions"></div>
+  </aside>
+
+  <!-- ========== LOGGED-IN HEADER (same structure as men summer) ========== -->
+  <header class="logged-header" id="userHeader">
+    <div class="logo">
+      <img src="palette and fit logo.png" alt="Palette and Fit logo">
+      <span class="logo-text">Palette and Fit</span>
+    </div>
+
+    <nav class="nav-logged">
+      <a href="homepage1.html">Home</a>
+
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">
+          <span>Categories</span>
+          <i class="fa-solid fa-chevron-down nav-dropdown-chevron" aria-hidden="true"></i>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="men.html">Men</a>
+          <a href="women.html" class="active">Women</a>
+        </div>
+      </div>
+
+      <a href="aboutus.html">About us</a>
+      <a href="contactus.html">Contact us</a>
+      <a href="Suggestionpage.html">Get suggestion</a>
+      <a href="wishlist.html" class="wishlist-link">♡ Wishlist</a>
+    </nav>
+
+    <div class="header-actions-logged">
+      <div class="profile-wrapper">
+        <button class="profile-icon" id="profileToggleUser" aria-haspopup="true" aria-expanded="false" title="Profile">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8.5" r="4.2" fill="#fff" fill-opacity=".95"></circle>
+            <ellipse cx="12" cy="18" rx="7" ry="3.2" fill="#fff" fill-opacity=".38"></ellipse>
+          </svg>
+        </button>
+        <div class="profile-menu" id="profileMenuUser">
+          <a href="profile.html">Profile</a>
+          <a href="#" class="logout-link">Log out</a>
+        </div>
+      </div>
+
+      <button class="pill-btn darkmode-btn" id="darkModeToggleUser" aria-pressed="false">
+        <span class="dm-icon">🌙</span>
+        <span class="dm-text">Dark Mode</span>
+      </button>
+
+      <button class="hamburger-logged" id="navToggleUser" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger-logged-box"><span class="hamburger-logged-inner"></span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Logged-in drawer + backdrop -->
+  <div class="nav-drawer-backdrop-logged" id="navBackdropUser"></div>
+
+  <aside class="nav-drawer-logged" id="navDrawerUser" aria-hidden="true">
+    <div class="drawer-header">
+      <span class="drawer-title">Palette &amp; Fit</span>
+      <button class="drawer-close" id="drawerCloseUser" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="drawer-links-logged">
+      <a href="homepage1.html">
+        <span class="drawer-icon"><i class="fa-solid fa-house"></i></span>
+        <span class="drawer-label">Home</span>
+      </a>
+
+      <div class="drawer-group open">
+        <button class="drawer-group-toggle" type="button">
+          <span class="drawer-icon"><i class="fa-solid fa-shirt"></i></span>
+          <span class="drawer-label">Shop</span>
+          <span class="drawer-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+        </button>
+        <div class="drawer-group-menu" id="drawerShopMenuUser">
+          <a href="men.html">Men</a>
+          <a href="women.html" class="active">Women</a>
+        </div>
+      </div>
+
+      <a href="aboutus.html">
+        <span class="drawer-icon"><i class="fa-solid fa-circle-info"></i></span>
+        <span class="drawer-label">About us</span>
+      </a>
+      <a href="contactus.html">
+        <span class="drawer-icon"><i class="fa-solid fa-envelope"></i></span>
+        <span class="drawer-label">Contact us</span>
+      </a>
+      <a href="Suggestionpage.html">
+        <span class="drawer-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+        <span class="drawer-label">Get suggestion</span>
+      </a>
+      <a href="privacy.html">
+        <span class="drawer-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <span class="drawer-label">Privacy policy</span>
+      </a>
+      <a href="terms.html">
+        <span class="drawer-icon"><i class="fa-regular fa-file-lines"></i></span>
+        <span class="drawer-label">Terms &amp; Conditions</span>
+      </a>
+      <a href="wishlist.html">
+        <span class="drawer-icon"><i class="fa-regular fa-heart"></i></span>
+        <span class="drawer-label">Wishlist</span>
+      </a>
+      <a href="profile.html">
+        <span class="drawer-icon"><i class="fa-regular fa-user"></i></span>
+        <span class="drawer-label">Profile</span>
+      </a>
+    </div>
+
+    <div class="drawer-actions-logged">
+      <button class="pill-btn darkmode-btn" id="drawerDarkToggleUser" aria-pressed="false">
+        <span class="dm-icon">🌙</span>
+        <span class="dm-text">Dark Mode</span>
+      </button>
+      <button class="pill-btn logout-link">Log out</button>
+    </div>
+  </aside>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Discover Your<br>Favourite<br>Summer Collection</h1>
+      <p>
+        Handpicked women's styles for every skin tone &amp; body type.<br>
+        Let Palette and Fit recommend the best for you!
+      </p>
+      <button class="hero-btn"
+        onclick="window.location.href='Suggestionpage.html?prompt=Recommend%20me%20women%20summer%20clothes%20for%20my%20skin%20tone%20and%20body%20type'">
+        Get Suggestions
+      </button>
+    </div>
+
+    <div class="hero-carousel-3d">
+      <div class="carousel-3d-track" id="carousel3d">
+        <img src="https://images.pexels.com/photos/17243573/pexels-photo-17243573.jpeg" alt="Woman in summer outfit 1" />
+        <img src="https://images.pexels.com/photos/8121913/pexels-photo-8121913.jpeg" alt="Woman in summer outfit 2" />
+        <img src="https://images.pexels.com/photos/8995679/pexels-photo-8995679.jpeg" alt="Woman in summer outfit 3" />
+        <img src="https://images.pexels.com/photos/4273743/pexels-photo-4273743.jpeg" alt="Woman in summer outfit 4" />
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS GRID -->
+  <section class="carousel-section">
+    <h2>Trending Women's Summer Fashion 2025 in Pakistan</h2>
+    <div class="products-grid" id="products-root"></div>
+  </section>
+
+  <!-- Product Preview Modal -->
+  <div id="previewModal">
+    <div id="modalContent">
+      <button id="closeModalBtn">×</button>
+      <img id="modalImg" src="" alt="Product">
+      <h3 id="modalTitle"></h3>
+      <div id="modalDesc"></div>
+      <button id="modalSuggestBtn" class="pill-btn">
+        Get suggestion for yourself about <span id="modalProductType"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-main">
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Need help?</div>
+        <div style="margin-bottom:0.4rem;"><a href="contactus.html">Contact us</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">More info</div>
+        <div style="margin-bottom:0.4rem;"><a href="aboutus.html">About us</a></div>
+        <div style="margin-bottom:0.4rem;"><a href="terms.html">Terms &amp; Conditions</a></div>
+        <div style="margin-bottom:0.4rem;"><a href="privacy.html">Privacy policy</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Location</div>
+        <div style="margin-bottom:0.4rem;"><a href="mailto:support@PaletteandFit.com">support@PaletteandFit.com</a></div>
+        <div style="margin-bottom:0.4rem;">
+          <a href="https://www.google.com/maps?q=4162+Wayback+Lane,+Farmingdale,+New+York,+11735,+USA" target="_blank" rel="noopener">
+            4162 Wayback Lane, Farmingdale
+          </a>
+        </div>
+        <div style="margin-bottom:0.4rem;">New York, 11735, USA</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem; font-size:1.05rem;">
+      <strong>Palette and Fit</strong><br>
+      <span style="font-size:0.9rem; color:#bbb;">© 2025 Palette and Fit. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- JS: login protection + nav/drawer/darkmode + women products/wishlist -->
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // ===== API base (with optional global override) =====
+    const API_BASE = window.API_BASE_URL || "https://palette-and-fit-backend.onrender.com";
+
+    // ===== LOGIN PROTECTION (pf_user_email first) =====
+    const storedEmail =
+      localStorage.getItem('pf_user_email') ||
+      localStorage.getItem('user_email') ||
+      '';
+
+    const isLoggedIn = !!storedEmail;
+
+    if (!isLoggedIn) {
+      window.location.href = 'guest-home.html';
+      return;
+    }
+
+    // Expose for wishlist handlers
+    window.userEmail = storedEmail;
+
+    const guestHeader = document.getElementById('guestHeader');
+    const userHeader  = document.getElementById('userHeader');
+
+    /* ===== GUEST ELEMENTS (same behaviour as homepage1) ===== */
+    const guestNavToggle   = document.getElementById('guestNavToggle');
+    const guestNavDrawer   = document.getElementById('guestNavDrawer');
+    const guestNavBackdrop = document.getElementById('guestNavBackdrop');
+    const guestDrawerClose = document.getElementById('guestDrawerClose');
+    const guestDrawerActions = document.getElementById('guestDrawerActions');
+    const guestHeaderActions = guestHeader ? guestHeader.querySelector('.header-actions') : null;
+    const guestRegBtn = document.getElementById('guestRegisterBtn');
+    const guestDmBtn  = document.getElementById('guestDarkModeToggle');
+    const mqMobGuest  = window.matchMedia('(max-width: 1200px)');
+
+    /* ===== LOGGED-IN ELEMENTS ===== */
+    const hamburgerUser   = document.getElementById('navToggleUser');
+    const drawerUser      = document.getElementById('navDrawerUser');
+    const backdropUser    = document.getElementById('navBackdropUser');
+    const drawerCloseUser = document.getElementById('drawerCloseUser');
+    const dmBtnHeaderUser = document.getElementById('darkModeToggleUser');
+    const dmBtnDrawerUser = document.getElementById('drawerDarkToggleUser');
+    const profileToggleUser = document.getElementById('profileToggleUser');
+    const profileMenuUser   = document.getElementById('profileMenuUser');
+
+    /* ===== Show correct header ===== */
+    if (isLoggedIn) {
+      if (guestHeader) guestHeader.style.display = 'none';
+      if (userHeader)  userHeader.style.display  = '';
+    } else {
+      if (guestHeader) guestHeader.style.display = '';
+      if (userHeader)  userHeader.style.display  = 'none';
+    }
+
+    /* ===== Guest drawer (kept for consistency) ===== */
+    function openGuestDrawer() {
+      guestNavDrawer.classList.add('open');
+      guestNavBackdrop.classList.add('open');
+      guestNavToggle.classList.add('is-active');
+      guestNavToggle.setAttribute('aria-expanded', 'true');
+      guestNavDrawer.setAttribute('aria-hidden', 'false');
+    }
+    function closeGuestDrawer() {
+      guestNavDrawer.classList.remove('open');
+      guestNavBackdrop.classList.remove('open');
+      guestNavToggle.classList.remove('is-active');
+      guestNavToggle.setAttribute('aria-expanded', 'false');
+      guestNavDrawer.setAttribute('aria-hidden', 'true');
+    }
+
+    if (!isLoggedIn && guestNavToggle && guestNavDrawer && guestNavBackdrop) {
+      guestNavToggle.addEventListener('click', () => {
+        if (guestNavDrawer.classList.contains('open')) {
+          closeGuestDrawer();
+        } else {
+          openGuestDrawer();
+        }
+      });
+
+      guestNavBackdrop.addEventListener('click', closeGuestDrawer);
+      if (guestDrawerClose) guestDrawerClose.addEventListener('click', closeGuestDrawer);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && guestNavDrawer && guestNavDrawer.classList.contains('open')) {
+          closeGuestDrawer();
+        }
+      });
+    }
+
+    function relocateGuestControls() {
+      if (!guestDmBtn || !guestRegBtn || !guestDrawerActions || !guestHeaderActions) return;
+
+      if (mqMobGuest.matches) {
+        if (!guestDrawerActions.contains(guestRegBtn)) {
+          guestDrawerActions.insertBefore(guestRegBtn, guestDrawerActions.firstChild);
+        }
+        if (!guestDrawerActions.contains(guestDmBtn)) {
+          guestDrawerActions.appendChild(guestDmBtn);
+        }
+      } else {
+        if (!guestHeaderActions.contains(guestRegBtn)) {
+          guestHeaderActions.insertBefore(guestRegBtn, guestNavToggle);
+        }
+        if (!guestHeaderActions.contains(guestDmBtn)) {
+          guestHeaderActions.insertBefore(guestDmBtn, guestNavToggle);
+        }
+        if (guestNavDrawer) closeGuestDrawer();
+      }
+    }
+    mqMobGuest.addEventListener('change', relocateGuestControls);
+    relocateGuestControls();
+
+    /* ===== Logged-in drawer ===== */
+    function openDrawerUser() {
+      drawerUser.classList.add('open');
+      backdropUser.classList.add('open');
+      hamburgerUser.classList.add('is-active');
+      hamburgerUser.setAttribute('aria-expanded', 'true');
+      drawerUser.setAttribute('aria-hidden', 'false');
+    }
+    function closeDrawerUser() {
+      drawerUser.classList.remove('open');
+      backdropUser.classList.remove('open');
+      hamburgerUser.classList.remove('is-active');
+      hamburgerUser.setAttribute('aria-expanded', 'false');
+      drawerUser.setAttribute('aria-hidden', 'true');
+    }
+
+    if (isLoggedIn && hamburgerUser && drawerUser && backdropUser) {
+      hamburgerUser.addEventListener('click', () => {
+        if (drawerUser.classList.contains('open')) {
+          closeDrawerUser();
+        } else {
+          openDrawerUser();
+        }
+      });
+
+      backdropUser.addEventListener('click', closeDrawerUser);
+      if (drawerCloseUser) drawerCloseUser.addEventListener('click', closeDrawerUser);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawerUser && drawerUser.classList.contains('open')) {
+          closeDrawerUser();
+        }
+      });
+    }
+
+    /* ===== Drawer "Shop" accordion ===== */
+    document.querySelectorAll('.drawer-group-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.drawer-group');
+        if (!group) return;
+        group.classList.toggle('open');
+      });
+    });
+
+    /* ===== Dark mode (guest + logged) ===== */
+    function setDarkMode(dark) {
+      document.body.classList.toggle('dark-mode', dark);
+      localStorage.setItem('darkMode', dark ? 'true' : 'false');
+
+      // Guest
+      if (guestDmBtn) {
+        guestDmBtn.setAttribute('aria-pressed', String(dark));
+        guestDmBtn.innerHTML = dark
+          ? '<span>☀️</span><span>Light Mode</span>'
+          : '<span>🌙</span><span>Dark Mode</span>';
+      }
+
+      // Logged-in
+      [dmBtnHeaderUser, dmBtnDrawerUser].forEach(btn => {
+        if (!btn) return;
+        btn.setAttribute('aria-pressed', String(dark));
+        const icon = btn.querySelector('.dm-icon');
+        const text = btn.querySelector('.dm-text');
+        if (icon) icon.textContent = dark ? '☀️' : '🌙';
+        if (text) text.textContent = dark ? 'Light Mode' : 'Dark Mode';
+      });
+    }
+
+    const initialDark = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(initialDark);
+
+    if (guestDmBtn) {
+      guestDmBtn.addEventListener('click', () => {
+        const dark = !document.body.classList.contains('dark-mode');
+        setDarkMode(dark);
+      });
+    }
+
+    [dmBtnHeaderUser, dmBtnDrawerUser].forEach(btn => {
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const dark = !document.body.classList.contains('dark-mode');
+        setDarkMode(dark);
+      });
+    });
+
+    /* ===== Profile dropdown ===== */
+    if (isLoggedIn && profileToggleUser && profileMenuUser) {
+      function closeProfileMenuUser() {
+        profileMenuUser.classList.remove('open');
+        profileToggleUser.setAttribute('aria-expanded', 'false');
+      }
+      function openProfileMenuUser() {
+        profileMenuUser.classList.add('open');
+        profileToggleUser.setAttribute('aria-expanded', 'true');
+      }
+
+      profileToggleUser.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (profileMenuUser.classList.contains('open')) {
+          closeProfileMenuUser();
+        } else {
+          openProfileMenuUser();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!profileMenuUser.contains(e.target) && e.target !== profileToggleUser) {
+          closeProfileMenuUser();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeProfileMenuUser();
+        }
+      });
+    }
+
+    /* ===== Logout (profile menu + drawer) ===== */
+    const logoutLinks = document.querySelectorAll('.logout-link');
+    logoutLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('user_email');
+        localStorage.removeItem('pf_user_email');
+        localStorage.removeItem('auth_token');
+        window.location.href = 'guest-home.html';
+      });
+    });
+
+    /* ===== HERO 3D CAROUSEL ===== */
+    const carouselImages = document.querySelectorAll("#carousel3d img");
+    let idx = 0, n = carouselImages.length;
+
+    function updateCarousel() {
+      const z = 210;
+      carouselImages.forEach((img, i) => {
+        let pos = (i - idx + n) % n;
+        if (pos === 0) {
+          img.style.transform = `rotateY(0deg) translateZ(${z}px) scale(1.09)`;
+          img.className = "focused";
+        } else if (pos === 1) {
+          img.style.transform = `rotateY(45deg) translateZ(110px) scale(0.93)`;
+          img.className = "side";
+        } else if (pos === n - 1) {
+          img.style.transform = `rotateY(-45deg) translateZ(110px) scale(0.93)`;
+          img.className = "side";
+        } else {
+          img.style.transform = `rotateY(${pos * 60}deg) translateZ(0px) scale(0.84)`;
+          img.className = "hide";
+        }
+      });
+    }
+    if (n > 0) {
+      updateCarousel();
+      setInterval(() => {
+        idx = (idx + 1) % n;
+        updateCarousel();
+      }, 2150);
+    }
+
+    /* ===== MODAL ===== */
+    const modal = document.getElementById("previewModal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const modalImg = document.getElementById("modalImg");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
+    const modalProductType = document.getElementById("modalProductType");
+    const modalSuggestBtn = document.getElementById("modalSuggestBtn");
+
+    if (closeModalBtn) {
+      closeModalBtn.onclick = () => { modal.style.display = "none"; };
+    }
+    if (modal) {
+      modal.onclick = (e) => {
+        if (e.target === modal) modal.style.display = "none";
+      };
+    }
+
+    /* ===== PRODUCTS + WISHLIST (robust IDs) ===== */
+    async function markWishlistActive() {
+      if (!window.userEmail) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/wishlist?email=${encodeURIComponent(window.userEmail)}`);
+        const data = await res.json();
+
+        const wishlistIds = (data.wishlist || []).map(item =>
+          String(item.product_id || item.id || item._id)
+        );
+
+        document.querySelectorAll(".product-card").forEach(card => {
+          const btn = card.querySelector(".wishlist-btn");
+          const pid = String(card.dataset.productId || "");
+          if (!btn || !pid) return;
+
+          const heart = btn.querySelector(".wishlist-heart");
+          if (wishlistIds.includes(pid)) {
+            btn.classList.add("active");
+            if (heart) heart.textContent = "❤️";
+          } else {
+            btn.classList.remove("active");
+            if (heart) heart.textContent = "♡";
+          }
+        });
+      } catch (err) {
+        console.log("Error marking wishlist:", err);
+      }
+    }
+
+    function attachCardClicks() {
+      document.querySelectorAll(".product-card").forEach(card => {
+        // Open modal on card click
+        card.onclick = (e) => {
+          if (
+            e.target.classList.contains("wishlist-btn") ||
+            e.target.classList.contains("wishlist-heart")
+          ) return;
+
+          const imgEl = card.querySelector("img");
+          const titleEl = card.querySelector(".title");
+          const descEl = card.querySelector(".desc");
+
+          const imgSrc = imgEl ? imgEl.src : "";
+          const title = titleEl ? titleEl.innerText : "";
+          const desc = descEl ? descEl.innerText : "";
+
+          modalImg.src = imgSrc;
+          modalTitle.innerText = title;
+          modalDesc.innerText = desc;
+          modalProductType.innerText = title;
+          modalSuggestBtn.onclick = () => {
+            window.location.href = "Suggestionpage.html?prompt=" +
+              encodeURIComponent(`Tell me, does my body shape suit the ${title}?`);
+          };
+          modal.style.display = "flex";
+        };
+
+        // Wishlist toggle
+        const wishlistBtn = card.querySelector(".wishlist-btn");
+        if (wishlistBtn) {
+          wishlistBtn.onclick = async (e) => {
+            e.stopPropagation();
+            const productId = card.dataset.productId;
+            const email = window.userEmail;
+            if (!email) {
+              alert("Please login to add items to wishlist.");
+              return;
+            }
+            const isActive = wishlistBtn.classList.contains("active");
+            try {
+              if (isActive) {
+                await fetch(`${API_BASE}/api/wishlist`, {
+                  method: "DELETE",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ email, product_id: productId }),
+                });
+              } else {
+                await fetch(`${API_BASE}/api/wishlist`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ email, product_id: productId }),
+                });
+              }
+              await markWishlistActive();
+            } catch (err) {
+              alert("Wishlist update failed. Please login.");
+            }
+          };
+        }
+      });
+    }
+
+    async function loadProducts() {
+      const root = document.getElementById("products-root");
+      if (!root) return;
+
+      root.innerHTML = '<div style="text-align:center;font-size:1.1rem;">Loading products...</div>';
+      try {
+        const res = await fetch(API_BASE + "/api/products/category/summer?gender=women");
+        const products = await res.json();
+
+        if (!Array.isArray(products) || !products.length) {
+          root.innerHTML = "<div style='color:#ad00e2; font-weight:600; text-align:center;'>No products found!<br>Add products using your admin panel.<br>(Use category: <b>summer</b>)</div>";
+          return;
+        }
+
+        const html = products.map(product => {
+          const pid = product.product_id || product.id || product._id;
+          const safeTitle = (product.title || '').replace(/"/g, '&quot;');
+          return `
+            <div class="product-card" data-product-id="${pid}">
+              <img src="${product.image_url}" alt="${safeTitle}">
+              <div class="title">${product.title}</div>
+              <div class="desc">${product.description || ""}</div>
+              <button class="wishlist-btn" title="Add to Wishlist">
+                <span class="wishlist-heart">♡</span>
+              </button>
+            </div>
+          `;
+        }).join("");
+
+        root.innerHTML = html;
+        attachCardClicks();
+        await markWishlistActive();
+      } catch (err) {
+        root.innerHTML = `<div style='color:red; text-align:center;'>Error loading products! ${err}</div>`;
+      }
+    }
+
+    loadProducts();
+  });
+</script>
+</body>
+</html>

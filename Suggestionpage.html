@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Palette and Fit – Suggestions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-light: #f7f4ee;
+      --bg-mid: #ece5db;
+      --bg-dark: #23242a;
+      --accent: #ad00e2;
+      --accent2: #c2a1ff;
+      --heading: #ad00e2;
+      --nav-bg: #ece5db;
+      --text: #23242a;
+      --button-bg: #ad00e2;
+      --button-text: #fff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+body {
+  background: var(--bg-light);
+  color: var(--text);
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+  font-family: unset;
+}
+
+    body.dark-mode {
+      --bg-light: #18181b;
+      --bg-mid: #23242a;
+      --bg-dark: #121214;
+      --nav-bg: #23242a;
+      --text: #ffffff;
+      --heading: #ad00e2;
+      --accent: #ad00e2;
+      --accent2: #c2a1ff;
+      --button-bg: #5f5cff;
+      --button-text: #ffffff;
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    /* ================= HEADER & NAV (LOGGED) ================= */
+
+    .logged-header {
+      background: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 14px #0001;
+      font-weight: 600;
+      padding: 0.9rem 2.4rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .logo img {
+      height: 56px;
+      width: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .logo-text {
+      font-family: 'Style Script', cursive;
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: #ad00e2;
+      line-height: 1.05;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      justify-content: center;
+      font-weight: 400;
+    }
+
+    .nav a {
+      color: #2a024d;
+      text-decoration: none;
+      font-size: 1.02rem;
+      padding: 0.25rem 0;
+      cursor: pointer;
+      transition: color 0.18s, font-weight 0.18s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .wishlist-link {
+      font-size: 1.08rem;
+    }
+
+    /* ====== CATEGORIES DROPDOWN ====== */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 1.02rem;
+      padding: 0.25rem 0;
+      color: #2a024d;
+      font-weight: 400;
+    }
+
+    .nav-dropdown-toggle .nav-dropdown-chevron {
+      font-size: 0.75rem;
+      transition: transform 0.18s ease;
+    }
+
+    .nav-dropdown.open .nav-dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 160px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      padding: 0.35rem 0.4rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 50;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(2px);
+    }
+
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 0.45rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.96rem;
+      color: #2a024d;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.16s ease, color 0.16s ease;
+    }
+
+    .nav-dropdown-menu a:hover {
+      background: rgba(173,0,226,0.08);
+      color: var(--accent);
+    }
+
+    body.dark-mode .nav a {
+      color: #ffffff;
+    }
+    body.dark-mode .nav a:hover,
+    body.dark-mode .nav a.active {
+      color: var(--accent);
+    }
+    body.dark-mode .nav-dropdown-menu {
+      background: #23242a;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+    }
+    body.dark-mode .nav-dropdown-menu a {
+      color: #f5f5f5;
+    }
+    body.dark-mode .nav-dropdown-menu a:hover {
+      background: rgba(194,161,255,0.2);
+      color: #ffffff;
+    }
+
+    /* profile icon + dropdown */
+    .profile-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0.2rem;
+      background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%);
+      border: 2.2px solid #fff;
+      overflow: hidden;
+      padding: 0;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .profile-icon svg {
+      width: 23px;
+      height: 23px;
+    }
+    .profile-icon:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    }
+    body.dark-mode .profile-icon {
+      border-color: #ad00e2;
+    }
+
+    .profile-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      min-width: 160px;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 10px 32px rgba(0,0,0,0.22);
+      padding: 0.45rem 0.35rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 20;
+    }
+    .profile-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .profile-menu a {
+      display: block;
+      padding: 0.45rem 0.9rem;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      white-space: nowrap;
+      transition: background 0.16s ease, color 0.16s ease;
+    }
+    .profile-menu a:hover {
+      background: rgba(173,0,226,0.08);
+      color: var(--accent);
+    }
+
+    body.dark-mode .profile-menu {
+      background: #23242a;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+    }
+    body.dark-mode .profile-menu a {
+      color: #f5f5f5;
+    }
+    body.dark-mode .profile-menu a:hover {
+      background: rgba(194,161,255,0.2);
+      color: #ffffff;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .pill-btn {
+      background: #7a2df6;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 0.5rem 1.6rem;
+      font-size: 0.98rem;
+      font-weight: 500;
+      box-shadow: 0 2px 12px #a673fa29;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.18s, transform 0.12s;
+      min-height: 36px;
+      white-space: nowrap;
+      text-decoration: none;
+      justify-content: center;
+      min-width: 140px;
+    }
+
+    .pill-btn:hover,
+    .pill-btn:focus {
+      background: #ad00e2;
+      color: #fff;
+      box-shadow: 0 6px 24px #a673fa49;
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    body.dark-mode .pill-btn {
+      background: #2a024d;
+    }
+    body.dark-mode .pill-btn:hover,
+    body.dark-mode .pill-btn:focus {
+      background: #7a2df6;
+    }
+
+    .darkmode-btn span:first-child {
+      font-size: 1.1em;
+    }
+
+    /* Hamburger (desktop hidden) */
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+    .hamburger-box {
+      position: relative;
+      width: 20px;
+      height: 2px;
+    }
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: #7a2df6;
+      transition: transform 0.28s cubic-bezier(.55,.06,.68,.19), top 0.2s, opacity 0.2s;
+    }
+    .hamburger-inner { top: 0; }
+    .hamburger-inner::before { top: -6px; }
+    .hamburger-inner::after  { top:  6px; }
+
+    .hamburger.is-active .hamburger-inner {
+      transform: rotate(45deg);
+    }
+    .hamburger.is-active .hamburger-inner::before {
+      top: 0;
+      transform: rotate(-90deg);
+    }
+    .hamburger.is-active .hamburger-inner::after {
+      top: 0;
+      opacity: 0;
+    }
+
+    @media (max-width: 1200px) {
+      .logged-header {
+        padding: 0.8rem 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav {
+        display: none;
+      }
+      .header-actions {
+        gap: 0.4rem;
+      }
+      .hamburger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border-radius: 8px;
+        border: 1px solid rgba(173, 0, 226, 0.25);
+        background: transparent;
+      }
+      .header-actions .darkmode-btn {
+        display: none;
+      }
+      .profile-wrapper {
+        display: none;
+      }
+      .logo img {
+        height: 44px;
+        width: 44px;
+      }
+      .logo-text {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* ================= RIGHT DRAWER (LOGGED NAV) ================= */
+
+    .nav-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 120;
+    }
+    .nav-drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(320px, 80vw);
+      background: var(--bg-light);
+      box-shadow: -16px 0 38px rgba(0, 0, 0, 0.28);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 130;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1.4rem 1.6rem;
+    }
+    body.dark-mode .nav-drawer {
+      background: var(--bg-dark);
+    }
+    .nav-drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+
+    .drawer-title {
+      font-family: 'Style Script', cursive;
+      font-size: 1.55rem;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .drawer-close {
+      background: none;
+      border: none;
+      font-size: 1.35rem;
+      line-height: 1;
+      padding: 0.15rem 0.4rem;
+      border-radius: 999px;
+      cursor: pointer;
+      color: #e3c7ff;
+      transition: background 0.18s, transform 0.18s, color 0.18s;
+    }
+    .drawer-close:hover {
+      background: rgba(173, 0, 226, 0.16);
+      color: #ffffff;
+      transform: rotate(90deg);
+    }
+
+    .drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 0.2rem 0 1.6rem;
+    }
+
+    .drawer-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1.05rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.18s, color 0.18s, transform 0.1s;
+    }
+
+    .drawer-links a:hover,
+    .drawer-links a:focus {
+      background: rgba(173, 0, 226, 0.12);
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    .drawer-links a.active {
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(173, 0, 226, 0.16);
+    }
+
+    .drawer-icon {
+      width: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .drawer-icon i {
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+
+    .drawer-label {
+      flex: 1;
+    }
+
+    body.dark-mode .drawer-links a {
+      color: #f7f4ee;
+    }
+    body.dark-mode .drawer-links a:hover,
+    body.dark-mode .drawer-links a:focus {
+      background: rgba(194,161,255,0.18);
+      color: #ffffff;
+    }
+    body.dark-mode .drawer-icon i {
+      color: var(--accent2);
+    }
+
+    .drawer-actions {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.1rem;
+    }
+    .drawer-actions .pill-btn {
+      width: 100%;
+      min-width: 0;
+    }
+
+    body.dark-mode .drawer-links a.active {
+      background: rgba(194,161,255,0.25);
+      color: #ffffff;
+    }
+    body.dark-mode .drawer-links a.active .drawer-icon i {
+      color: #ffffff;
+    }
+
+    /* ================= PAGE HEADING ================= */
+
+    .page-heading {
+      max-width: 900px;
+      margin: 2.4rem auto 0.5rem;
+      padding: 0 1.2rem;
+      text-align: center;
+    }
+
+    .page-title {
+      display: inline-block;
+      font-size: 2.15rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #2a024d;
+      text-transform: none;
+      position: relative;
+      padding-bottom: 0.4rem;
+    }
+
+    .page-title::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: 60%;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ad00e2, #c2a1ff);
+      box-shadow: 0 4px 10px rgba(173,0,226,0.35);
+    }
+
+    .page-subtitle {
+      margin-top: 0.7rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #555;
+    }
+
+    body.dark-mode .page-title {
+      color: #fdfbff;
+    }
+    body.dark-mode .page-subtitle {
+      color: #d0cbe6;
+    }
+
+    @media (max-width: 600px) {
+      .page-heading {
+        margin: 1.6rem auto 0.3rem;
+        padding: 0 0.8rem;
+      }
+      .page-title {
+        font-size: 1.65rem;
+      }
+      .page-subtitle {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ================= CHATBOT CARD & BUBBLES ================= */
+
+    .chatbot-shell {
+      max-width: 1060px;
+      margin: 1.4rem auto 3rem;
+      padding: 0 1.2rem;
+    }
+
+    .chatbot-container {
+      width: 100%;
+      min-height: 480px;
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 7px 38px #ad00e247, 0 2.5px 10px #c2a1ff77;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 900px) {
+      .chatbot-shell {
+        padding: 0 0.8rem;
+      }
+    }
+    @media (max-width: 650px) {
+      .chatbot-shell {
+        margin: 1.1rem auto 1.8rem;
+      }
+      .chatbot-container {
+        border-radius: 0.9rem;
+        min-height: 320px;
+      }
+    }
+
+    body.dark-mode .chatbot-container {
+      background: #23223c;
+    }
+
+    .chat-header {
+      background: var(--accent);
+      color: #fff;
+      padding: 1.1rem 1.5rem;
+      font-size: 1.12rem;
+      font-weight: 600;
+      border-radius: 1.5rem 1.5rem 0 0;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+    @media (max-width: 540px) {
+      .chat-header {
+        font-size: 0.96rem;
+        padding: 0.9rem 0.9rem;
+        flex-wrap: wrap;
+      }
+    }
+
+    .chat-header-title {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .chat-header-title i {
+      font-size: 1rem;
+    }
+
+    .chat-history-toggle {
+      border-radius: 999px;
+      border: none;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      background: #f4e3ff;
+      color: #4e006d;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      white-space: nowrap;
+      transition: background 0.18s, transform 0.12s, box-shadow 0.16s;
+    }
+
+    .chat-history-toggle:hover {
+      background: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.22);
+    }
+
+    body.dark-mode .chat-history-toggle {
+      background: #ffffff;
+      color: #ad00e2;
+    }
+
+    .chat-window {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      padding: 1.15rem 1.2rem 0.6rem;
+      min-height: 200px;
+      max-height: 420px;
+      overflow-y: auto;
+      background: var(--bg-light);
+      color: var(--text);
+      font-size: 1.02rem;
+      gap: 0.5rem;
+      scroll-behavior: smooth;
+      width: 100%;
+    }
+    @media (max-width: 540px) {
+      .chat-window {
+        padding: 0.6rem 0.6rem 0.3rem;
+        font-size: 0.93rem;
+        min-height: 160px;
+        max-height: 360px;
+      }
+    }
+    body.dark-mode .chat-window {
+      background: #2c2e3b;
+      color: #fff;
+    }
+
+    .msg-row {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+    }
+
+    .msg-bubble.user {
+      margin-left: auto;
+      margin-right: 0.7rem;
+      background: linear-gradient(120deg, #ad00e2 70%, #c2a1ff 100%);
+      color: #fff;
+      border-radius: 16px 16px 2px 16px;
+      padding: 0.7rem 1.1rem;
+      font-size: 1.02rem;
+      box-shadow: 0 2px 6px #ad00e221;
+      max-width: 80%;
+      word-break: break-word;
+      text-align: right;
+    }
+
+    .msg-bubble.bot {
+      margin-right: auto;
+      background: #fff;
+      color: #22203a;
+      border-radius: 16px 16px 16px 2px;
+      padding: 0.7rem 1.1rem;
+      font-size: 1.02rem;
+      box-shadow: 0 2px 10px #c2a1ff11;
+      max-width: 90%;
+      word-break: break-word;
+      white-space: pre-line;
+      text-align: left;
+    }
+
+    @media (max-width: 540px) {
+      .msg-bubble.user,
+      .msg-bubble.bot {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.65rem;
+      }
+    }
+
+    body.dark-mode .msg-bubble.bot {
+      background: #fdfbff;
+      color: #ad00e2;
+    }
+
+    .prompt-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: 0.9rem 1.2rem 0.7rem;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 540px) {
+      .prompt-panel {
+        padding: 0.4rem 0.7rem 0.2rem;
+        font-size: 0.88rem;
+      }
+    }
+
+    .prompt {
+      background: #e8d8fd;
+      color: #2a024d;
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      font-style: italic;
+      font-size: 0.92rem;
+    }
+    body.dark-mode .prompt {
+      background: #fff;
+      color: #ad00e2;
+    }
+
+    .chat-input-wrap {
+      display: flex;
+      align-items: center;
+      padding: 0.9rem 1.2rem 1rem;
+      background: #f5f5f5;
+      border-radius: 0 0 1.5rem 1.5rem;
+      width: 100%;
+      gap: 0.5rem;
+      box-sizing: border-box;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 540px) {
+      .chat-input-wrap {
+        padding: 0.7rem 0.7rem 0.9rem;
+      }
+    }
+    body.dark-mode .chat-input-wrap {
+      background: #1f1f25;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 20px;
+      font-size: 0.98rem;
+      outline: none;
+      background: #fff;
+      box-sizing: border-box;
+    }
+    @media (max-width: 540px) {
+      .chat-input {
+        font-size: 0.88rem;
+        padding: 0.38rem 0.45rem;
+      }
+    }
+    body.dark-mode .chat-input {
+      background: #2b2d3a;
+      color: #fff;
+      border: 1px solid #3a3c4a;
+    }
+
+    .chat-upload {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      outline: none;
+      flex-shrink: 0;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.12s, border-color 0.15s;
+    }
+    .chat-upload i {
+      pointer-events: none;
+    }
+    .chat-upload:hover,
+    .chat-upload:focus {
+      background: #f0e7ff;
+      border-color: #ad00e2;
+      box-shadow: 0 2px 8px rgba(173,0,226,0.28);
+      transform: translateY(-1px);
+    }
+    body.dark-mode .chat-upload {
+      background: #2b2d3a;
+      border-color: #3a3c4a;
+      color: #fff;
+    }
+    body.dark-mode .chat-upload:hover,
+    body.dark-mode .chat-upload:focus {
+      background: #3a3c4a;
+      border-color: #ad00e2;
+    }
+
+    .chat-image-label {
+      flex-basis: 100%;
+      font-size: 0.8rem;
+      color: #555;
+      margin-left: 0.1rem;
+      margin-top: 0.1rem;
+    }
+    body.dark-mode .chat-image-label {
+      color: #ddd;
+    }
+
+    .chat-send {
+      background: linear-gradient(90deg, #ad00e2 60%, #c2a1ff 100%);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      width: 36px;
+      height: 36px;
+      margin-left: 4px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #ad00e233, 0 0.5px 2px #a673fa29;
+      outline: none;
+      border: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.17s;
+      flex-shrink: 0;
+    }
+    .chat-send:hover,
+    .chat-send:focus {
+      background: linear-gradient(92deg, #c2a1ff 20%, #ad00e2 100%);
+      color: #fff;
+      transform: translateY(-2px) scale(1.08) rotate(-2deg);
+      box-shadow: 0 5px 18px #ad00e250, 0 2px 8px #7a2df630;
+      border-color: #ad00e2;
+    }
+    .chat-send:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    @media (max-width: 540px) {
+      .chat-send {
+        width: 30px;
+        height: 30px;
+        font-size: 0.96rem;
+      }
+      .chat-upload {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+      }
+    }
+
+    .chat-error {
+      flex-basis: 100%;
+      margin-top: 6px;
+      padding-left: 4px;
+      font-size: 0.9rem;
+      color: #e11900;
+    }
+
+    .is-invalid {
+      border: 2px solid #e11900 !important;
+      animation: chatShake .28s linear;
+    }
+
+    @keyframes chatShake {
+      0%,100% { transform: translateX(0); }
+      25%     { transform: translateX(-3px); }
+      75%     { transform: translateX(3px);  }
+    }
+
+    /* ================= CHAT HISTORY DRAWER (RIGHT) ================= */
+
+    .chat-history-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 140;
+    }
+    .chat-history-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .chat-history-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(340px, 85vw);
+      background: var(--bg-mid);
+      box-shadow: -18px 0 40px rgba(0,0,0,0.32);
+      transform: translateX(100%);
+      transition: transform 0.28s ease;
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      padding: 1.4rem 1.3rem 1.6rem;
+    }
+    body.dark-mode .chat-history-drawer {
+      background: #15151b;
+    }
+    .chat-history-drawer.open {
+      transform: translateX(0);
+    }
+
+    .chat-history-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .chat-history-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #4e006d;
+    }
+    body.dark-mode .chat-history-title {
+      color: #f7ecff;
+    }
+
+    .chat-history-close {
+      background: none;
+      border: none;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: #4e006d;
+      transition: background 0.16s, transform 0.15s;
+    }
+    .chat-history-close:hover {
+      background: rgba(0,0,0,0.05);
+      transform: rotate(90deg);
+    }
+    body.dark-mode .chat-history-close {
+      color: #f7ecff;
+    }
+
+    .chat-history-new-btn {
+      background: #ad00e2;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      margin-bottom: 0.9rem;
+      transition: background 0.16s, transform 0.12s, box-shadow 0.16s;
+    }
+
+    .chat-history-new-btn:hover {
+      background: #7a2df6;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+
+    .chat-history-list {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding-right: 0.2rem;
+      margin-top: 0.1rem;
+    }
+
+    .chat-history-empty {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.6rem;
+    }
+
+    .chat-history-item {
+      width: 100%;
+      border: none;
+      background: #f7f4ee;
+      border-radius: 0.9rem;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.45rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+      font-size: 0.9rem;
+    }
+    .chat-history-item-title {
+      font-weight: 600;
+      color: #3b014f;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .chat-history-item-meta {
+      font-size: 0.78rem;
+      color: #777;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.4rem;
+    }
+    .chat-history-item:hover {
+      background: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.16);
+    }
+    .chat-history-item.active {
+      background: #f0deff;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+    }
+
+    body.dark-mode .chat-history-item {
+      background: #242331;
+      color: #f5f5f5;
+    }
+    body.dark-mode .chat-history-item-title {
+      color: #f3d9ff;
+    }
+    body.dark-mode .chat-history-item-meta {
+      color: #a5a5c2;
+    }
+    body.dark-mode .chat-history-item:hover {
+      background: #2c2b3b;
+    }
+    body.dark-mode .chat-history-item.active {
+      background: #3d3259;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #444b4b;
+      color: #eee;
+      padding: 2.5rem 0 1.2rem;
+      margin-top: 2rem;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    footer strong {
+      color: #fff;
+    }
+
+    .footer-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 0 1.4rem;
+      font-size: 0.96rem;
+    }
+
+    .footer-col {
+      flex: 1 1 200px;
+      min-width: 180px;
+    }
+
+    body.dark-mode footer {
+      background: #18181b;
+      color: #ccc;
+    }
+    body.dark-mode footer a {
+      color: #aaa;
+    }
+
+    @media (max-width: 800px) {
+      .footer-main {
+        flex-direction: column;
+        gap: 0.7rem;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .footer-main {
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+    }
+    /* Fix "Categories" link colour in dark mode */
+body.dark-mode .navbar .nav-link.dropdown-toggle {
+  color: #ffffff !important;
+}
+html.dark-mode .navbar .nav-link.dropdown-toggle {
+  color: #ffffff !important;
+}
+
+/* Fix "Categories" text colour in dark mode */
+body.dark-mode .nav-dropdown-toggle {
+  color: #ffffff !important;      /* main text in dark mode */
+}
+
+body.dark-mode .nav-dropdown-toggle:hover,
+body.dark-mode .nav-dropdown.open .nav-dropdown-toggle {
+  color: var(--accent) !important; /* on hover / when dropdown open */
+}
+
+  </style>
+</head>
+<body>
+  <!-- ========== LOGGED-IN HEADER ========== -->
+  <header class="logged-header" id="userHeader">
+    <div class="logo">
+      <img src="palette and fit logo.png" alt="Palette and Fit logo">
+      <span class="logo-text">Palette and Fit</span>
+    </div>
+
+    <nav class="nav">
+      <a href="homepage1.html">Home</a>
+
+      <div class="nav-dropdown" id="categoriesDropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+          <span>Categories</span>
+          <i class="fa-solid fa-chevron-down nav-dropdown-chevron"></i>
+        </button>
+        <div class="nav-dropdown-menu" aria-label="Categories menu">
+          <a href="men.html">Men</a>
+          <a href="women.html">Women</a>
+        </div>
+      </div>
+
+      <a href="aboutus.html">About us</a>
+      <a href="contactus.html">Contact us</a>
+      <a href="Suggestionpage.html" class="active">Get suggestion</a>
+      <a href="wishlist.html" class="wishlist-link">♡ Wishlist</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="profile-wrapper">
+        <button class="profile-icon" id="profileToggleUser" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8.5" r="4.2" fill="#fff" fill-opacity=".95"></circle>
+            <ellipse cx="12" cy="18" rx="7" ry="3.2" fill="#fff" fill-opacity=".38"></ellipse>
+          </svg>
+        </button>
+        <div class="profile-menu" id="profileMenuUser">
+          <a href="profile.html">Profile</a>
+          <a href="#" class="logout-link">Log out</a>
+        </div>
+      </div>
+
+      <!-- desktop dark mode -->
+      <button class="pill-btn darkmode-btn" id="darkModeToggleUser" aria-pressed="false">
+        <span class="dm-icon">🌙</span>
+        <span class="dm-text">Dark Mode</span>
+      </button>
+
+      <button class="hamburger" id="navToggleUser" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Logged-in nav drawer + backdrop -->
+  <div class="nav-drawer-backdrop" id="navBackdropUser"></div>
+
+  <aside class="nav-drawer" id="navDrawerUser" aria-hidden="true">
+    <div class="drawer-header">
+      <span class="drawer-title">Palette &amp; Fit</span>
+      <button class="drawer-close" id="drawerCloseUser" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="drawer-links">
+      <a href="homepage1.html">
+        <span class="drawer-icon"><i class="fa-solid fa-house"></i></span>
+        <span class="drawer-label">Home</span>
+      </a>
+      <a href="men.html">
+        <span class="drawer-icon"><i class="fa-solid fa-person"></i></span>
+        <span class="drawer-label">Men</span>
+      </a>
+      <a href="women.html">
+        <span class="drawer-icon"><i class="fa-solid fa-person-dress"></i></span>
+        <span class="drawer-label">Women</span>
+      </a>
+      <a href="aboutus.html">
+        <span class="drawer-icon"><i class="fa-solid fa-circle-info"></i></span>
+        <span class="drawer-label">About us</span>
+      </a>
+      <a href="contactus.html">
+        <span class="drawer-icon"><i class="fa-solid fa-envelope"></i></span>
+        <span class="drawer-label">Contact us</span>
+      </a>
+      <a href="Suggestionpage.html" class="active">
+        <span class="drawer-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+        <span class="drawer-label">Get suggestion</span>
+      </a>
+      <a href="terms.html">
+        <span class="drawer-icon"><i class="fa-regular fa-file-lines"></i></span>
+        <span class="drawer-label">Terms and conditions</span>
+      </a>
+      <a href="privacy.html">
+        <span class="drawer-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <span class="drawer-label">Privacy policy</span>
+      </a>
+      <a href="wishlist.html">
+        <span class="drawer-icon"><i class="fa-regular fa-heart"></i></span>
+        <span class="drawer-label">Wishlist</span>
+      </a>
+      <a href="profile.html">
+        <span class="drawer-icon"><i class="fa-regular fa-user"></i></span>
+        <span class="drawer-label">Profile</span>
+      </a>
+    </div>
+
+    <div class="drawer-actions">
+      <button class="pill-btn darkmode-btn" id="drawerDarkToggleUser" aria-pressed="false">
+        <span class="dm-icon">🌙</span>
+        <span class="dm-text">Dark Mode</span>
+      </button>
+      <button class="pill-btn logout-link">Log out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT: SUGGESTION CHATBOT -->
+  <main>
+    <section class="page-heading">
+      <h1 class="page-title">Style and colour suggestions</h1>
+      <p class="page-subtitle">
+        Ask anything about your skin tone, body shape, outfits or colours and get personalised advice.
+      </p>
+      <!-- NEW: profile summary line, filled from JS using localStorage profile -->
+      <div id="profile-summary"
+           style="margin-top:0.75rem;font-size:0.9rem;color:#555;"></div>
+    </section>
+
+    <section class="chatbot-shell">
+      <div class="chatbot-container">
+        <div class="chat-header">
+          <div class="chat-header-title">
+            <i class="fa-regular fa-comments"></i>
+            <span>Hi! How can I help you today?</span>
+          </div>
+          <button id="chatHistoryToggle" class="chat-history-toggle">
+            <i class="fa-solid fa-plus"></i>
+            <span>New chat</span>
+          </button>
+        </div>
+
+        <div class="chat-window" id="chat-window"></div>
+
+        <div class="prompt-panel" id="prompt-panel">
+          <div class="prompt">e.g. what colour suits my skin tone?</div>
+          <div class="prompt">e.g. what style flatters my body width?</div>
+          <div class="prompt">e.g. what clothes suit my height &amp; age?</div>
+        </div>
+
+        <div class="chat-input-wrap">
+          <button id="imageBtn" type="button" class="chat-upload" title="Attach outfit photo">
+            <i class="fa-solid fa-image"></i>
+          </button>
+          <input id="image-input" type="file" accept="image/*" hidden>
+          <input id="chat-input" class="chat-input" type="text" placeholder="Ask anything..." />
+          <button id="sendBtn" class="chat-send">➤</button>
+          <div id="image-label" class="chat-image-label"></div>
+          <div id="chat-error" class="chat-error" hidden></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CHAT HISTORY DRAWER -->
+  <div class="chat-history-backdrop" id="chatHistoryBackdrop"></div>
+  <aside class="chat-history-drawer" id="chatHistoryDrawer" aria-hidden="true">
+    <div class="chat-history-header">
+      <span class="chat-history-title">Chats</span>
+      <button class="chat-history-close" id="chatHistoryClose" aria-label="Close chat history">
+        &times;
+      </button>
+    </div>
+    <button class="chat-history-new-btn" id="startNewChatBtn">
+      <i class="fa-solid fa-plus"></i> Start new chat
+    </button>
+    <div id="chatHistoryList" class="chat-history-list">
+      <div class="chat-history-empty">No chats yet. Start a new chat to see it here.</div>
+    </div>
+  </aside>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-main">
+      <div class="footer-col">
+        <div>Need help?</div>
+        <div><a href="contactus.html">Contact us</a></div>
+      </div>
+      <div class="footer-col">
+        <div>More info</div>
+        <div><a href="aboutus.html">About us</a></div>
+        <div><a href="terms.html">Terms &amp; Conditions</a></div>
+      </div>
+      <div class="footer-col">
+        <div>Location</div>
+        <div><a href="mailto:support@PaletteandFit.com">support@PaletteandFit.com</a></div>
+        <div>
+          <a href="https://www.google.com/maps?q=4162+Wayback+Lane,+Farmingdale,+New+York,+11735,+USA" target="_blank" rel="noopener">
+            4162 Wayback Lane, Farmingdale
+          </a>
+        </div>
+        <div>New York, 11735, USA</div>
+      </div>
+    </div>
+    <div>
+      <strong>Palette and Fit</strong><br>
+      <span>© 2025 Palette and Fit. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    /* ========== BASIC AUTH / CONFIG ========== */
+    function getCurrentUserEmail() {
+      return window.currentUserEmail ||
+        localStorage.getItem('user_email') ||
+        localStorage.getItem('pf_user_email');
+    }
+
+    const currentEmail = getCurrentUserEmail();
+    if (!currentEmail) {
+      window.location.href = 'guest-home.html';
+      return;
+    }
+
+    const API_BASE = window.API_BASE_URL || "https://palette-and-fit-backend.onrender.com";
+    const CHATS_KEY = 'pf_chats_' + currentEmail;
+    const LAST_CHAT_KEY = 'pf_last_chat_' + currentEmail;
+
+    /* ========== PROFILE CONTEXT FOR SUGGESTIONS ========== */
+    const profileSummaryEl = document.getElementById('profile-summary');
+    let suggestionProfile = null;
+
+    function loadSuggestionProfile() {
+      // 1) Rich snapshot created by profile page after analysis
+      try {
+        const stored = localStorage.getItem('pf_suggestion_profile');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed && typeof parsed === 'object') {
+            return parsed;
+          }
+        }
+      } catch (e) {
+        console.warn('Could not parse pf_suggestion_profile', e);
+      }
+
+      // 2) Fallback to basic profileData (saved by profile page)
+      try {
+        const baseStored = localStorage.getItem('profileData');
+        if (baseStored) {
+          const raw = JSON.parse(baseStored);
+          if (raw && typeof raw === 'object') {
+            return {
+              email: currentEmail,
+              name: raw.name || '',
+              age: raw.age || '',
+              gender: raw.gender || '',
+              skin_tone: raw.skin_tone || '',
+              weight: raw.weight || '',
+              body_length: raw.body_length || '',
+              upper_width: raw.upper_width || '',
+              lower_width: raw.lower_width || ''
+            };
+          }
+        }
+      } catch (e) {
+        console.warn('Could not parse profileData', e);
+      }
+
+      return null;
+    }
+
+    function buildInlineProfileText(profile) {
+      if (!profile || typeof profile !== 'object') return '';
+      const bits = [];
+
+      if (profile.gender)     bits.push('Gender: ' + profile.gender);
+      if (profile.age)        bits.push('Age: ' + profile.age);
+      if (profile.skin_tone)  bits.push('Skin tone: ' + profile.skin_tone);
+      if (profile.body_shape) bits.push('Body shape: ' + profile.body_shape);
+      if (profile.body_length) bits.push('Body length: ' + profile.body_length);
+      if (profile.upper_width) bits.push('Upper body width: ' + profile.upper_width);
+      if (profile.lower_width) bits.push('Lower body width: ' + profile.lower_width);
+      if (profile.weight)     bits.push('Weight: ' + profile.weight);
+      if (profile.best_color)  bits.push('Best colours: ' + profile.best_color);
+      if (profile.worst_color) bits.push('Worst colours: ' + profile.worst_color);
+
+      if (!bits.length) return '';
+      return 'User style profile (use this for personalised fashion, fit and colour advice): '
+             + bits.join(', ') + '.';
+    }
+
+    function renderProfileSummary() {
+      if (!profileSummaryEl) return;
+      profileSummaryEl.innerHTML = '';
+
+      if (!suggestionProfile) {
+        profileSummaryEl.innerHTML =
+          'Tip: For more personalised suggestions, please complete or update your '
+          + '<a href="profile.html">style profile</a>.';
+        return;
+      }
+
+      const summaryBits = [];
+      if (suggestionProfile.gender) summaryBits.push(suggestionProfile.gender);
+      if (suggestionProfile.age) summaryBits.push(suggestionProfile.age + ' yrs');
+      if (suggestionProfile.skin_tone) summaryBits.push('Skin tone: ' + suggestionProfile.skin_tone);
+      if (suggestionProfile.body_shape) summaryBits.push('Body shape: ' + suggestionProfile.body_shape);
+      if (suggestionProfile.best_color) summaryBits.push('Best colours: ' + suggestionProfile.best_color);
+
+      if (!summaryBits.length) {
+        profileSummaryEl.innerHTML =
+          'We could not find detailed profile information. You can fill it in on your '
+          + '<a href="profile.html">profile page</a> for better suggestions.';
+      } else {
+        profileSummaryEl.innerHTML =
+          '<strong>Using your saved profile:</strong> ' + summaryBits.join(' • ');
+      }
+    }
+
+    suggestionProfile = loadSuggestionProfile();
+    renderProfileSummary();
+
+    /* ========== NAV / DRAWER / DARK MODE / PROFILE ========== */
+
+    const hamburgerUser   = document.getElementById('navToggleUser');
+    const drawerUser      = document.getElementById('navDrawerUser');
+    const backdropUser    = document.getElementById('navBackdropUser');
+    const drawerCloseUser = document.getElementById('drawerCloseUser');
+
+    const dmBtnHeaderUser = document.getElementById('darkModeToggleUser');
+    const dmBtnDrawerUser = document.getElementById('drawerDarkToggleUser');
+
+    const profileToggleUser = document.getElementById('profileToggleUser');
+    const profileMenuUser   = document.getElementById('profileMenuUser');
+
+    function openDrawerUser() {
+      if (!drawerUser || !backdropUser || !hamburgerUser) return;
+      drawerUser.classList.add('open');
+      backdropUser.classList.add('open');
+      hamburgerUser.classList.add('is-active');
+      hamburgerUser.setAttribute('aria-expanded', 'true');
+      drawerUser.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeDrawerUser() {
+      if (!drawerUser || !backdropUser || !hamburgerUser) return;
+      drawerUser.classList.remove('open');
+      backdropUser.classList.remove('open');
+      hamburgerUser.classList.remove('is-active');
+      hamburgerUser.setAttribute('aria-expanded', 'false');
+      drawerUser.setAttribute('aria-hidden', 'true');
+    }
+
+    if (hamburgerUser && drawerUser && backdropUser) {
+      hamburgerUser.addEventListener('click', () => {
+        if (drawerUser.classList.contains('open')) {
+          closeDrawerUser();
+        } else {
+          openDrawerUser();
+        }
+      });
+
+      backdropUser.addEventListener('click', closeDrawerUser);
+      if (drawerCloseUser) drawerCloseUser.addEventListener('click', closeDrawerUser);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawerUser.classList.contains('open')) {
+          closeDrawerUser();
+        }
+      });
+    }
+
+    const catDropdown = document.getElementById('categoriesDropdown');
+    if (catDropdown) {
+      const toggle = catDropdown.querySelector('.nav-dropdown-toggle');
+      const menu   = catDropdown.querySelector('.nav-dropdown-menu');
+
+      function closeCat() {
+        catDropdown.classList.remove('open');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      }
+      function openCat() {
+        catDropdown.classList.add('open');
+        if (toggle) toggle.setAttribute('aria-expanded', 'true');
+      }
+
+      if (toggle && menu) {
+        toggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (catDropdown.classList.contains('open')) {
+            closeCat();
+          } else {
+            openCat();
+          }
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!catDropdown.contains(e.target)) {
+            closeCat();
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            closeCat();
+          }
+        });
+      }
+    }
+
+    function setDarkMode(dark) {
+      document.body.classList.toggle('dark-mode', dark);
+      localStorage.setItem('darkMode', dark ? 'true' : 'false');
+
+      [dmBtnHeaderUser, dmBtnDrawerUser].forEach(btn => {
+        if (!btn) return;
+        btn.setAttribute('aria-pressed', String(dark));
+        const icon = btn.querySelector('.dm-icon');
+        const text = btn.querySelector('.dm-text');
+        if (icon) icon.textContent = dark ? '☀️' : '🌙';
+        if (text) text.textContent = dark ? 'Light Mode' : 'Dark Mode';
+      });
+    }
+
+    const initialDark = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(initialDark);
+
+    [dmBtnHeaderUser, dmBtnDrawerUser].forEach(btn => {
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const dark = !document.body.classList.contains('dark-mode');
+        setDarkMode(dark);
+      });
+    });
+
+    if (profileToggleUser && profileMenuUser) {
+      function closeProfileMenuUser() {
+        profileMenuUser.classList.remove('open');
+        profileToggleUser.setAttribute('aria-expanded', 'false');
+      }
+      function openProfileMenuUser() {
+        profileMenuUser.classList.add('open');
+        profileToggleUser.setAttribute('aria-expanded', 'true');
+      }
+
+      profileToggleUser.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (profileMenuUser.classList.contains('open')) {
+          closeProfileMenuUser();
+        } else {
+          openProfileMenuUser();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!profileMenuUser.contains(e.target) && e.target !== profileToggleUser) {
+          closeProfileMenuUser();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeProfileMenuUser();
+        }
+      });
+    }
+
+    const logoutLinks = document.querySelectorAll('.logout-link');
+    logoutLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('user_email');
+        localStorage.removeItem('pf_user_email');
+        localStorage.removeItem('auth_token');
+        window.location.href = 'guest-home.html';
+      });
+    });
+
+    /* ========== HELPERS ========== */
+
+    function markdownToHtml(md) {
+      if (!md) return '';
+      return md
+        .replace(/\*\*\*(.*?)\*\*\*/g, '<b><i>$1</i></b>')
+        .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+        .replace(/\*(.*?)\*/g, '<i>$1</i>')
+        .replace(/\n/g, '<br>');
+    }
+
+    /* ========== CHAT STATE (LOCAL STORAGE ONLY) ========== */
+
+    let chats = [];
+    let currentChatId = null;
+
+    const chatHistoryToggle   = document.getElementById('chatHistoryToggle');
+    const chatHistoryDrawer   = document.getElementById('chatHistoryDrawer');
+    const chatHistoryBackdrop = document.getElementById('chatHistoryBackdrop');
+    const chatHistoryClose    = document.getElementById('chatHistoryClose');
+    const startNewChatBtn     = document.getElementById('startNewChatBtn');
+    const chatHistoryListEl   = document.getElementById('chatHistoryList');
+
+    const sendBtn     = document.getElementById('sendBtn');
+    const input       = document.getElementById('chat-input');
+    const chatWindow  = document.getElementById('chat-window');
+    const promptPanel = document.getElementById('prompt-panel');
+    const errBox      = document.getElementById('chat-error');
+
+    const imageBtn    = document.getElementById('imageBtn');
+    const imageInput  = document.getElementById('image-input');
+    const imageLabel  = document.getElementById('image-label');
+    let attachedImageFile = null;
+
+    /* ---- file attach ---- */
+    if (imageBtn && imageInput) {
+      imageBtn.addEventListener('click', () => imageInput.click());
+      imageInput.addEventListener('change', () => {
+        const file = imageInput.files && imageInput.files[0] ? imageInput.files[0] : null;
+        attachedImageFile = file;
+        if (file && imageLabel) {
+          const name = file.name.length > 24 ? file.name.slice(0,21) + '…' : file.name;
+          imageLabel.textContent = 'Photo attached: ' + name;
+        } else if (imageLabel) {
+          imageLabel.textContent = '';
+        }
+      });
+    }
+
+    /* ---- helpers for UI ---- */
+    function scrollChatToBottom() {
+      if (!chatWindow) return;
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    function showError(msg) {
+      if (!errBox) return;
+      errBox.textContent = '⚠️ ' + (msg || 'Please type something.');
+      errBox.hidden = false;
+      input.classList.add('is-invalid');
+      setTimeout(() => {
+        errBox.hidden = true;
+        input.classList.remove('is-invalid');
+      }, 1600);
+      input.focus();
+    }
+
+    function renderMessageBubble(role, content) {
+      if (!chatWindow) return null;
+      const row = document.createElement('div');
+      row.className = 'msg-row';
+      const bubble = document.createElement('div');
+      bubble.className = 'msg-bubble ' + (role === 'user' ? 'user' : 'bot');
+      if (role === 'bot') {
+        bubble.innerHTML = markdownToHtml(content);
+      } else {
+        bubble.textContent = content;
+      }
+      row.appendChild(bubble);
+      chatWindow.appendChild(row);
+      scrollChatToBottom();
+      return bubble;
+    }
+
+    function clearChatWindow() {
+      if (!chatWindow) return;
+      chatWindow.innerHTML = '';
+    }
+
+    function getCurrentChat() {
+      return chats.find(c => c.id === currentChatId) || null;
+    }
+
+    function renderCurrentChat() {
+      clearChatWindow();
+      const chat = getCurrentChat();
+      if (!chat || !chat.messages.length) {
+        if (promptPanel) promptPanel.style.display = 'block';
+        return;
+      }
+      if (promptPanel) promptPanel.style.display = 'none';
+
+      chat.messages.forEach(m => {
+        renderMessageBubble(m.role, m.content);
+      });
+    }
+
+    function saveChats() {
+      try {
+        localStorage.setItem(CHATS_KEY, JSON.stringify(chats));
+      } catch (e) {
+        console.error('Error saving chats', e);
+      }
+    }
+
+    function loadChats() {
+      try {
+        const raw = localStorage.getItem(CHATS_KEY);
+        if (!raw) {
+          chats = [];
+          currentChatId = null;
+          return;
+        }
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          chats = parsed;
+        } else {
+          chats = [];
+        }
+      } catch (e) {
+        chats = [];
+      }
+
+      if (chats.length) {
+        const stored = localStorage.getItem(LAST_CHAT_KEY);
+        if (stored && chats.some(c => c.id === stored)) {
+          currentChatId = stored;
+        } else {
+          currentChatId = chats[0].id;
+        }
+      } else {
+        currentChatId = null;
+      }
+    }
+
+    function formatPreview(chat) {
+      if (!chat.messages.length) return 'No messages yet';
+      const last = chat.messages[chat.messages.length - 1];
+      let txt = (last.content || '').replace(/\s+/g, ' ').trim();
+      if (!txt) return 'No messages yet';
+      return txt.length > 45 ? txt.slice(0, 45) + '…' : txt;
+    }
+
+    function renderHistoryList() {
+      if (!chatHistoryListEl) return;
+      chatHistoryListEl.innerHTML = '';
+
+      if (!chats.length) {
+        const empty = document.createElement('div');
+        empty.className = 'chat-history-empty';
+        empty.textContent = 'No chats yet. Start a new chat to see it here.';
+        chatHistoryListEl.appendChild(empty);
+        return;
+      }
+
+      chats.forEach(chat => {
+        const btn = document.createElement('button');
+        btn.className = 'chat-history-item' + (chat.id === currentChatId ? ' active' : '');
+
+        const title = document.createElement('div');
+        title.className = 'chat-history-item-title';
+        title.textContent = chat.title || 'Untitled chat';
+
+        const meta = document.createElement('div');
+        meta.className = 'chat-history-item-meta';
+        const previewSpan = document.createElement('span');
+        previewSpan.textContent = formatPreview(chat);
+        const countSpan = document.createElement('span');
+        const count = chat.messages.length;
+        countSpan.textContent = count === 1 ? '1 message' : count + ' messages';
+
+        meta.appendChild(previewSpan);
+        meta.appendChild(countSpan);
+
+        btn.appendChild(title);
+        btn.appendChild(meta);
+
+        btn.addEventListener('click', () => {
+          currentChatId = chat.id;
+          localStorage.setItem(LAST_CHAT_KEY, currentChatId);
+          renderHistoryList();
+          renderCurrentChat();
+          closeHistoryDrawer();
+        });
+
+        chatHistoryListEl.appendChild(btn);
+      });
+    }
+
+    function createChat(initialText) {
+      const id = String(Date.now());
+      const chat = {
+        id,
+        title: initialText ? initialText.slice(0, 40) : 'New chat',
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        messages: []
+      };
+      chats.unshift(chat);
+      currentChatId = id;
+      localStorage.setItem(LAST_CHAT_KEY, currentChatId);
+      saveChats();
+      renderHistoryList();
+      return chat;
+    }
+
+    /* ---- history drawer ---- */
+    function openHistoryDrawer() {
+      chatHistoryDrawer.classList.add('open');
+      chatHistoryBackdrop.classList.add('open');
+      chatHistoryDrawer.setAttribute('aria-hidden', 'false');
+    }
+    function closeHistoryDrawer() {
+      chatHistoryDrawer.classList.remove('open');
+      chatHistoryBackdrop.classList.remove('open');
+      chatHistoryDrawer.setAttribute('aria-hidden', 'true');
+    }
+
+    if (chatHistoryToggle) chatHistoryToggle.addEventListener('click', openHistoryDrawer);
+    if (chatHistoryBackdrop) chatHistoryBackdrop.addEventListener('click', closeHistoryDrawer);
+    if (chatHistoryClose) chatHistoryClose.addEventListener('click', closeHistoryDrawer);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && chatHistoryDrawer.classList.contains('open')) {
+        closeHistoryDrawer();
+      }
+    });
+
+    if (startNewChatBtn) {
+      startNewChatBtn.addEventListener('click', () => {
+        createChat();
+        renderCurrentChat();
+      });
+    }
+
+    /* ---- send logic ---- */
+    if (sendBtn && input && chatWindow) {
+      const syncSendDisabled = () => {
+        sendBtn.disabled = !input.value.trim();
+      };
+      input.addEventListener('input', syncSendDisabled);
+      syncSendDisabled();
+
+      sendBtn.addEventListener('click', async () => {
+        const raw = input.value;
+        const msg = raw.trim();
+        if (!msg) {
+          showError();
+          return;
+        }
+
+        let chat = getCurrentChat();
+        if (!chat) {
+          chat = createChat(msg);
+        } else if (!chat.title || chat.title === 'New chat') {
+          chat.title = msg.slice(0, 40);
+        }
+
+        // user bubble + store
+        chat.messages.push({ role: 'user', content: msg });
+        chat.updatedAt = Date.now();
+        saveChats();
+        renderHistoryList();
+
+        renderMessageBubble('user', msg + (attachedImageFile ? "  📷" : ""));
+        if (promptPanel) promptPanel.style.display = 'none';
+        input.value = '';
+        syncSendDisabled();
+
+        // placeholder
+        const placeholderRow = document.createElement('div');
+        placeholderRow.className = 'msg-row';
+        const placeholderBubble = document.createElement('div');
+        placeholderBubble.className = 'msg-bubble bot';
+        placeholderBubble.textContent = 'Thinking...';
+        placeholderRow.appendChild(placeholderBubble);
+        chatWindow.appendChild(placeholderRow);
+        scrollChatToBottom();
+
+        // Build inline profile summary text to send with the query
+        const inlineProfileText = buildInlineProfileText(suggestionProfile);
+
+        try {
+          let endpoint;
+          let fetchOptions;
+
+          if (attachedImageFile) {
+            endpoint = API_BASE + '/api/recommendation_with_image';
+            const formData = new FormData();
+            formData.append('email', currentEmail);
+            formData.append('query', msg);
+            if (inlineProfileText) {
+              formData.append('inline_profile', inlineProfileText);
+            }
+            formData.append('image', attachedImageFile);
+            fetchOptions = { method: 'POST', body: formData };
+          } else {
+            endpoint = API_BASE + '/api/recommendation';
+            const payload = {
+              email: currentEmail,
+              query: msg
+            };
+            if (inlineProfileText) {
+              payload.inline_profile = inlineProfileText;
+            }
+            fetchOptions = {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            };
+          }
+
+          const response = await fetch(endpoint, fetchOptions);
+          const data = await response.json();
+
+          const replyText =
+            data.recommendation ||
+            data.ai_message ||
+            data.answer ||
+            data.error ||
+            "Sorry, I couldn't generate a suggestion right now. Please try again later.";
+
+          placeholderBubble.innerHTML = markdownToHtml(replyText);
+
+          // store assistant message
+          chat.messages.push({ role: 'assistant', content: replyText });
+          chat.updatedAt = Date.now();
+          saveChats();
+          renderHistoryList();
+        } catch (err) {
+          console.error('Send chat error', err);
+          placeholderBubble.textContent = 'Error: ' + err;
+        }
+
+        // clear attached image after send
+        attachedImageFile = null;
+        if (imageInput) imageInput.value = '';
+        if (imageLabel) imageLabel.textContent = '';
+
+        scrollChatToBottom();
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (!input.value.trim()) {
+            showError();
+            return;
+          }
+          sendBtn.click();
+        }
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      const pre = params.get('prompt');
+      if (pre) {
+        input.value = pre;
+        syncSendDisabled();
+      }
+    }
+
+    // Initial load from localStorage
+    loadChats();
+    renderHistoryList();
+    renderCurrentChat();
+  });
+  </script>
+</body>
+</html>

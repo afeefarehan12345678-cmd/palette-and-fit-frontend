@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Palette and Fit – Guest Home</title>
+  <link rel="stylesheet" href="common.css">
+  <!-- Script font for logo / site name -->
+  <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <!-- Font Awesome for sidebar icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --bg-light: #f7f4ee;
+      --bg-mid: #ece5db;
+      --bg-dark: #23242a;
+      --accent: #ad00e2;
+      --accent2: #c2a1ff;
+      --heading: #ad00e2;
+      --nav-bg: #ece5db;
+      --text: #23242a;
+      --button-bg: #ad00e2;
+      --button-text: #fff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-light);
+      color: var(--text);
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      --bg-light: #18181b;
+      --bg-mid: #23242a;
+      --bg-dark: #121214;
+      --nav-bg: #23242a;
+      --text: #ffffff;
+      --heading: #ad00e2;
+      --accent: #ad00e2;
+      --accent2: #c2a1ff;
+      --button-bg: #5f5cff;
+      --button-text: #ffffff;
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    /* ================= HEADER & NAV ================= */
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.9rem 2.4rem;
+      background: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 14px #0001;
+      font-weight: 600;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .logo img {
+      height: 56px;
+      width: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .logo-text {
+      font-family: 'Style Script', cursive;
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: #ad00e2;
+      line-height: 1.05;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding-inline: 1.2rem;
+      }
+      .logo img {
+        height: 44px;
+        width: 44px;
+      }
+      .logo-text {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* center nav links (desktop) */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-weight: 400;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .nav a {
+      color: #2a024d;
+      text-decoration: none;
+      font-size: 1.02rem;
+      padding: 0.25rem 0;
+      cursor: pointer;
+      transition: color 0.18s, font-weight 0.18s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Right side group (desktop) */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    /* Pill buttons: register + dark mode */
+    .pill-btn {
+      background: #7a2df6;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 0.5rem 1.6rem;
+      font-size: 0.98rem;
+      font-weight: 500;
+      box-shadow: 0 2px 12px #a673fa29;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.18s, transform 0.12s;
+      min-height: 36px;
+      white-space: nowrap;
+      text-decoration: none;
+      justify-content: center;
+      min-width: 140px;
+    }
+
+    .pill-btn:hover,
+    .pill-btn:focus {
+      background: #ad00e2;
+      color: #fff;
+      box-shadow: 0 6px 24px #a673fa49;
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    body.dark-mode .pill-btn {
+      background: #2a024d;
+    }
+
+    body.dark-mode .pill-btn:hover,
+    body.dark-mode .pill-btn:focus {
+      background: #7a2df6;
+    }
+
+    .darkmode-btn span:first-child {
+      font-size: 1.1em;
+    }
+
+    /* Hamburger button (base) */
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+
+    .hamburger-box {
+      position: relative;
+      width: 20px;
+      height: 2px;
+    }
+
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: #7a2df6;
+      box-shadow: none;
+      transition: transform 0.28s cubic-bezier(.55,.06,.68,.19), top 0.2s, opacity 0.2s;
+    }
+
+    .hamburger-inner { top: 0; }
+    .hamburger-inner::before { top: -6px; }
+    .hamburger-inner::after  { top:  6px; }
+
+    .hamburger.is-active .hamburger-inner {
+      transform: rotate(45deg);
+    }
+    .hamburger.is-active .hamburger-inner::before {
+      top: 0;
+      transform: rotate(-90deg);
+    }
+    .hamburger.is-active .hamburger-inner::after {
+      top: 0;
+      opacity: 0;
+    }
+
+    body.dark-mode .nav a {
+      color: #ffffff;
+    }
+    body.dark-mode .nav a:hover,
+    body.dark-mode .nav a.active {
+      color: var(--accent);
+    }
+
+    /* ======= RIGHT DRAWER (MOBILE) ======= */
+
+    .nav-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 120;
+    }
+
+    .nav-drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(320px, 80vw);
+      background: var(--bg-light);
+      box-shadow: -16px 0 38px rgba(0, 0, 0, 0.28);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 130;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1.4rem 1.6rem;
+    }
+
+    body.dark-mode .nav-drawer {
+      background: var(--bg-dark);
+    }
+
+    .nav-drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+
+    .drawer-title {
+      font-family: 'Style Script', cursive;
+      font-size: 1.55rem;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .drawer-close {
+      background: none;
+      border: none;
+      font-size: 1.35rem;
+      line-height: 1;
+      padding: 0.15rem 0.4rem;
+      border-radius: 999px;
+      cursor: pointer;
+      color: #e3c7ff;
+      transition: background 0.18s, transform 0.18s, color 0.18s;
+    }
+
+    .drawer-close:hover {
+      background: rgba(173, 0, 226, 0.16);
+      color: #ffffff;
+      transform: rotate(90deg);
+    }
+
+    .drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 0.2rem 0 1.6rem;
+    }
+
+    .drawer-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1.05rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.18s, color 0.18s, transform 0.1s;
+    }
+
+    .drawer-icon {
+      width: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drawer-icon i {
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+
+    .drawer-links a.active .drawer-icon i {
+      color: #ad00e2;
+    }
+
+    body.dark-mode .drawer-icon i {
+      color: var(--accent2);
+    }
+
+    .drawer-label {
+      flex: 1;
+    }
+
+    .drawer-links a:hover,
+    .drawer-links a:focus {
+      background: rgba(173, 0, 226, 0.12);
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    .drawer-links a.active {
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(173, 0, 226, 0.16);
+    }
+
+    body.dark-mode .drawer-links a {
+      color: #f7f4ee;
+    }
+
+    body.dark-mode .drawer-links a:hover,
+    body.dark-mode .drawer-links a:focus {
+      background: rgba(194, 161, 255, 0.18);
+      color: #ffffff;
+    }
+
+    .drawer-actions {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.1rem;
+    }
+
+    .drawer-actions .pill-btn {
+      width: 100%;
+    }
+
+    @media (max-width: 1200px) {
+      header {
+        padding: 0.8rem 1.2rem;
+        justify-content: space-between;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .header-actions {
+        gap: 0.4rem;
+      }
+
+      .hamburger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border-radius: 8px;
+        border: 1px solid rgba(173, 0, 226, 0.25);
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .header-actions .pill-btn {
+        min-width: 0;
+        padding-inline: 1.3rem;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      .hamburger {
+        display: none !important;
+      }
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      max-width: 1180px;
+      margin: 2.5rem auto 2.8rem;
+      padding: 0 1.4rem;
+      display: grid;
+      grid-template-columns: minmax(260px, 1.05fr) minmax(260px, 1.1fr);
+      gap: 2.4rem;
+      align-items: stretch;
+    }
+
+    .hero-image {
+      border-radius: 26px;
+      overflow: hidden;
+      min-height: 360px;
+      background: #ddd;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-panel {
+      background: #fff;
+      border-radius: 26px;
+      box-shadow: 0 14px 40px rgba(80, 45, 150, 0.14);
+      padding: 2.6rem 2.4rem 2.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    body.dark-mode .hero-panel {
+      background: #23242a;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.4);
+    }
+
+    .hero-tag {
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      color: #5b0b94;
+      margin-bottom: 1rem;
+    }
+
+    body.dark-mode .hero-title {
+      color: #f4e2ff;
+    }
+
+    .hero-text {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin-bottom: 1.7rem;
+    }
+
+    .hero-text strong {
+      font-weight: 700;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, #ff9bff, #7a2df6);
+      border-radius: 999px;
+      padding: 0.7rem 1.6rem;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(122, 45, 246, 0.45);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      text-decoration: none;
+    }
+
+    .primary-btn:hover {
+      box-shadow: 0 8px 26px rgba(122, 45, 246, 0.65);
+      transform: translateY(-1px);
+    }
+
+    .hero-note {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 0.7rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        min-height: 270px;
+      }
+    }
+
+    /* ================= INFO CARDS ================= */
+
+    .info-section {
+      max-width: 1180px;
+      margin: 0 auto 3.2rem;
+      padding: 0 1.4rem;
+    }
+
+    .info-heading {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .info-heading h2 {
+      font-size: 1.5rem;
+      color: var(--heading);
+      margin-bottom: 0.4rem;
+    }
+
+    .info-heading p {
+      font-size: 0.98rem;
+      opacity: 0.85;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .info-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 1.6rem 1.5rem 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    body.dark-mode .info-card {
+      background: #23242a;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+    }
+
+    .info-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.8rem;
+      color: #5b0b94;
+    }
+
+    body.dark-mode .info-card h3 {
+      color: #f4e2ff;
+    }
+
+    .info-card ul {
+      list-style: disc;
+      padding-left: 1.1rem;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .info-card ul li + li {
+      margin-top: 0.25rem;
+    }
+
+    /* ================= LOTTIE ROWS ================= */
+
+    .lottie-section {
+      max-width: 1180px;
+      margin: 0 auto 3.5rem;
+      padding: 0 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.6rem;
+    }
+
+    .lottie-row {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.95fr) minmax(260px, 1.1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .lottie-row.reverse {
+      grid-template-columns: minmax(260px, 1.1fr) minmax(260px, 0.95fr);
+    }
+
+    .lottie-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lottie-col lottie-player {
+      width: 100%;
+      max-width: 360px;
+      min-height: 220px;
+    }
+
+    .lottie-text {
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .lottie-text h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.7rem;
+      color: #5b0b94;
+    }
+
+    body.dark-mode .lottie-text h3 {
+      color: #f4e2ff;
+    }
+
+    .lottie-text p + p {
+      margin-top: 0.45rem;
+    }
+
+    @media (max-width: 900px) {
+      .lottie-row,
+      .lottie-row.reverse {
+        grid-template-columns: 1fr;
+      }
+
+      .lottie-row.reverse .lottie-col:first-child {
+        order: 2;
+      }
+      .lottie-row.reverse .lottie-text {
+        order: 1;
+      }
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #444b4b;
+      color: #eee;
+      padding: 2.5rem 0 1.2rem;
+      margin-top: 2rem;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    footer strong {
+      color: #fff;
+    }
+
+    .footer-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 0 1.4rem;
+      font-size: 0.96rem;
+    }
+
+    .footer-col {
+      flex: 1 1 200px;
+      min-width: 180px;
+    }
+
+    body.dark-mode footer {
+      background: #18181b;
+      color: #ccc;
+    }
+
+    body.dark-mode footer a {
+      color: #aaa;
+    }
+
+    @media (max-width: 800px) {
+      .footer-main {
+        flex-direction: column;
+        gap: 0.7rem;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .footer-main {
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="logo">
+      <img src="palette and fit logo.png" alt="Palette and Fit logo">
+      <span class="logo-text">Palette and Fit</span>
+    </div>
+
+    <nav class="nav">
+      <a href="guest-home.html" class="active">Home</a>
+      <a href="aboutus.html">About us</a>
+      <a href="contactus.html">Contact us</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="landing.html" class="pill-btn" id="registerBtn">Register</a>
+
+      <button class="pill-btn darkmode-btn" id="darkModeToggle" aria-pressed="false">
+        <span>🌙</span>
+        <span>Dark Mode</span>
+      </button>
+
+      <button class="hamburger" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- RIGHT-SIDE DRAWER + BACKDROP -->
+  <div class="nav-drawer-backdrop" id="navBackdrop"></div>
+
+  <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+    <div class="drawer-header">
+      <span class="drawer-title">Palette &amp; Fit</span>
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="drawer-links">
+      <a href="guest-home.html" class="active">
+        <span class="drawer-icon"><i class="fa-solid fa-house"></i></span>
+        <span class="drawer-label">Home</span>
+      </a>
+      <a href="aboutus.html">
+        <span class="drawer-icon"><i class="fa-solid fa-shirt"></i></span>
+        <span class="drawer-label">About us</span>
+      </a>
+      <a href="contactus.html">
+        <span class="drawer-icon"><i class="fa-solid fa-envelope"></i></span>
+        <span class="drawer-label">Contact us</span>
+      </a>
+      <a href="privacy.html">
+        <span class="drawer-icon"><i class="fa-solid fa-lock"></i></span>
+        <span class="drawer-label">Privacy &amp; policy</span>
+      </a>
+      <a href="terms.html">
+        <span class="drawer-icon"><i class="fa-solid fa-file-lines"></i></span>
+        <span class="drawer-label">Terms &amp; Conditions</span>
+      </a>
+    </div>
+
+    <div class="drawer-actions" id="drawerActions"></div>
+  </aside>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="hero-image">
+        <img src="guest-hero.jpg" alt="People exploring outfits with Palette and Fit">
+      </div>
+
+      <div class="hero-panel">
+        <div class="hero-tag">Guest mode</div>
+        <h1 class="hero-title">Explore your style before you sign up</h1>
+        <p class="hero-text">
+          Browse Palette and Fit as a guest and discover looks for different
+          <strong>skin tones</strong>, <strong>body types</strong>, and
+          <strong>personalities</strong>. No login needed.
+        </p>
+        <p class="hero-text">
+          When you create an account later, you can scan your real skin tone,
+          add body details, and let the style bot recommend outfits that feel
+          made just for you.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#lottieSection" class="primary-btn">
+            Start exploring
+          </a>
+          <p class="hero-note">
+            No account needed to look around. You can register anytime from the top right.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= INFO CARDS ================= -->
+    <section class="info-section">
+      <div class="info-heading">
+        <h2>Why we ask for your skin tone and body data</h2>
+        <p>Short answers, no confusing text — just clear, simple points.</p>
+      </div>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>More accurate colour ideas</h3>
+          <ul>
+            <li>The app can understand your real undertone.</li>
+            <li>Lipstick, hijab and dress colours look more glowing on you.</li>
+            <li>You get an updated colour palette for every season.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3>Better fit, less guesswork</h3>
+          <ul>
+            <li>Your height, body length, shoulders and tummy area are all taken into account.</li>
+            <li>You get different ideas for loose, fitted or modest styles.</li>
+            <li>If your weight changes, just update the numbers and your tips refresh automatically.</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3>Smarter AI style answers</h3>
+          <ul>
+            <li>The bot uses a mix of your skin tone and body data.</li>
+            <li>You get clear answers to questions like “Which neckline suits me?”</li>
+            <li>Over time, the AI also learns what you like.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= LOTTIE ROWS ================= -->
+    <section class="lottie-section" id="lottieSection">
+      <div class="lottie-row">
+        <div class="lottie-col">
+          <lottie-player
+            src="Face model.json"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay
+            aria-label="Face scan animation">
+          </lottie-player>
+        </div>
+        <div class="lottie-text">
+          <h3>Scan your skin tone when you are ready</h3>
+          <p>When you sign up you can scan your skin tone with a simple selfie or live camera.</p>
+          <p>Dark, medium, fair — we focus on undertone, not labels.</p>
+          <p>If your makeup changes, you get a tan or the lighting is different, you can save a new scan.</p>
+        </div>
+      </div>
+
+      <div class="lottie-row reverse">
+        <div class="lottie-text">
+          <h3>Set body details for better fit tips</h3>
+          <p>Height, approximate weight, shoulders, tummy and thighs — this data is used only for styling.</p>
+          <p>You can tell us if you prefer fitted, relaxed or modest cuts.</p>
+          <p>When your routine or weight changes, update your profile numbers and the system will suggest new outfits automatically.</p>
+        </div>
+        <div class="lottie-col">
+          <lottie-player
+            src="User Profile.json"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay
+            aria-label="User profile animation">
+          </lottie-player>
+        </div>
+      </div>
+
+      <div class="lottie-row">
+        <div class="lottie-col">
+          <lottie-player
+            src="Bot hello mesage.json"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay
+            aria-label="Chat bot animation">
+          </lottie-player>
+        </div>
+        <div class="lottie-text">
+          <h3>Ask the style bot any outfit question</h3>
+          <p>The bot uses your skin tone and body preferences together to suggest outfit ideas.</p>
+          <p>You can ask: “What colour wedding outfit would suit my skin tone?”</p>
+          <p>Or “Which trouser cut is best for my height?” — the bot gives a simple, clear answer.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="footer-main">
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Need help?</div>
+        <div style="margin-bottom:0.4rem;"><a href="contactus.html">Contact us</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">More info</div>
+        <div style="margin-bottom:0.4rem;"><a href="aboutus.html">About us</a></div>
+        <div style="margin-bottom:0.4rem;"><a href="terms.html">Terms &amp; Conditions</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Location</div>
+        <div style="margin-bottom:0.4rem;">
+          <a href="mailto:support@PaletteandFit.com">support@PaletteandFit.com</a>
+        </div>
+        <div style="margin-bottom:0.4rem;">
+          <a href="https://www.google.com/maps?q=4162+Wayback+Lane,+Farmingdale,+New+York,+11735,+USA"
+             target="_blank" rel="noopener">
+            4162 Wayback Lane, Farmingdale
+          </a>
+        </div>
+        <div style="margin-bottom:0.4rem;">New York, 11735, USA</div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:2.5rem; font-size:1.05rem;">
+      <strong>Palette and Fit</strong><br>
+      <span style="font-size:0.9rem; color:#bbb;">© 2025 Palette and Fit. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- Lottie player script -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <!-- NAV + DARK MODE + DRAWER JS (+ redirect for logged in) -->
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // 1) Check URL for ?email=... coming from Google/Facebook redirect
+    const params = new URLSearchParams(window.location.search);
+    const qEmail = params.get('email');
+    const qIsAdmin = params.get('is_admin');
+
+    if (qEmail) {
+      // Store email for the rest of the site
+      localStorage.setItem('pf_user_email', qEmail);
+      localStorage.setItem('user_email', qEmail);
+
+      if (qIsAdmin !== null) {
+        localStorage.setItem('is_admin', qIsAdmin === 'true' ? 'true' : 'false');
+      }
+    }
+
+    // 2) If we already have an email in localStorage, user is logged in → go to main homepage
+    const storedEmail =
+      localStorage.getItem('pf_user_email') || localStorage.getItem('user_email');
+
+    if (storedEmail) {
+      window.location.href = 'homepage1.html';
+      return;
+    }
+
+    // ===== NAV + DARK MODE + DRAWER JS =====
+    const hamburger = document.getElementById('navToggle');
+    const drawer = document.getElementById('navDrawer');
+    const backdrop = document.getElementById('navBackdrop');
+    const drawerClose = document.getElementById('drawerClose');
+    const drawerActions = document.getElementById('drawerActions');
+    const headerActions = document.querySelector('.header-actions');
+
+    const dmBtn = document.getElementById('darkModeToggle');
+    const regBtn = document.getElementById('registerBtn');
+
+    const mqMob = window.matchMedia('(max-width: 1200px)');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      backdrop.classList.add('open');
+      hamburger.classList.add('is-active');
+      hamburger.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      backdrop.classList.remove('open');
+      hamburger.classList.remove('is-active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+    }
+
+    if (hamburger && drawer && backdrop) {
+      hamburger.addEventListener('click', () => {
+        if (drawer.classList.contains('open')) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      });
+
+      backdrop.addEventListener('click', closeDrawer);
+      if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('open')) {
+          closeDrawer();
+        }
+      });
+    }
+
+    // Dark mode toggle
+    if (dmBtn) {
+      const setUI = (dark) => {
+        document.body.classList.toggle('dark-mode', dark);
+        dmBtn.setAttribute('aria-pressed', String(dark));
+        dmBtn.innerHTML = dark
+          ? '<span>☀️</span><span>Light Mode</span>'
+          : '<span>🌙</span><span>Dark Mode</span>';
+      };
+
+      const initialDark = localStorage.getItem('darkMode') === 'true';
+      setUI(initialDark);
+
+      dmBtn.addEventListener('click', () => {
+        const dark = !document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', dark);
+        setUI(dark);
+      });
+    }
+
+    // Move Register + Dark Mode between header and drawer depending on screen size
+    const relocateControls = () => {
+      if (!dmBtn || !regBtn) return;
+
+      if (mqMob.matches) {
+        if (!drawerActions.contains(regBtn)) {
+          drawerActions.insertBefore(regBtn, drawerActions.firstChild);
+        }
+        if (!drawerActions.contains(dmBtn)) {
+          drawerActions.appendChild(dmBtn);
+        }
+      } else {
+        if (!headerActions.contains(regBtn)) {
+          headerActions.insertBefore(regBtn, hamburger);
+        }
+        if (!headerActions.contains(dmBtn)) {
+          headerActions.insertBefore(dmBtn, hamburger);
+        }
+        closeDrawer();
+      }
+    };
+
+    mqMob.addEventListener('change', relocateControls);
+    relocateControls();
+  });
+</script>
+</body>
+</html>

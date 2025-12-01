@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account – Palette and Fit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* make sure every text uses the same font as SIGNUP1 */
+html, body {
+  font-family: 'Poppins', sans-serif;
+}
+
+input,
+select,
+button,
+textarea {
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --bg-light: #f6f3fc;
+  --accent: #ad00e2;
+  --accent-glow: #e8d8fd;
+  --card-bg: #ffffff;
+  --text: #20144a;
+  --input-border: #d4c4ef;
+  --input-bg: #faf6fe;
+  --shadow: 0 8px 36px #ad00e222, 0 1.5px 8px #ad00e208;
+  --shadow-dark: 0 6px 32px #0003, 0 1.5px 8px #0002;
+  --btn-purple: #ad00e2;
+  --btn-purple-dark: #7a2df6;
+
+  --top-pill-width: 150px; /* back + dark buttons same width */
+
+  /* watercolor background – same as before */
+  --custom-bg: url('data:image/jpeg;base64,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');
+}
+
+/* DARK MODE (variables override) */
+body.dark-mode {
+  color: #fff;
+  --input-bg: rgba(24, 14, 45, 0.85);
+  --card-bg: rgba(18, 9, 34, 0.96);
+  --text: #e7d6fa;
+  --input-border: #9f7de0;
+}
+
+/* full-height + watercolor bg */
+html, body {
+  min-height: 100%; /* was height:100%; to avoid clipping on small screens */
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;  /* was center – flex-start avoids “cut” form on short screens */
+  justify-content: center;
+  min-height: 100vh;
+
+  padding: 3rem 1.5rem 2.5rem;
+  color: var(--text);
+  background: none;
+  transition: background 0.3s, color 0.3s;
+  overflow-y: auto; /* ensure scroll if content taller than viewport */
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--custom-bg) center center/cover no-repeat fixed;
+  z-index: -2;
+  filter: brightness(1) contrast(1.02) saturate(1.1);
+  transition: filter 0.3s;
+}
+
+body.dark-mode::before {
+  filter: brightness(0.66) contrast(1.08) saturate(1.15);
+}
+
+/* MAIN CARD */
+.container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+
+  background: var(--card-bg);
+  border-radius: 2.2rem;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+
+  padding: 1.35rem 2.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body.dark-mode .container {
+  background: rgba(20,11,39,0.94);
+  box-shadow: var(--shadow-dark);
+}
+
+/* TOP BAR (Back + Dark Mode) */
+.top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+/* pill buttons (shared shape) */
+.pill-btn {
+  min-width: var(--top-pill-width);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 0.46rem 1.15rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+
+  box-shadow: 0 2px 12px #ad00e225;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+
+  transition:
+    background 0.18s,
+    color 0.18s,
+    box-shadow 0.18s,
+    transform 0.12s;
+}
+
+/* Back to home – light mode (purple) */
+.back-home {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.back-home::before {
+  content: "←";
+  font-size: 0.93rem;
+}
+
+.back-home:hover,
+.back-home:focus-visible {
+  background: var(--btn-purple-dark);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Dark toggle – light mode */
+.dark-toggle {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.dark-toggle:hover {
+  transform: translateY(-1px);
+}
+
+/* Dark mode appearance for pills */
+body.dark-mode .back-home,
+body.dark-mode .dark-toggle {
+  background: #ffffff;
+  color: var(--accent);
+}
+
+body.dark-mode .back-home:hover,
+body.dark-mode .dark-toggle:hover,
+body.dark-mode .back-home:focus-visible,
+body.dark-mode .dark-toggle:focus-visible {
+  background: #ffffff;
+  color: #7a2df6;
+  transform: translateY(-1px);
+}
+
+/* hide the extra mobile button if it exists in HTML */
+.dark-toggle-mobile {
+  display: none !important;
+}
+
+/* PROGRESS STEPS */
+.progress-bar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2.2rem;
+  width: 100%;
+  margin: 0.1rem 0 0.2rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: #b3a5c7;
+  gap: 0.2rem;
+  transition: color 0.18s;
+}
+
+.step.active {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f5eaff;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.15rem;
+  border: 2.5px solid #e8d8fd;
+  box-shadow: 0 2px 10px #ad00e21c;
+}
+
+.step.active .step-circle {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px #ad00e246;
+}
+
+body.dark-mode .step-circle {
+  background: #3b1853;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+body.dark-mode .step.active .step-circle {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* TAGLINE + TITLE */
+.tagline {
+  margin-top: 0.25rem;
+  font-size: 0.92rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #7b57c4;
+  text-align: center;
+}
+
+body.dark-mode .tagline {
+  color: #d3c0ff;
+}
+
+h2 {
+  margin: 0.4rem 0 1rem;
+  color: var(--accent);
+  text-align: center;
+  font-weight: 800;
+  font-size: 2.05rem;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 8px #e8d8fd;
+}
+
+body.dark-mode h2 {
+  color: #ffffff;
+  text-shadow: 0 1px 12px #7a2df6;
+}
+
+/* FORM */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+label {
+  font-size: 1.01rem;
+  font-weight: 600;
+  margin-bottom: 0.07rem;
+  color: #7054ad;
+  margin-left: 2px;
+}
+
+body.dark-mode label {
+  color: #cbbcf3;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  padding: 0.48rem 2.4rem 0.48rem 2.13rem;
+  border-radius: 1rem;
+  border: 1.5px solid var(--input-border);
+  background: var(--input-bg);
+  font-size: 1.06rem;
+  color: var(--text);
+  outline: none;
+  margin-top: 0.07rem;
+  box-shadow: 0 0.5px 3px #b292d11c;
+  transition: border-color 0.18s, box-shadow 0.19s, background 0.18s;
+  height: 2.05rem;
+}
+
+input:focus {
+  border-color: var(--accent);
+  background: #f7f0fd;
+  box-shadow: 0 2px 12px #c6a1e817;
+}
+
+body.dark-mode input {
+  color: #ffffff;
+  background: rgba(21, 12, 43, 0.95);
+  border-color: #845acb;
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.86rem;
+  top: 54%;
+  transform: translateY(-50%);
+  font-size: 1.11rem;
+  color: #b6a2d5;
+  pointer-events: none;
+}
+
+body.dark-mode .input-icon {
+  color: #a284de;
+}
+
+/* PASSWORD EYE */
+.eye-btn {
+  position: absolute;
+  right: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #b290dd;
+  padding: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye-btn svg {
+  width: 21px;
+  height: 21px;
+  pointer-events: none;
+}
+
+/* PRIMARY BUTTON */
+.btn {
+  margin-top: 0.17rem;
+  background: var(--btn-purple);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.11rem;
+  border: none;
+  padding: 0.71rem 0;
+  border-radius: 1rem;
+  cursor: pointer;
+  width: 100%;
+  letter-spacing: 0.12px;
+  box-shadow: 0 2.2px 14px #ad00e222;
+  transition: background 0.19s, box-shadow 0.18s, transform 0.13s;
+}
+
+.btn:hover {
+  background: var(--btn-purple-dark);
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* signup message */
+#signupMessage {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  text-align: center;
+  min-height: 1.1em;
+  color: #ad00e2;
+}
+
+body.dark-mode #signupMessage {
+  color: #f3d7ff;
+}
+
+/* SOCIAL SIGNUP */
+.social-login {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.7rem;
+  width: 100%;
+}
+
+.social-login button {
+  flex: 1;
+  padding: 0.7rem 0.3rem;
+  font-size: 1.01rem;
+  border: none;
+  border-radius: 0.9rem;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  background: #db4437; /* Google red */
+  transition: opacity .17s, transform .12s, box-shadow .16s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 7px rgba(0,0,0,0.09);
+}
+
+.social-login button.facebook {
+  background: #4267B2;
+}
+
+.social-login button:hover {
+  opacity: 0.96;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+
+/* BOTTOM LINK */
+.bottom-links {
+  margin-top: 0.85rem;
+  font-size: 0.93rem;
+  text-align: center;
+  color: #7a5ab3;
+}
+
+.bottom-links a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.3rem;
+}
+
+.bottom-links a:hover {
+  text-decoration: underline;
+}
+
+body.dark-mode .bottom-links {
+  color: #d6c7ff;
+}
+
+/* LEAVE MODAL */
+.leave-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.leave-modal-content {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.5rem 1.9rem 1.3rem;
+  max-width: 380px;
+  width: 88vw;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.30);
+  text-align: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.leave-modal-content h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.12rem;
+  color: #4a2f78;
+}
+
+.leave-modal-content p {
+  margin: 0 0 1.1rem;
+  color: #62418f;
+  font-size: 0.96rem;
+  line-height: 1.45;
+}
+
+.leave-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.leave-btn {
+  padding: 0.45rem 1.3rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.94rem;
+  cursor: pointer;
+}
+
+.leave-btn.stay {
+  background: #f1e7ff;
+  color: #5a30a3;
+}
+
+.leave-btn.leave {
+  background: linear-gradient(90deg,#b77ffb 0%, #ad00e2 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(173,0,226,0.35);
+}
+
+/* modal dark mode */
+body.dark-mode .leave-modal {
+  background: rgba(0,0,0,0.55);
+}
+
+body.dark-mode .leave-modal-content {
+  background: rgba(23,12,46,0.98);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.75);
+}
+
+body.dark-mode .leave-modal-content h3 {
+  color: #f7ecff;
+}
+
+body.dark-mode .leave-modal-content p {
+  color: #e3d3ff;
+}
+
+body.dark-mode .leave-btn.stay {
+  background: rgba(255,255,255,0.12);
+  color: #f5e9ff;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+
+/* tablets / small laptops */
+@media (max-width: 900px) {
+  body {
+    padding: 2.6rem 1.2rem 2rem;
+    align-items: flex-start;
+  }
+  .container {
+    padding: 1.2rem 1.8rem 1.5rem;
+    border-radius: 1.9rem;
+  }
+}
+
+/* phones */
+@media (max-width: 600px) {
+  body {
+    padding: 2.4rem 0.8rem 1.8rem;
+    align-items: flex-start;
+  }
+  .container {
+    padding: 1rem 1.1rem 1.2rem;
+    border-radius: 1.6rem;
+  }
+
+  /* keep buttons side-by-side, small pills */
+  .top-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .top-bar .pill-btn {
+    align-self: auto;
+    flex: 0 0 auto;
+  }
+
+  .progress-bar {
+    gap: 1.3rem;
+  }
+  h2 {
+    font-size: 1.55rem;
+  }
+  .tagline {
+    font-size: 0.88rem;
+  }
+  .step, label {
+    font-size: 0.92rem;
+  }
+  .step-circle {
+    width: 24px;
+    height: 24px;
+    font-size: 0.95rem;
+  }
+  input {
+    font-size: 0.96rem;
+    height: 1.85rem;
+  }
+  .btn {
+    font-size: 1rem;
+    padding: 0.62rem 0;
+  }
+}
+
+/* very small phones */
+@media (max-width: 400px) {
+  body {
+    padding: 2.1rem 0.6rem 1.6rem;
+    align-items: flex-start;
+  }
+  .container {
+    padding: 0.85rem 0.7rem 1rem;
+    border-radius: 1.3rem;
+  }
+  h2 {
+    font-size: 1.28rem;
+  }
+  .tagline {
+    font-size: 0.8rem;
+  }
+  .step, label {
+    font-size: 0.84rem;
+  }
+  .step-circle {
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+  }
+  .btn {
+    font-size: 0.94rem;
+  }
+}
+</style>
+
+</head>
+<body>
+<div class="container">
+  <div class="top-bar">
+    <a href="guest-home.html" class="pill-btn back-home" id="backHomeLink">Back to home</a>
+    <button class="pill-btn dark-toggle" id="toggleDark" type="button">🌙 Dark Mode</button>
+  </div>
+
+  <div class="progress-bar" aria-label="Signup progress">
+    <div class="step active" aria-current="step">
+      <div class="step-circle">1</div>
+      Account
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      Profile
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      Welcome
+    </div>
+  </div>
+
+  <div class="tagline">LET’S SIGN UP TO PALETTE AND FIT</div>
+  <h2>Create Account</h2>
+
+  <form id="signupForm" autocomplete="off" novalidate>
+    <div>
+      <label for="email">Email</label>
+      <div class="input-group">
+        <span class="input-icon">&#9993;</span>
+        <input type="email" id="email" maxlength="50" placeholder="you@email.com" required>
+      </div>
+    </div>
+    <div>
+      <label for="phone">Phone Number</label>
+      <div class="input-group">
+        <span class="input-icon">&#128241;</span>
+        <input type="tel" id="phone" maxlength="15" placeholder="03XX-XXXXXXX" required>
+      </div>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <div class="input-group">
+        <span class="input-icon">&#128274;</span>
+        <input type="password" id="password" maxlength="32" placeholder="Password" required>
+        <button type="button" class="eye-btn" data-target="password" aria-label="Show or hide password">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b290dd" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="12" rx="7.5" ry="5.2"/>
+            <circle cx="12" cy="12" r="2.2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div>
+      <label for="confirm">Confirm Password</label>
+      <div class="input-group">
+        <span class="input-icon">&#128274;</span>
+        <input type="password" id="confirm" maxlength="32" placeholder="Confirm password" required>
+        <button type="button" class="eye-btn" data-target="confirm" aria-label="Show or hide confirm password">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b290dd" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="12" rx="7.5" ry="5.2"/>
+            <circle cx="12" cy="12" r="2.2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="btn" type="submit" id="signupSubmitBtn">Continue</button>
+  </form>
+
+  <div id="signupMessage"></div>
+
+  <!-- Social signup -->
+  <div class="social-login">
+    <button type="button" id="signupGoogle">Sign up with Google</button>
+    <button type="button" class="facebook" id="signupFacebook">Sign up with Facebook</button>
+  </div>
+
+  <div class="bottom-links">
+    <span>Already have an account?</span>
+    <a href="login.html">Log in</a>
+  </div>
+</div>
+
+<!-- Leave confirmation modal -->
+<div class="leave-modal" id="leaveModal" aria-modal="true" role="dialog" aria-labelledby="leaveTitle">
+  <div class="leave-modal-content">
+    <h3 id="leaveTitle">Leave signup?</h3>
+    <p>Are you sure you want to leave now? We’re so close to building your personalised preference panel.</p>
+    <div class="leave-actions">
+      <button type="button" class="leave-btn stay" id="stayHereBtn">Stay here</button>
+      <button type="button" class="leave-btn leave" id="leaveConfirmBtn">Leave anyway</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // For consistency with login page, you can also switch to the dynamic API_BASE logic later.
+  const API_BASE = 'https://palette-and-fit-backend.onrender.com';
+
+  const bodyEl  = document.body;
+  const darkBtn = document.getElementById('toggleDark');
+
+  /* 🔒 If already logged in, send to logged-in home */
+  if (localStorage.getItem('user_email')) {
+    window.location.href = 'homepage1.html';
+    return;
+  }
+
+  /* ===== Dark mode toggle ===== */
+  function updateBtnText() {
+    const mode = bodyEl.classList.contains('dark-mode');
+    darkBtn.textContent = mode ? '☀️ Light Mode' : '🌙 Dark Mode';
+  }
+
+  function toggleDarkMode() {
+    const isDark = bodyEl.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+    updateBtnText();
+  }
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    bodyEl.classList.add('dark-mode');
+  }
+  updateBtnText();
+  darkBtn.addEventListener('click', toggleDarkMode);
+
+  /* ===== Leave confirmation modal (Back to home) ===== */
+  const GUEST_HOME_URL = 'guest-home.html';
+  const backHomeLink    = document.getElementById('backHomeLink');
+  const leaveModal      = document.getElementById('leaveModal');
+  const stayHereBtn     = document.getElementById('stayHereBtn');
+  const leaveConfirmBtn = document.getElementById('leaveConfirmBtn');
+
+  function openLeaveModal() {
+    leaveModal.style.display = 'flex';
+  }
+  function closeLeaveModal() {
+    leaveModal.style.display = 'none';
+  }
+
+  backHomeLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openLeaveModal();
+  });
+  stayHereBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeLeaveModal();
+  });
+  leaveConfirmBtn.addEventListener('click', () => {
+    window.location.href = GUEST_HOME_URL;
+  });
+  leaveModal.addEventListener('click', (e) => {
+    if (e.target === leaveModal) closeLeaveModal();
+  });
+
+  /* ===== Password show / hide ===== */
+  document.querySelectorAll('.eye-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+      const input = document.getElementById(targetId);
+      if (!input) return;
+
+      const isPw = input.type === 'password';
+      input.type = isPw ? 'text' : 'password';
+
+      const svg = btn.querySelector('svg');
+      if (svg) svg.setAttribute('stroke', isPw ? '#ad00e2' : '#b290dd');
+    });
+  });
+
+  /* ===== Social sign-up (Google / Facebook) ===== */
+  const signupGoogleBtn = document.getElementById('signupGoogle');
+  const signupFacebookBtn = document.getElementById('signupFacebook');
+
+  // Hint backend that this is signup flow and we want to land on SIGNUP2.html after OAuth
+  const SIGNUP_NEXT = 'SIGNUP2.html';
+
+  if (signupGoogleBtn) {
+    signupGoogleBtn.addEventListener('click', () => {
+      window.location.href =
+        `${API_BASE}/auth/google?source=signup&next=${encodeURIComponent(SIGNUP_NEXT)}`;
+    });
+  }
+  if (signupFacebookBtn) {
+    signupFacebookBtn.addEventListener('click', () => {
+      window.location.href =
+        `${API_BASE}/auth/facebook?source=signup&next=${encodeURIComponent(SIGNUP_NEXT)}`;
+    });
+  }
+
+  /* ===== SIGNUP (Step 1) – call Flask API on Render ===== */
+  const form      = document.getElementById('signupForm');
+  const submitBtn = document.getElementById('signupSubmitBtn');
+
+  if (!form) return;
+
+  // list of very common typo domains that should be rejected
+  const COMMON_EMAIL_TYPOS = [
+    'gnail.com', 'gamil.com', 'gmial.com',
+    'hetmail.com', 'hotnail.com',
+    'yahu.com', 'yaoo.com'
+  ];
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email      = (document.getElementById('email')?.value || '').trim();
+    const phone      = (document.getElementById('phone')?.value || '').trim();
+    const password   = document.getElementById('password')?.value || '';
+    const confirmPwd = document.getElementById('confirm')?.value || '';
+    const messageDiv = document.getElementById('signupMessage');
+
+    // optional gender – for next steps if you add it
+    let gender = '';
+    const genderSel = document.getElementById('gender');
+    if (genderSel && genderSel.value) {
+      gender = genderSel.value;
+    } else {
+      const gRadio = document.querySelector('input[name="gender"]:checked');
+      if (gRadio) gender = gRadio.value;
+    }
+
+    const showMsg = (t) => {
+      if (messageDiv) messageDiv.textContent = t;
+    };
+
+    // ===== basic + domain-level email validation =====
+    if (!email) {
+      showMsg('Please enter your email.');
+      return;
+    }
+
+    // basic email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showMsg('Please enter a valid email address.');
+      return;
+    }
+
+    // domain checks – avoid common misspellings like gnail/hetmail/yahu
+    const domainPart = email.split('@')[1]?.toLowerCase() || '';
+    if (COMMON_EMAIL_TYPOS.includes(domainPart)) {
+      showMsg('It looks like your email domain is misspelled (e.g. gmail / hotmail / yahoo). Please correct it.');
+      return;
+    }
+
+    if (password.length < 6) {
+      showMsg('Password must be at least 6 characters long.');
+      return;
+    }
+    if (password !== confirmPwd) {
+      showMsg('Passwords do not match.');
+      return;
+    }
+    if (phone && !/^\+?\d[\d\s-]{6,}$/.test(phone)) {
+      showMsg('Please enter a valid phone number.');
+      return;
+    }
+
+    // persist for next steps
+    localStorage.setItem('signupEmail', email);
+    localStorage.setItem('user_email',  email);
+    if (phone)  localStorage.setItem('signupPhone',  phone);
+    if (gender) localStorage.setItem('signupGender', String(gender).toLowerCase());
+
+    showMsg('Signing you up...');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Please wait...';
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/api/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: email,
+          password: password,
+          phone:    phone,
+          gender:   gender || undefined
+        })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok) {
+        // save token if backend returned one
+        if (data.auth_token) {
+          localStorage.setItem('auth_token', data.auth_token);
+        }
+        showMsg('Signup successful! Redirecting...');
+        setTimeout(() => {
+          window.location.href = 'SIGNUP2.html';
+        }, 900);
+      } else {
+        showMsg('Error: ' + (data.error || 'Signup failed. Please try again.'));
+      }
+    } catch (err) {
+      console.error(err);
+      showMsg('Network error. Please try again.');
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Continue';
+      }
+    }
+  });
+});
+</script>
+
+
+</body>
+</html>

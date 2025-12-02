@@ -40,12 +40,95 @@
       transition: background 0.3s, color 0.3s;
     }
 
+    body.drawer-open {
+      overflow: hidden;
+    }
+
     .admin-root {
       display: flex;
       min-height: 100vh;
     }
 
-    /* Sidebar */
+    /* ============ MOBILE TOP HEADER ============ */
+    .mobile-header {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 160;
+      background: var(--sidebar-bg);
+      border-bottom: 1px solid #ececec88;
+      padding: 0.6rem 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-logo {
+      font-family: "Style Script", cursive;
+      font-size: 1.7rem;
+      color: #ad00e2;
+      letter-spacing: 1px;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .mobile-menu-btn {
+      border: none;
+      background: #f3e9ff;
+      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 10px #00000020;
+      padding: 0;
+      transition: background 0.18s, transform 0.12s;
+    }
+
+    .mobile-menu-btn:hover {
+      background: #e9dbff;
+      transform: translateY(-1px);
+    }
+
+    .mobile-menu-icon,
+    .mobile-menu-icon::before,
+    .mobile-menu-icon::after {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 999px;
+      transition: transform 0.22s ease, opacity 0.22s ease, top 0.22s ease, bottom 0.22s ease;
+      position: relative;
+    }
+
+    .mobile-menu-icon::before {
+      position: absolute;
+      top: -6px;
+    }
+
+    .mobile-menu-icon::after {
+      position: absolute;
+      bottom: -6px;
+    }
+
+    .mobile-menu-btn.open .mobile-menu-icon {
+      transform: rotate(45deg);
+    }
+
+    .mobile-menu-btn.open .mobile-menu-icon::before {
+      top: 0;
+      transform: rotate(-90deg);
+    }
+
+    .mobile-menu-btn.open .mobile-menu-icon::after {
+      bottom: 0;
+      opacity: 0;
+    }
+
+    /* ============ SIDEBAR (DESKTOP) ============ */
     .sidebar {
       position: fixed;
       top: 0;
@@ -58,9 +141,10 @@
       display: flex;
       flex-direction: column;
       border-right: 2px solid #ececec;
-      z-index: 100;
+      z-index: 120;
       overflow-y: auto;
       box-sizing: border-box;
+      transition: background 0.3s, transform 0.25s ease, opacity 0.25s ease;
     }
 
     .sidebar .logo {
@@ -138,7 +222,7 @@
       transform: translateY(-1px);
     }
 
-    /* Main panel */
+    /* ============ MAIN PANEL ============ */
     .main-panel {
       margin-left: var(--sidebar-width);
       flex: 1;
@@ -148,7 +232,7 @@
       display: flex;
       flex-direction: column;
       gap: 1.4rem;
-      transition: background 0.3s, margin-left 0.3s;
+      transition: background 0.3s, margin-left 0.3s, padding 0.3s;
     }
 
     .top-bar {
@@ -271,7 +355,7 @@
       background: linear-gradient(120deg, #b728ff, #7d3bff);
     }
 
-    /* Logout modal (reuse from other page) */
+    /* Logout modal */
     .logout-modal-bg {
       display: none;
       position: fixed;
@@ -346,42 +430,77 @@
       color: #fff !important;
     }
 
-    /* Responsive */
-    @media (max-width: 700px) {
+    /* ============ BACKDROP FOR MOBILE DRAWER ============ */
+    .sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 20, 0.35);
+      z-index: 110;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .sidebar-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ============ RESPONSIVE ============ */
+
+    /* Tablet & mobile: top header + right drawer */
+    @media (max-width: 900px) {
+      .mobile-header {
+        display: flex;
+      }
+
+      .admin-root {
+        flex-direction: column;
+      }
+
       .sidebar {
-        position: static;
-        width: 100vw;
-        height: auto;
-        min-height: 0;
+        top: 0;
+        right: 0;
+        left: auto;
+        height: 100vh;
+        width: 270px;
+        padding: 1.5rem 1.3rem 1.2rem 1.3rem;
         border-right: none;
-        border-bottom: 2px solid #ececec;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.8rem;
-        padding: 0.7rem 0.7rem 0.7rem 1rem;
+        border-left: 1px solid #ececec55;
+        box-shadow: -4px 0 24px #00000033;
+        transform: translateX(100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
       }
 
       .sidebar .logo {
-        font-size: 1.25rem;
-        margin-bottom: 0;
+        font-size: 1.9rem;
+        margin-bottom: 1.2rem;
       }
 
       .sidebar-bottom {
-        margin-top: 0;
-        flex-direction: row;
-        gap: 0.4rem;
-      }
-
-      .darkmode-btn,
-      .logout-btn {
-        padding-inline: 0.8rem;
-        font-size: 0.8rem;
+        margin-top: 1.6rem;
       }
 
       .main-panel {
-        margin-left: 0 !important;
-        padding: 1.4rem 0.7rem 1rem 0.7rem;
+        margin-left: 0;
+        padding: 1.4rem 1.1rem 1.4rem 1.1rem;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .back-link {
+        align-self: flex-start;
       }
 
       .chat-wrapper {
@@ -389,132 +508,109 @@
       }
     }
 
+    /* Phones */
     @media (max-width: 600px) {
-      .top-title {
-        font-size: 1.4rem;
+      html,
+      body {
+        font-size: 14px;
+      }
+
+      .main-panel {
+        margin-left: 0 !important;
+        padding: 1.2rem 0.8rem 0.9rem 0.8rem;
+        gap: 1rem;
+      }
+
+      .back-link {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.88rem;
+      }
+
+      .chat-wrapper {
+        padding: 1rem 0.7rem 0.9rem 0.7rem;
+      }
+
+      .bubble {
+        max-width: 100%;
+        font-size: 0.92rem;
+      }
+
+      .logout-modal-box {
+        min-width: 0;
+        max-width: 95vw;
+        padding: 1.1rem 0.8rem 1rem 0.8rem;
       }
     }
-    /* ===== Extra responsive patch for User Conversation page ===== */
 
-/* Tablets & small laptops */
-@media (max-width: 900px) {
-  .top-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
+    /* Small phones */
+    @media (max-width: 480px) {
+      .admin-root {
+        flex-direction: column;
+      }
 
-  .back-link {
-    align-self: flex-start;
-  }
+      .sidebar {
+        padding: 0.6rem 0.7rem;
+        gap: 0.5rem;
+      }
 
-  .chat-wrapper {
-    max-height: none; /* allow full-height scrolling on shorter screens */
-  }
-}
+      .sidebar .logo {
+        font-size: 1.15rem;
+      }
 
-/* Phones in portrait */
-@media (max-width: 600px) {
-  html,
-  body {
-    font-size: 14px;
-  }
+      .sidebar-nav {
+        gap: 0.4rem;
+      }
 
-  .main-panel {
-    margin-left: 0 !important;
-    padding: 1.2rem 0.8rem 0.9rem 0.8rem;
-    gap: 1rem;
-  }
+      .sidebar-nav a {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+      }
 
-  .top-bar {
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
+      .darkmode-btn,
+      .logout-btn {
+        padding: 0.4rem 0.55rem;
+        font-size: 0.78rem;
+      }
 
-  .back-link {
-    width: 100%;
-    justify-content: center;
-    font-size: 0.88rem;
-  }
+      .top-title {
+        font-size: 1.35rem;
+      }
 
-  .chat-wrapper {
-    padding: 1rem 0.7rem 0.9rem 0.7rem;
-  }
+      .top-sub {
+        font-size: 0.9rem;
+      }
+    }
 
-  .bubble {
-    max-width: 100%;
-    font-size: 0.92rem;
-  }
+    /* Ultra-small screens */
+    @media (max-width: 360px) {
+      html,
+      body {
+        font-size: 13px;
+      }
 
-  .logout-modal-box {
-    min-width: 0;
-    max-width: 95vw;
-    padding: 1.1rem 0.8rem 1rem 0.8rem;
-  }
-}
+      .bubble {
+        padding: 0.45rem 0.7rem;
+      }
 
-/* Small phones */
-@media (max-width: 480px) {
-  .admin-root {
-    flex-direction: column;
-  }
-
-  /* Compact top bar sidebar (extends your existing 700px rules) */
-  .sidebar {
-    padding: 0.6rem 0.7rem;
-    gap: 0.5rem;
-  }
-
-  .sidebar .logo {
-    font-size: 1.15rem;
-  }
-
-  .sidebar-nav {
-    gap: 0.4rem;
-  }
-
-  .sidebar-nav a {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.8rem;
-  }
-
-  .darkmode-btn,
-  .logout-btn {
-    padding: 0.4rem 0.55rem;
-    font-size: 0.78rem;
-  }
-
-  .top-title {
-    font-size: 1.35rem;
-  }
-
-  .top-sub {
-    font-size: 0.9rem;
-  }
-}
-
-/* Ultra-small screens */
-@media (max-width: 360px) {
-  html,
-  body {
-    font-size: 13px;
-  }
-
-  .bubble {
-    padding: 0.45rem 0.7rem;
-  }
-
-  .logout-modal-box {
-    padding-left: 0.6rem;
-    padding-right: 0.6rem;
-  }
-}
-
+      .logout-modal-box {
+        padding-left: 0.6rem;
+        padding-right: 0.6rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Mobile header -->
+  <header class="mobile-header">
+    <div class="mobile-logo">Palette and Fit</div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation">
+      <span class="mobile-menu-icon"></span>
+    </button>
+  </header>
+
   <div class="admin-root">
-    <!-- Sidebar -->
+    <!-- Sidebar / Drawer -->
     <aside class="sidebar">
       <div class="logo">Palette and Fit</div>
       <nav class="sidebar-nav">
@@ -544,10 +640,13 @@
       </div>
 
       <div class="chat-wrapper" id="chatWrapper">
-        <!-- Chat items inject here -->
+        <!-- Chat items injected here -->
       </div>
     </main>
   </div>
+
+  <!-- Backdrop for mobile drawer -->
+  <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
 
   <!-- Logout modal -->
   <div id="logoutModal" class="logout-modal-bg">
@@ -565,7 +664,6 @@
         ? "http://127.0.0.1:5001"
         : "https://palette-and-fit-backend.onrender.com";
 
-    // 🔐 Admin secret for protected backend routes
     const ADMIN_SECRET = "palfit_admin_2025_supersecret";
 
     // Admin guard
@@ -621,7 +719,50 @@
       performLogout();
     });
 
-    // Read slug param (?user=...)
+    // Mobile drawer toggle
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const sidebarEl = document.querySelector(".sidebar");
+    const sidebarBackdrop = document.getElementById("sidebarBackdrop");
+
+    function openDrawer() {
+      sidebarEl.classList.add("open");
+      sidebarBackdrop.classList.add("active");
+      mobileMenuBtn.classList.add("open");
+      document.body.classList.add("drawer-open");
+    }
+
+    function closeDrawer() {
+      sidebarEl.classList.remove("open");
+      sidebarBackdrop.classList.remove("active");
+      mobileMenuBtn.classList.remove("open");
+      document.body.classList.remove("drawer-open");
+    }
+
+    mobileMenuBtn.addEventListener("click", () => {
+      if (sidebarEl.classList.contains("open")) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+
+    sidebarBackdrop.addEventListener("click", closeDrawer);
+
+    document.querySelectorAll(".sidebar-nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 900) {
+          closeDrawer();
+        }
+      });
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) {
+        closeDrawer();
+      }
+    });
+
+    // Conversation logic
     const params = new URLSearchParams(window.location.search);
     const userSlug = params.get("user") || "";
     const convTitle = document.getElementById("convTitle");
@@ -649,8 +790,9 @@
         if (!res.ok) throw new Error("Failed to fetch messages");
         const allMsgs = await res.json();
 
-        // Filter: jis message ka msg.user == userSlug
-        const filtered = (allMsgs || []).filter(m => (m.user || "").toLowerCase() === userIdOrEmail.toLowerCase());
+        const filtered = (allMsgs || []).filter(
+          m => (m.user || "").toLowerCase() === userIdOrEmail.toLowerCase()
+        );
 
         if (!filtered.length) {
           chatWrapper.innerHTML =
@@ -658,7 +800,6 @@
           return;
         }
 
-        // Sort by date if possible
         filtered.sort((a, b) => {
           const da = new Date(a.date || 0).getTime();
           const db = new Date(b.date || 0).getTime();

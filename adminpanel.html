@@ -493,6 +493,161 @@
         font-size: 1.45rem;
       }
     }
+    /* ===== Extra responsive patch for very small / SL-type screens ===== */
+
+/* Phones & very small devices (≤ 480px) */
+@media (max-width: 480px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  .admin-root {
+    flex-direction: column;
+  }
+
+  /* Top bar style sidebar */
+  .sidebar {
+    position: static;
+    width: 100vw;
+    height: auto;
+    min-height: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 0.7rem;
+    border-right: none;
+    border-bottom: 2px solid #ececec33;
+  }
+
+  .sidebar .logo {
+    font-size: 1.3rem !important;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    gap: 0.25rem;
+  }
+
+  .sidebar-nav a {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.78rem;
+  }
+
+  .sidebar-bottom {
+    flex-direction: row;
+    gap: 0.35rem;
+    margin-top: 0;
+  }
+
+  .darkmode-btn,
+  .logout-btn {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.78rem;
+  }
+
+  /* Main panel spacing */
+  .main-panel {
+    margin-left: 0 !important;
+    padding: 1rem 0.55rem 0.9rem 0.55rem;
+    gap: 1.2rem;
+  }
+
+  .panel-header,
+  .products-header,
+  .users-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  /* Forms / filters fill width */
+  #searchUser,
+  .simple-select,
+  .add-btn {
+    width: 100%;
+  }
+
+  /* Stat cards stack */
+  .stats-row {
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .stat-card {
+    min-width: 0;
+    padding: 1rem 1.1rem;
+  }
+
+  /* Charts one per row, tighter padding */
+  .charts-row {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .chart-block,
+  .activity-block {
+    padding: 1.1rem 0.75rem 1.1rem 0.75rem;
+  }
+
+  /* Tables (Users page / messages / chats) */
+  .users-table-wrap,
+  .msg-table-wrap {
+    padding-inline: 0.4rem;
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 600px; /* allows horizontal scroll instead of breaking layout */
+  }
+
+  th,
+  td {
+    padding: 0.4em 0.55em;
+  }
+
+  /* Modals fit screen width nicely */
+  .modal-box,
+  .logout-modal-box {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    min-width: 0 !important;
+    margin: 1rem auto;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+}
+
+/* Ultra-small screens (≤ 360px) */
+@media (max-width: 360px) {
+  html,
+  body {
+    font-size: 13px;
+  }
+
+  .sidebar-nav a {
+    padding-inline: 0.45rem;
+  }
+
+  .panel-title,
+  .products-header h2,
+  .users-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .add-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.1rem;
+  }
+
+  .stat-value {
+    font-size: 1.7rem;
+  }
+}
+
   </style>
 </head>
 <body>

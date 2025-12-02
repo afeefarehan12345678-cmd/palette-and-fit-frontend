@@ -661,6 +661,138 @@
         padding: 1.1rem 0.4rem 1rem 0.4rem;
       }
     }
+
+
+    /* ===== Extra responsive patch for Products page ===== */
+
+/* Stack filters + button and tighten layout on tablets & small phones */
+@media (max-width: 600px) {
+  .products-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .header-right {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .header-right > div {
+    width: 100%;
+  }
+
+  .simple-select,
+  .add-btn {
+    width: 100%;
+  }
+}
+
+/* Phones & very small devices */
+@media (max-width: 480px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  .admin-root {
+    flex-direction: column;
+  }
+
+  /* Sidebar as compact top bar (extends your 700px rule) */
+  .sidebar {
+    position: static;
+    width: 100vw;
+    height: auto;
+    min-height: 0;
+    padding: 0.6rem 0.7rem;
+    gap: 0.5rem;
+  }
+
+  .sidebar .logo {
+    font-size: 1.25rem !important;
+    margin: 0;
+  }
+
+  .sidebar-nav {
+    gap: 0.3rem;
+  }
+
+  .sidebar-nav a {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .sidebar-bottom {
+    gap: 0.35rem;
+  }
+
+  .darkmode-btn,
+  .logout-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.78rem;
+  }
+
+  .main-panel {
+    margin-left: 0 !important;
+    padding: 1rem 0.6rem 0.9rem 0.6rem;
+    gap: 1.3rem;
+  }
+
+  /* Cards + grid tighter on phones */
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .product-card {
+    padding: 1rem 0.7rem;
+  }
+
+  .product-img {
+    width: 100%;
+    max-width: none;
+    height: 140px;
+  }
+
+  /* Modals fill screen width nicely */
+  .modal-box,
+  .logout-modal-box {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    min-width: 0 !important;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+  }
+}
+
+/* Ultra-small screens */
+@media (max-width: 360px) {
+  html,
+  body {
+    font-size: 13px;
+  }
+
+  .sidebar .logo {
+    font-size: 1.15rem !important;
+  }
+
+  .products-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .add-btn {
+    font-size: 0.9rem;
+    padding: 0.5em 1.1em;
+  }
+
+  .product-title {
+    font-size: 1rem;
+  }
+}
+
   </style>
 </head>
 <body>

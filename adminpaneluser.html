@@ -584,6 +584,125 @@
         padding: 1.1rem 0.4rem 1rem 0.4rem;
       }
     }
+
+
+    /* ===== Extra responsive patch for Users page ===== */
+
+/* Let both tables scroll horizontally on narrow screens */
+.users-table-wrap,
+.msg-table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Make header + search stack nicely on small widths */
+@media (max-width: 720px) {
+  .users-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  #searchUser {
+    width: 100%;
+  }
+}
+
+/* Phones: keep table usable via sideways scroll, tighten paddings */
+@media (max-width: 600px) {
+  .users-table-wrap,
+  .msg-table-wrap {
+    padding: 0.6rem 0.4rem 0.8rem 0.4rem;
+  }
+
+  /* Force a minimum width so the table doesn't squash columns */
+  .users-table-wrap table,
+  .msg-table-wrap table {
+    min-width: 640px;
+  }
+
+  /* Buttons a bit smaller and allowed to wrap */
+  .delete-user,
+  .view-chat-btn {
+    font-size: 0.8rem;
+    padding: 0.28em 0.8em;
+    margin-top: 0.15rem;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  .admin-root {
+    flex-direction: column;
+  }
+
+  /* Sidebar as compact top bar (extends existing 700px rule) */
+  .sidebar {
+    padding: 0.6rem 0.7rem;
+    gap: 0.5rem;
+  }
+
+  .sidebar .logo {
+    font-size: 1.15rem;
+  }
+
+  .sidebar-nav a {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .darkmode-btn,
+  .logout-btn {
+    padding: 0.4rem 0.55rem;
+    font-size: 0.78rem;
+  }
+
+  .main-panel {
+    margin-left: 0 !important;
+    padding: 1rem 0.6rem 0.9rem 0.6rem;
+    gap: 1.4rem;
+  }
+
+  .users-header h2 {
+    font-size: 1.5rem;
+  }
+
+  #searchUser {
+    font-size: 0.9rem;
+  }
+
+  .logout-modal-box {
+    min-width: 0 !important;
+    max-width: 95vw !important;
+    padding: 1.1rem 0.6rem 1rem 0.6rem;
+  }
+}
+
+/* Ultra-small screens */
+@media (max-width: 360px) {
+  html,
+  body {
+    font-size: 13px;
+  }
+
+  th,
+  td {
+    padding: 0.35em 0.45em;
+  }
+
+  .modal-box {
+    width: 94vw !important;
+    max-width: 94vw !important;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+  }
+}
+
   </style>
 </head>
 <body>

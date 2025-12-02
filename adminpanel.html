@@ -9,34 +9,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet" />
 
   <style>
-:root {
-  --sidebar-bg: #fff;
-  --main-bg: #fff;
-  --accent: #ad00e2;
-  --accent2: #c2a1ff;
-  --text: #23242a;
-  --card-bg: #fff;
-  --border-radius: 1.25rem;
-  --shadow: 0 2px 16px #e5e5e5;
-  --sidebar-width: 235px;
-}
+    :root {
+      --sidebar-bg: #ffffff;
+      --main-bg: #f9f5ff;
+      --accent: #ad00e2;
+      --accent2: #c2a1ff;
+      --text: #23242a;
+      --card-bg: #ffffff;
+      --border-radius: 1.25rem;
+      --shadow: 0 2px 16px #e5e5e5;
+      --sidebar-width: 235px;
+    }
 
-body.dark-mode {
-  --sidebar-bg: #23242a;
-  --main-bg: #18181b;
-  --card-bg: #fff;
-  --text: #fff;
-  --shadow: 0 6px 32px #0002, 0 1.5px 8px #0001;
-}
+    body.dark-mode {
+      --sidebar-bg: #18181c;
+      --main-bg: #09090b;
+      --card-bg: #1f1f25;
+      --text: #fdfcff;
+      --shadow: 0 6px 32px #0005, 0 1.5px 8px #0003;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       background: var(--main-bg);
       color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
+
     .admin-root {
       display: flex;
       min-height: 100vh;
     }
+
+    /* ============ SIDEBAR ============ */
     .sidebar {
       position: fixed;
       top: 0;
@@ -48,12 +57,13 @@ body.dark-mode {
       display: flex;
       flex-direction: column;
       gap: 2rem;
-      border-right: 2px solid #ececec;
+      border-right: 2px solid #ececec33;
       z-index: 100;
       justify-content: flex-start;
     }
+
     .sidebar .logo {
-      font-family: 'Style Script', cursive !important;
+      font-family: "Style Script", cursive !important;
       font-size: 2.4rem !important;
       color: #ad00e2 !important;
       font-weight: 400 !important;
@@ -66,11 +76,13 @@ body.dark-mode {
       text-align: left;
       text-shadow: none !important;
     }
+
     .sidebar-nav {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
+
     .sidebar-nav a {
       color: var(--accent);
       text-decoration: none;
@@ -78,16 +90,19 @@ body.dark-mode {
       font-weight: 600;
       padding: 0.62rem 1.2rem;
       border-radius: 0.75rem;
-      transition: background 0.18s, color 0.18s;
+      transition: background 0.18s, color 0.18s, transform 0.12s;
       letter-spacing: 0.2px;
       cursor: pointer;
     }
+
     .sidebar-nav a.active,
     .sidebar-nav a:hover {
       background: linear-gradient(90deg, #ad00e2 55%, #c2a1ff 100%);
       color: #fff !important;
       font-weight: 700;
+      transform: translateY(-1px);
     }
+
     .sidebar-bottom {
       margin-top: auto;
       display: flex;
@@ -95,6 +110,7 @@ body.dark-mode {
       gap: 0.6rem;
       align-items: stretch;
     }
+
     .darkmode-btn,
     .logout-btn {
       width: 100%;
@@ -103,112 +119,216 @@ body.dark-mode {
       padding: 0.85rem 0;
       font-size: 1rem;
       font-weight: 600;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
       background: linear-gradient(90deg, #ad00e2 75%, #c2a1ff 100%);
       color: #fff;
       cursor: pointer;
       box-shadow: 0 2px 12px #ad00e229;
-      transition: background .18s, color .18s;
+      transition: background 0.18s, color 0.18s, transform 0.12s;
       margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 0.4rem;
     }
+
     .darkmode-btn:hover,
     .logout-btn:hover {
       background: linear-gradient(90deg, #c2a1ff 10%, #ad00e2 90%);
       color: #fff;
+      transform: translateY(-1px);
     }
+
+    /* ============ MAIN PANEL ============ */
     .main-panel {
       margin-left: var(--sidebar-width);
       flex: 1;
-      padding: 2.5rem 2.2rem 1.5rem 2.2rem;
+      padding: 2.4rem 2.1rem 1.7rem 2.1rem;
       background: var(--main-bg);
       min-width: 0;
       display: flex;
       flex-direction: column;
+      gap: 2.3rem;
     }
+
+    .panel-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .panel-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .panel-subtitle {
+      font-size: 0.98rem;
+      opacity: 0.8;
+    }
+
+    /* ============ STAT CARDS ============ */
     .stats-row {
       display: flex;
-      gap: 2rem;
-      margin-bottom: 2.2rem;
+      gap: 1.6rem;
       flex-wrap: wrap;
     }
+
     .stat-card {
-      flex: 1 1 210px;
+      flex: 1 1 220px;
       background: var(--card-bg) !important;
       color: var(--text);
       border-radius: var(--border-radius);
       box-shadow: var(--shadow);
-      padding: 1.4rem 2rem 1.25rem 1.6rem;
+      padding: 1.35rem 1.7rem 1.25rem 1.7rem;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       min-width: 210px;
-      border: 2.5px solid #ececec;
+      border: 1.6px solid #ece5ff;
+      position: relative;
+      overflow: hidden;
     }
+
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, #f6e4ff, transparent 60%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    body.dark-mode .stat-card {
+      border-color: #3b294c;
+    }
+
     .stat-label {
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       font-weight: 600;
-      color: #888;
-      margin-bottom: 0.38em;
+      color: #8b8098;
+      margin-bottom: 0.35em;
+      position: relative;
+      z-index: 1;
     }
+
+    body.dark-mode .stat-label {
+      color: #c9bfe2;
+    }
+
     .stat-value {
       font-size: 2.1rem;
       font-weight: 800;
       color: var(--accent);
+      position: relative;
+      z-index: 1;
     }
+
+    /* ============ CHARTS ============ */
     .charts-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.2rem;
-      margin-bottom: 2.5rem;
+      gap: 1.8rem;
       width: 100%;
     }
+
     .chart-block {
       background: var(--card-bg) !important;
       color: var(--text);
       border-radius: var(--border-radius);
       box-shadow: var(--shadow);
-      padding: 1.6rem 1.1rem 1.6rem 1.1rem;
+      padding: 1.45rem 1.15rem 1.6rem 1.15rem;
       min-width: 0;
-      min-height: 310px;
-      border: 2.5px solid #ececec;
+      min-height: 295px;
+      border: 1.6px solid #ece5ff;
+      position: relative;
+      overflow: hidden;
     }
+
+    .chart-block::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 100% 0, #efe3ff, transparent 55%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    body.dark-mode .chart-block {
+      border-color: #3b294c;
+    }
+
     .chart-title {
-      font-size: 1.13rem;
+      font-size: 1.12rem;
       font-weight: 700;
       color: var(--accent);
-      margin-bottom: 0.6em;
+      margin-bottom: 0.55em;
+      position: relative;
+      z-index: 1;
     }
+
+    /* ============ ACTIVITY ============ */
     .activity-block {
       background: var(--card-bg) !important;
       color: var(--text);
       border-radius: var(--border-radius);
       box-shadow: var(--shadow);
-      padding: 1.7rem 1.1rem 1.3rem 1.1rem;
-      border: 2.5px solid #ececec;
-      margin-bottom: 2.5rem;
+      padding: 1.6rem 1.15rem 1.3rem 1.15rem;
+      border: 1.6px solid #ece5ff;
       width: 100%;
       word-break: break-word;
+      position: relative;
+      overflow: hidden;
     }
+
+    .activity-block::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 100%, #f9e9ff, transparent 55%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    body.dark-mode .activity-block {
+      border-color: #3b294c;
+    }
+
     .activity-title {
-      font-size: 1.15rem;
+      font-size: 1.14rem;
       font-weight: 700;
       color: var(--accent2);
       margin-bottom: 0.62em;
+      position: relative;
+      z-index: 1;
     }
+
     .activity-list {
       margin: 0;
       padding: 0;
       list-style: none;
-      font-size: 1.05rem;
+      font-size: 0.99rem;
+      position: relative;
+      z-index: 1;
     }
+
     .activity-list li {
-      margin-bottom: 0.95em;
+      margin-bottom: 0.9em;
       color: #353045;
     }
+
+    body.dark-mode .activity-list li {
+      color: #eae4ff;
+    }
+
+    .activity-list li:last-child {
+      margin-bottom: 0;
+    }
+
     .bot-reply-wrapper {
       max-height: 4.5em;
       overflow: hidden;
@@ -217,111 +337,162 @@ body.dark-mode {
       line-height: 1.5em;
       white-space: pre-line;
       word-break: break-word;
-      display: block;
+      display: inline-block;
     }
+
     .bot-reply-wrapper.expanded {
       max-height: none !important;
       overflow: visible !important;
     }
+
     .read-more-btn {
       display: inline-block;
       margin-left: 0.5em;
       color: var(--accent2);
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       user-select: none;
     }
-    @media (max-width: 1000px) {
-      .charts-row {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-      }
+
+    /* ============ LOGOUT MODAL ============ */
+    .logout-modal-bg {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(36, 0, 42, 0.28);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
     }
-    @media (max-width: 700px) {
-      .admin-root {
-        flex-direction: column;
+
+    .logout-modal-bg.active {
+      display: flex !important;
+    }
+
+    .logout-modal-box {
+      background: #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 8px 42px #ad00e299, 0 0 0 2px #ad00e241;
+      min-width: 320px;
+      max-width: 94vw;
+      padding: 2.1rem 2.1rem 1.4rem 2.1rem;
+      text-align: center;
+      animation: popin 0.28s;
+    }
+
+    @keyframes popin {
+      from {
+        transform: translateY(30px) scale(0.97);
+        opacity: 0.1;
       }
-      .sidebar {
-        flex-direction: row;
-        width: 100vw;
-        border-right: none;
-        border-bottom: 2px solid #ececec;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.8rem;
-        padding: 0.7rem 0.7rem 0.7rem 1rem;
-      }
-      .sidebar .logo {
-        font-size: 1.25rem !important;
-      }
-      .main-panel {
-        padding: 1.3rem 0.5rem 1rem 0.5rem;
-      }
-      .stats-row {
-        gap: 0.8rem;
-      }
-      .chart-block,
-      .activity-block {
-        padding: 1rem 0.7rem 1rem 0.7rem;
-        min-height: 220px;
+      to {
+        transform: none;
+        opacity: 1;
       }
     }
 
-.logout-modal-bg {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(36, 0, 42, 0.24);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-}
-.logout-modal-bg.active { display: flex !important; }
-.logout-modal-box {
-  background: #fff;
-  border-radius: 1.2rem;
-  box-shadow: 0 8px 42px #ad00e299, 0 0 0 2px #ad00e241;
-  min-width: 320px;
-  max-width: 94vw;
-  padding: 2.2rem 2.1rem 1.3rem 2.1rem;
-  text-align: center;
-  animation: popin 0.28s;
-}
-@keyframes popin {
-  from { transform: translateY(30px) scale(0.97); opacity: 0.1;}
-  to { transform: none; opacity: 1;}
-}
-.logout-title {
-  font-size: 1.53rem;
-  font-weight: 700;
-  color: #ad00e2;
-  margin-bottom: 0.4em;
-}
-.logout-desc {
-  font-size: 1.07rem;
-  color: #6d217c;
-  margin-bottom: 2.2em;
-}
-.logout-modal-btn {
-  background: linear-gradient(90deg, #ad00e2 75%, #c2a1ff 100%);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1.15rem;
-  padding: 0.68em 2.8em;
-  box-shadow: 0 2px 18px #ad00e233;
-  cursor: pointer;
-  transition: background 0.17s;
-}
-.logout-modal-btn:hover, .logout-modal-btn:focus {
-  background: linear-gradient(90deg, #c2a1ff 15%, #ad00e2 90%);
-  outline: none;
-}
-@media (max-width: 430px) {
-  .logout-modal-box { min-width: 0; padding: 1.1rem 0.3rem 1rem 0.3rem;}
-}
+    .logout-title {
+      font-size: 1.53rem;
+      font-weight: 700;
+      color: #ad00e2;
+      margin-bottom: 0.4em;
+    }
+
+    .logout-desc {
+      font-size: 1.07rem;
+      color: #6d217c;
+      margin-bottom: 2.1em;
+    }
+
+    .logout-modal-btn {
+      background: linear-gradient(90deg, #ad00e2 75%, #c2a1ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.7em 2.9em;
+      box-shadow: 0 2px 18px #ad00e233;
+      cursor: pointer;
+      transition: background 0.17s;
+    }
+
+    .logout-modal-btn:hover,
+    .logout-modal-btn:focus {
+      background: linear-gradient(90deg, #c2a1ff 15%, #ad00e2 90%);
+      outline: none;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 1000px) {
+      .charts-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .admin-root {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        flex-direction: row;
+        width: 100vw;
+        height: auto;
+        border-right: none;
+        border-bottom: 2px solid #ececec33;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+        padding: 0.7rem 0.9rem 0.7rem 0.9rem;
+      }
+
+      .sidebar .logo {
+        font-size: 1.5rem !important;
+        margin-bottom: 0;
+      }
+
+      .sidebar-nav {
+        flex-direction: row;
+        gap: 0.4rem;
+      }
+
+      .sidebar-nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.95rem;
+      }
+
+      .sidebar-bottom {
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+
+      .darkmode-btn,
+      .logout-btn {
+        padding-inline: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .main-panel {
+        margin-left: 0;
+        padding: 1.3rem 0.6rem 1.1rem 0.6rem;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .logout-modal-box {
+        min-width: 0;
+        padding: 1.1rem 0.6rem 1rem 0.6rem;
+      }
+
+      .panel-title {
+        font-size: 1.45rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -336,7 +507,8 @@ body.dark-mode {
       </nav>
       <div class="sidebar-bottom">
         <button class="darkmode-btn" id="darkModeToggle">
-          <span style="font-size:1.18em;">🌙</span> Dark Mode
+          <span style="font-size:1.18em;">🌙</span>
+          <span>Dark Mode</span>
         </button>
         <button class="logout-btn" id="logoutBtn">Logout</button>
       </div>
@@ -344,21 +516,28 @@ body.dark-mode {
 
     <!-- Main content -->
     <main class="main-panel">
+      <header class="panel-header">
+        <div>
+          <div class="panel-title">Admin Dashboard</div>
+          <div class="panel-subtitle">Overview of Palette and Fit activity</div>
+        </div>
+      </header>
+
       <!-- Stats Row -->
-      <div class="stats-row">
+      <section class="stats-row">
         <div class="stat-card">
           <span class="stat-label">People Currently Online</span>
-          <span class="stat-value" id="stat-online">–</span>
+          <span class="stat-value" id="stat-online">—</span>
         </div>
         <div class="stat-card">
           <span class="stat-label">Total Registered Users</span>
-          <span class="stat-value" id="stat-users">–</span>
+          <span class="stat-value" id="stat-users">—</span>
         </div>
         <div class="stat-card">
           <span class="stat-label">Men vs Women Wishlist</span>
-          <canvas id="genderWishlistChart" width="120" height="38"></canvas>
+          <canvas id="genderWishlistChart" width="140" height="40"></canvas>
         </div>
-      </div>
+      </section>
 
       <!-- Charts -->
       <section class="charts-row">
@@ -377,22 +556,23 @@ body.dark-mode {
       </section>
 
       <!-- Activity -->
-      <div class="activity-block">
+      <section class="activity-block">
         <div class="activity-title">Recent Wishlist Activity</div>
         <ul class="activity-list" id="activity-list">
           <li>Loading activity...</li>
         </ul>
-      </div>
-      <div class="activity-block">
+      </section>
+
+      <section class="activity-block">
         <div class="activity-title">Recent Chatbot Interactions</div>
         <ul class="activity-list" id="chatbot-list">
           <li>Loading chatbot logs...</li>
         </ul>
-      </div>
+      </section>
     </main>
   </div>
 
-  <!-- Custom Logout Modal -->
+  <!-- Logout Modal -->
   <div id="logoutModal" class="logout-modal-bg">
     <div class="logout-modal-box">
       <div class="logout-title">Logged out!</div>
@@ -406,215 +586,311 @@ body.dark-mode {
     // 0. API base + ADMIN GUARD
     // =========================
     const API_BASE =
-      (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')
-        ? 'http://127.0.0.1:5001'
-        : 'https://your-backend-domain.com'; // TODO: replace with your deployed backend URL
+      (window.location.hostname === "127.0.0.1" ||
+        window.location.hostname === "localhost")
+        ? "http://127.0.0.1:5001"
+        : "https://palette-and-fit-backend.onrender.com";
 
     (function guardAdminPanel() {
-      const email = localStorage.getItem('userEmail');
-      const isAdmin = localStorage.getItem('isAdmin') === 'true';
+      const email = localStorage.getItem("userEmail");
+      const isAdmin = localStorage.getItem("isAdmin") === "true";
 
-      // If not logged in or not admin → kick to login
       if (!email || !isAdmin) {
-        window.location.href = 'login.html';
+        window.location.href = "login.html";
       }
     })();
 
-    // ==============
-    // 1. Simple stats
-    // ==============
-    document.getElementById('stat-online').textContent = '—';
+    // ============== SIMPLE STATS ==============
+    // Currently online (agar aap future mein API dein, yahan call laga sakte ho)
+    document.getElementById("stat-online").textContent = "—";
 
-    // Total Registered Users
+    // Total users
     fetch(`${API_BASE}/api/admin/total-users`)
       .then(res => res.json())
       .then(data => {
-        document.getElementById('stat-users').textContent = data.total_users || '0';
+        document.getElementById("stat-users").textContent =
+          data.total_users || "0";
       })
       .catch(() => {
-        document.getElementById('stat-users').textContent = '0';
+        document.getElementById("stat-users").textContent = "0";
       });
 
-    // ==============================
-    // 2. Men vs Women Wishlist Chart
-    // ==============================
-    fetch(`${API_BASE}/api/admin/wishlist-gender`)
-      .then(res => res.json())
-      .then(data => {
-        const labels = Object.keys(data);
-        const counts = Object.values(data);
-        new Chart(document.getElementById('genderWishlistChart'), {
-          type: 'pie',
-          data: {
-            labels,
-            datasets: [{
-              data: counts,
-              backgroundColor: ["#ad00e2", "#c2a1ff", "#ccc"]
-            }]
-          },
-          options: {
-            plugins: {
-              legend: { display: true, position: 'bottom' }
-            }
-          }
-        });
-      });
+    // Helper for chart text/grid colors
+    function chartColors() {
+      const isDark = document.body.classList.contains("dark-mode");
+      return {
+        grid: isDark ? "#3f3553" : "#eeeeee",
+        ticks: isDark ? "#f9f5ff" : "#333333",
+        legend: isDark ? "#f9f5ff" : "#333333"
+      };
+    }
 
-    // ============================
-    // 3. Most Wishlisted Product
-    // ============================
-    fetch(`${API_BASE}/api/admin/most-wishlisted`)
-      .then(res => res.json())
-      .then(data => {
-        new Chart(document.getElementById('wishlistProductChart'), {
-          type: 'bar',
-          data: {
-            labels: data.labels,
-            datasets: [{
-              label: 'Wishlists',
-              data: data.counts,
-              borderRadius: 7,
-              backgroundColor: "#ad00e2"
-            }]
-          },
-          options: {
-            plugins: { legend: { display: false } },
-            scales: {
-              y: { beginAtZero: true, grid: { color: '#eee' } },
-              x: { grid: { display: false } }
-            }
-          }
-        });
+    // Rebuild charts on theme change (optional small helper)
+    let genderChart, wishlistChart, skinChart, ageChart;
+    function destroyCharts() {
+      [genderChart, wishlistChart, skinChart, ageChart].forEach(ch => {
+        if (ch) ch.destroy();
       });
+    }
 
-    // ============================
-    // 4. Skin Tone Distribution
-    // ============================
-    fetch(`${API_BASE}/api/admin/skin-tone`)
-      .then(res => res.json())
-      .then(data => {
-        new Chart(document.getElementById('skinToneChart'), {
-          type: 'pie',
-          data: {
-            labels: data.labels,
-            datasets: [{
-              data: data.counts,
-              backgroundColor: [
-                "#c2a1ff", "#ad00e2", "#ffa07a", "#90ee90",
-                "#20b2aa", "#e9967a", "#9370db", "#c7b198"
+    // ================== GENDER WISHLIST ==================
+    function loadGenderChart() {
+      fetch(`${API_BASE}/api/admin/wishlist-gender`)
+        .then(res => res.json())
+        .then(data => {
+          const labels = Object.keys(data || {});
+          const counts = Object.values(data || {});
+          const ctx = document.getElementById("genderWishlistChart");
+          if (!ctx) return;
+
+          const colors = ["#ad00e2", "#c2a1ff", "#fdb7ff", "#ccc"];
+
+          genderChart = new Chart(ctx, {
+            type: "pie",
+            data: {
+              labels,
+              datasets: [
+                {
+                  data: counts,
+                  backgroundColor: colors.slice(0, labels.length)
+                }
               ]
-            }]
-          },
-          options: {
-            plugins: {
-              legend: { display: true, position: 'right' }
+            },
+            options: {
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "bottom",
+                  labels: { color: chartColors().legend }
+                }
+              }
             }
-          }
-        });
-      });
-
-    // ============================
-    // 5. Age Group Distribution
-    // ============================
-    fetch(`${API_BASE}/api/admin/age-group`)
-      .then(res => res.json())
-      .then(data => {
-        new Chart(document.getElementById('ageChart'), {
-          type: 'bar',
-          data: {
-            labels: data.labels,
-            datasets: [{
-              label: 'Users',
-              data: data.counts,
-              borderRadius: 8,
-              backgroundColor: "#ad00e2"
-            }]
-          },
-          options: {
-            plugins: { legend: { display: false } },
-            scales: {
-              y: { beginAtZero: true, grid: { color: '#eee' } },
-              x: { grid: { display: false } }
-            }
-          }
-        });
-      });
-
-    // ==============================
-    // 6. Recent Wishlist Activity
-    // ==============================
-    fetch(`${API_BASE}/api/admin/recent-wishlist`)
-      .then(res => res.json())
-      .then(list => {
-        const activityList = document.getElementById('activity-list');
-        activityList.innerHTML = '';
-        if (!list.length) {
-          activityList.innerHTML = '<li>No activity found.</li>';
-        } else {
-          list.forEach(a => {
-            const li = document.createElement('li');
-            li.innerHTML = `<strong>${a.user}</strong> wishlisted <span style="color:var(--accent);font-weight:600">${a.product}</span>`;
-            activityList.appendChild(li);
           });
-        }
-      });
+        })
+        .catch(() => {
+          // silent fail, card khali rahega
+        });
+    }
 
-    // ============================================
-    // 7. Chatbot Logs + Read more/Show less toggle
-    // ============================================
+    // ================== MOST WISHLISTED PRODUCT ==================
+    function loadWishlistProductChart() {
+      fetch(`${API_BASE}/api/admin/most-wishlisted`)
+        .then(res => res.json())
+        .then(data => {
+          const labels = data.labels || [];
+          const counts = data.counts || [];
+          const ctx = document.getElementById("wishlistProductChart");
+          if (!ctx) return;
+
+          const cols = chartColors();
+
+          wishlistChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels,
+              datasets: [
+                {
+                  label: "Wishlists",
+                  data: counts,
+                  borderRadius: 7,
+                  backgroundColor: "#ad00e2"
+                }
+              ]
+            },
+            options: {
+              plugins: {
+                legend: { display: false }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  grid: { color: cols.grid },
+                  ticks: { color: cols.ticks }
+                },
+                x: {
+                  grid: { display: false },
+                  ticks: { color: cols.ticks }
+                }
+              }
+            }
+          });
+        })
+        .catch(() => {});
+    }
+
+    // ================== SKIN TONE ==================
+    function loadSkinToneChart() {
+      fetch(`${API_BASE}/api/admin/skin-tone`)
+        .then(res => res.json())
+        .then(data => {
+          const labels = data.labels || [];
+          const counts = data.counts || [];
+          const ctx = document.getElementById("skinToneChart");
+          if (!ctx) return;
+
+          skinChart = new Chart(ctx, {
+            type: "pie",
+            data: {
+              labels,
+              datasets: [
+                {
+                  data: counts,
+                  backgroundColor: [
+                    "#c2a1ff",
+                    "#ad00e2",
+                    "#ffa07a",
+                    "#90ee90",
+                    "#20b2aa",
+                    "#e9967a",
+                    "#9370db",
+                    "#c7b198"
+                  ]
+                }
+              ]
+            },
+            options: {
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "right",
+                  labels: { color: chartColors().legend }
+                }
+              }
+            }
+          });
+        })
+        .catch(() => {});
+    }
+
+    // ================== AGE GROUP ==================
+    function loadAgeChart() {
+      fetch(`${API_BASE}/api/admin/age-group`)
+        .then(res => res.json())
+        .then(data => {
+          const labels = data.labels || [];
+          const counts = data.counts || [];
+          const ctx = document.getElementById("ageChart");
+          if (!ctx) return;
+
+          const cols = chartColors();
+
+          ageChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels,
+              datasets: [
+                {
+                  label: "Users",
+                  data: counts,
+                  borderRadius: 8,
+                  backgroundColor: "#ad00e2"
+                }
+              ]
+            },
+            options: {
+              plugins: { legend: { display: false } },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  grid: { color: cols.grid },
+                  ticks: { color: cols.ticks }
+                },
+                x: {
+                  grid: { display: false },
+                  ticks: { color: cols.ticks }
+                }
+              }
+            }
+          });
+        })
+        .catch(() => {});
+    }
+
+    function loadAllCharts() {
+      destroyCharts();
+      loadGenderChart();
+      loadWishlistProductChart();
+      loadSkinToneChart();
+      loadAgeChart();
+    }
+
+    // ================== RECENT WISHLIST ACTIVITY ==================
+    function loadWishlistActivity() {
+      fetch(`${API_BASE}/api/admin/recent-wishlist`)
+        .then(res => res.json())
+        .then(list => {
+          const activityList = document.getElementById("activity-list");
+          activityList.innerHTML = "";
+          if (!list || !list.length) {
+            activityList.innerHTML = "<li>No activity found.</li>";
+          } else {
+            list.forEach(a => {
+              const li = document.createElement("li");
+              li.innerHTML = `<strong>${a.user}</strong> wishlisted <span style="color:var(--accent);font-weight:600">${a.product}</span>`;
+              activityList.appendChild(li);
+            });
+          }
+        })
+        .catch(() => {
+          const activityList = document.getElementById("activity-list");
+          activityList.innerHTML = "<li>Could not fetch activity.</li>";
+        });
+    }
+
+    // ================== CHATBOT LOGS + READ MORE ==================
     function addReadMoreToBotReplies() {
-      document.querySelectorAll('.bot-reply-wrapper').forEach(wrapper => {
-        const existingBtn = wrapper.parentNode.querySelector('.read-more-btn');
+      document.querySelectorAll(".bot-reply-wrapper").forEach(wrapper => {
+        const existingBtn = wrapper.parentNode.querySelector(".read-more-btn");
         if (existingBtn) existingBtn.remove();
 
-        wrapper.classList.remove('expanded');
-        wrapper.style.maxHeight = '4.5em';
-        wrapper.style.overflow = 'hidden';
+        wrapper.classList.remove("expanded");
+        wrapper.style.maxHeight = "4.5em";
+        wrapper.style.overflow = "hidden";
 
         setTimeout(() => {
           const fullHeight = wrapper.scrollHeight;
           const limitedHeight = wrapper.clientHeight;
 
-          if (fullHeight > limitedHeight) {
-            const btn = document.createElement('span');
-            btn.textContent = 'Read more';
-            btn.className = 'read-more-btn';
+          if (fullHeight > limitedHeight + 2) {
+            const btn = document.createElement("span");
+            btn.textContent = "Read more";
+            btn.className = "read-more-btn";
 
-            btn.addEventListener('click', () => {
-              if (wrapper.classList.contains('expanded')) {
-                wrapper.classList.remove('expanded');
-                wrapper.style.maxHeight = '4.5em';
-                wrapper.style.overflow = 'hidden';
-                btn.textContent = 'Read more';
+            btn.addEventListener("click", () => {
+              if (wrapper.classList.contains("expanded")) {
+                wrapper.classList.remove("expanded");
+                wrapper.style.maxHeight = "4.5em";
+                wrapper.style.overflow = "hidden";
+                btn.textContent = "Read more";
               } else {
-                wrapper.classList.add('expanded');
-                wrapper.style.maxHeight = 'none';
-                wrapper.style.overflow = 'visible';
-                btn.textContent = 'Show less';
+                wrapper.classList.add("expanded");
+                wrapper.style.maxHeight = "none";
+                wrapper.style.overflow = "visible";
+                btn.textContent = "Show less";
               }
             });
 
             wrapper.parentNode.appendChild(btn);
           } else {
-            wrapper.classList.add('expanded');
-            wrapper.style.maxHeight = 'none';
-            wrapper.style.overflow = 'visible';
+            wrapper.classList.add("expanded");
+            wrapper.style.maxHeight = "none";
+            wrapper.style.overflow = "visible";
           }
         }, 10);
       });
     }
 
-    function fetchChatbotLogs() {
+    function loadChatbotLogs() {
       fetch(`${API_BASE}/api/admin/chatbot-logs`)
         .then(res => res.json())
         .then(logs => {
-          const chatbotList = document.getElementById('chatbot-list');
-          chatbotList.innerHTML = '';
-          if (!logs.length) {
-            chatbotList.innerHTML = '<li>No chatbot logs found.</li>';
+          const chatbotList = document.getElementById("chatbot-list");
+          chatbotList.innerHTML = "";
+          if (!logs || !logs.length) {
+            chatbotList.innerHTML = "<li>No chatbot logs found.</li>";
           } else {
             logs.forEach(a => {
-              const li = document.createElement('li');
+              const li = document.createElement("li");
               li.innerHTML = `
                 <strong>${a.user}</strong>
                 <span style="color:var(--accent2); font-weight:600;"> asked:</span>
@@ -628,61 +904,61 @@ body.dark-mode {
           }
         })
         .catch(() => {
-          const chatbotList = document.getElementById('chatbot-list');
-          chatbotList.innerHTML = '<li>Could not fetch chatbot logs.</li>';
+          const chatbotList = document.getElementById("chatbot-list");
+          chatbotList.innerHTML = "<li>Could not fetch chatbot logs.</li>";
         });
     }
 
-    fetchChatbotLogs();
-
-    // =================
-    // 8. Dark mode toggle
-    // =================
-    const darkBtn = document.getElementById('darkModeToggle');
+    // ============== DARK MODE TOGGLE ==============
+    const darkBtn = document.getElementById("darkModeToggle");
     const bodyEl = document.body;
 
     function setDarkBtn(isDark) {
       darkBtn.innerHTML = isDark
-        ? '<span style="font-size:1.18em;">☀️</span> Light Mode'
-        : '<span style="font-size:1.18em;">🌙</span> Dark Mode';
+        ? '<span style="font-size:1.18em;">☀️</span><span>Light Mode</span>'
+        : '<span style="font-size:1.18em;">🌙</span><span>Dark Mode</span>';
     }
 
-    if (localStorage.getItem('darkMode') === 'true') {
-      bodyEl.classList.add('dark-mode');
+    if (localStorage.getItem("darkMode") === "true") {
+      bodyEl.classList.add("dark-mode");
       setDarkBtn(true);
     } else {
       setDarkBtn(false);
     }
 
-    darkBtn.addEventListener('click', () => {
-      const isDark = bodyEl.classList.toggle('dark-mode');
-      localStorage.setItem('darkMode', isDark);
+    darkBtn.addEventListener("click", () => {
+      const isDark = bodyEl.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", isDark);
       setDarkBtn(isDark);
+      loadAllCharts(); // theme change → redraw charts with new colors
     });
 
-    // ======================
-    // 9. Logout + modal flow
-    // ======================
-    const logoutBtn = document.getElementById('logoutBtn');
-    const logoutModal = document.getElementById('logoutModal');
-    const logoutModalOk = document.getElementById('logoutModalOk');
+    // ====================== LOGOUT FLOW ======================
+    const logoutBtn = document.getElementById("logoutBtn");
+    const logoutModal = document.getElementById("logoutModal");
+    const logoutModalOk = document.getElementById("logoutModalOk");
 
     function performLogout() {
-      localStorage.removeItem('userEmail');
-      localStorage.removeItem('isAdmin');
-      localStorage.removeItem('isLoggedIn');
-      // (keep darkMode if you want persistent theme)
-      window.location.href = 'login.html';
+      localStorage.removeItem("userEmail");
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("isLoggedIn");
+      // darkMode ko rehne dete hain so theme stay
+      window.location.href = "login.html";
     }
 
-    logoutBtn.addEventListener('click', () => {
-      logoutModal.classList.add('active');
+    logoutBtn.addEventListener("click", () => {
+      logoutModal.classList.add("active");
     });
 
-    logoutModalOk.addEventListener('click', () => {
-      logoutModal.classList.remove('active');
+    logoutModalOk.addEventListener("click", () => {
+      logoutModal.classList.remove("active");
       performLogout();
     });
+
+    // ================== INITIAL LOAD ==================
+    loadAllCharts();
+    loadWishlistActivity();
+    loadChatbotLogs();
   </script>
 </body>
 </html>

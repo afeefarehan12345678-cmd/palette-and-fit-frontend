@@ -394,6 +394,122 @@
         font-size: 1.4rem;
       }
     }
+    /* ===== Extra responsive patch for User Conversation page ===== */
+
+/* Tablets & small laptops */
+@media (max-width: 900px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .back-link {
+    align-self: flex-start;
+  }
+
+  .chat-wrapper {
+    max-height: none; /* allow full-height scrolling on shorter screens */
+  }
+}
+
+/* Phones in portrait */
+@media (max-width: 600px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  .main-panel {
+    margin-left: 0 !important;
+    padding: 1.2rem 0.8rem 0.9rem 0.8rem;
+    gap: 1rem;
+  }
+
+  .top-bar {
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .back-link {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.88rem;
+  }
+
+  .chat-wrapper {
+    padding: 1rem 0.7rem 0.9rem 0.7rem;
+  }
+
+  .bubble {
+    max-width: 100%;
+    font-size: 0.92rem;
+  }
+
+  .logout-modal-box {
+    min-width: 0;
+    max-width: 95vw;
+    padding: 1.1rem 0.8rem 1rem 0.8rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .admin-root {
+    flex-direction: column;
+  }
+
+  /* Compact top bar sidebar (extends your existing 700px rules) */
+  .sidebar {
+    padding: 0.6rem 0.7rem;
+    gap: 0.5rem;
+  }
+
+  .sidebar .logo {
+    font-size: 1.15rem;
+  }
+
+  .sidebar-nav {
+    gap: 0.4rem;
+  }
+
+  .sidebar-nav a {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .darkmode-btn,
+  .logout-btn {
+    padding: 0.4rem 0.55rem;
+    font-size: 0.78rem;
+  }
+
+  .top-title {
+    font-size: 1.35rem;
+  }
+
+  .top-sub {
+    font-size: 0.9rem;
+  }
+}
+
+/* Ultra-small screens */
+@media (max-width: 360px) {
+  html,
+  body {
+    font-size: 13px;
+  }
+
+  .bubble {
+    padding: 0.45rem 0.7rem;
+  }
+
+  .logout-modal-box {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+}
+
   </style>
 </head>
 <body>

@@ -449,6 +449,9 @@
         ? "http://127.0.0.1:5001"
         : "https://palette-and-fit-backend.onrender.com";
 
+    // 🔐 Admin secret for protected backend routes
+    const ADMIN_SECRET = "palfit_admin_2025_supersecret";
+
     // Admin guard
     (function guardAdminUserChat() {
       const email = localStorage.getItem("userEmail");
@@ -522,7 +525,11 @@
     async function loadConversationForUser(userIdOrEmail) {
       chatWrapper.innerHTML = "<div class='no-chat'>Loading conversation...</div>";
       try {
-        const res = await fetch(`${API_BASE}/api/messages`);
+        const res = await fetch(`${API_BASE}/api/messages`, {
+          headers: {
+            "X-Admin-Secret": ADMIN_SECRET
+          }
+        });
         if (!res.ok) throw new Error("Failed to fetch messages");
         const allMsgs = await res.json();
 

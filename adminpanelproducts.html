@@ -829,6 +829,9 @@
         ? "http://127.0.0.1:5001"
         : "https://palette-and-fit-backend.onrender.com";
 
+    // 🔐 Admin secret – same as backend .env
+    const ADMIN_SECRET = "palfit_admin_2025_supersecret";
+
     (function guardAdminProducts() {
       const email = localStorage.getItem("userEmail");
       const isAdmin = localStorage.getItem("isAdmin") === "true";
@@ -897,8 +900,13 @@
     const categoryFilter = document.getElementById("categoryFilter");
 
     function loadProducts() {
-      fetch(`${API_BASE}/api/products`)
-        .then(res => res.json())
+      fetch(`${API_BASE}/api/products`, {
+        headers: { "X-Admin-Secret": ADMIN_SECRET }
+      })
+        .then(res => {
+          if (!res.ok) throw new Error("Failed to fetch products");
+          return res.json();
+        })
         .then(products => {
           allProducts = products || [];
           displayProducts();
@@ -1037,6 +1045,7 @@
           uploads.push(
             fetch(`${API_BASE}/api/products`, {
               method: "POST",
+              headers: { "X-Admin-Secret": ADMIN_SECRET },
               body: formData
             }).then(res => res.json())
           );
@@ -1058,7 +1067,10 @@
         // Only URL
         fetch(`${API_BASE}/api/products`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "X-Admin-Secret": ADMIN_SECRET
+          },
           body: JSON.stringify({ title, description, image_url: imageUrl, gender, category })
         })
           .then(res => res.json())
@@ -1097,7 +1109,8 @@
     removeConfirmBtn.addEventListener("click", () => {
       if (!productToDeleteId) return;
       fetch(`${API_BASE}/api/products/${productToDeleteId}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: { "X-Admin-Secret": ADMIN_SECRET }
       })
         .then(res => res.json())
         .then(r => {
@@ -1167,6 +1180,7 @@
 
         fetch(`${API_BASE}/api/products/${editingProductId}`, {
           method: "PUT",
+          headers: { "X-Admin-Secret": ADMIN_SECRET },
           body: formData
         })
           .then(res => res.json())
@@ -1184,7 +1198,10 @@
         // Only change text / URL
         fetch(`${API_BASE}/api/products/${editingProductId}`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "X-Admin-Secret": ADMIN_SECRET
+          },
           body: JSON.stringify({ title, description, image_url })
         })
           .then(res => res.json())

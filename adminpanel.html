@@ -591,6 +591,9 @@
         ? "http://127.0.0.1:5001"
         : "https://palette-and-fit-backend.onrender.com";
 
+    // 🔐 Same admin secret used on other admin pages
+    const ADMIN_SECRET = "palfit_admin_2025_supersecret";
+
     (function guardAdminPanel() {
       const email = localStorage.getItem("userEmail");
       const isAdmin = localStorage.getItem("isAdmin") === "true";
@@ -601,12 +604,17 @@
     })();
 
     // ============== SIMPLE STATS ==============
-    // Currently online (agar aap future mein API dein, yahan call laga sakte ho)
+    // Currently online – placeholder for future API
     document.getElementById("stat-online").textContent = "—";
 
     // Total users
-    fetch(`${API_BASE}/api/admin/total-users`)
-      .then(res => res.json())
+    fetch(`${API_BASE}/api/admin/total-users`, {
+      headers: { "X-Admin-Secret": ADMIN_SECRET }
+    })
+      .then(res => {
+        if (!res.ok) throw new Error("Failed total-users");
+        return res.json();
+      })
       .then(data => {
         document.getElementById("stat-users").textContent =
           data.total_users || "0";
@@ -625,7 +633,7 @@
       };
     }
 
-    // Rebuild charts on theme change (optional small helper)
+    // Rebuild charts on theme change
     let genderChart, wishlistChart, skinChart, ageChart;
     function destroyCharts() {
       [genderChart, wishlistChart, skinChart, ageChart].forEach(ch => {
@@ -635,13 +643,15 @@
 
     // ================== GENDER WISHLIST ==================
     function loadGenderChart() {
-      fetch(`${API_BASE}/api/admin/wishlist-gender`)
-        .then(res => res.json())
+      fetch(`${API_BASE}/api/admin/wishlist-gender`, {
+        headers: { "X-Admin-Secret": ADMIN_SECRET }
+      })
+        .then(res => res.ok ? res.json() : {})
         .then(data => {
           const labels = Object.keys(data || {});
           const counts = Object.values(data || {});
           const ctx = document.getElementById("genderWishlistChart");
-          if (!ctx) return;
+          if (!ctx || !labels.length) return;
 
           const colors = ["#ad00e2", "#c2a1ff", "#fdb7ff", "#ccc"];
 
@@ -667,20 +677,20 @@
             }
           });
         })
-        .catch(() => {
-          // silent fail, card khali rahega
-        });
+        .catch(() => {});
     }
 
     // ================== MOST WISHLISTED PRODUCT ==================
     function loadWishlistProductChart() {
-      fetch(`${API_BASE}/api/admin/most-wishlisted`)
-        .then(res => res.json())
+      fetch(`${API_BASE}/api/admin/most-wishlisted`, {
+        headers: { "X-Admin-Secret": ADMIN_SECRET }
+      })
+        .then(res => res.ok ? res.json() : {})
         .then(data => {
           const labels = data.labels || [];
           const counts = data.counts || [];
           const ctx = document.getElementById("wishlistProductChart");
-          if (!ctx) return;
+          if (!ctx || !labels.length) return;
 
           const cols = chartColors();
 
@@ -720,13 +730,15 @@
 
     // ================== SKIN TONE ==================
     function loadSkinToneChart() {
-      fetch(`${API_BASE}/api/admin/skin-tone`)
-        .then(res => res.json())
+      fetch(`${API_BASE}/api/admin/skin-tone`, {
+        headers: { "X-Admin-Secret": ADMIN_SECRET }
+      })
+        .then(res => res.ok ? res.json() : {})
         .then(data => {
           const labels = data.labels || [];
           const counts = data.counts || [];
           const ctx = document.getElementById("skinToneChart");
-          if (!ctx) return;
+          if (!ctx || !labels.length) return;
 
           skinChart = new Chart(ctx, {
             type: "pie",
@@ -764,13 +776,15 @@
 
     // ================== AGE GROUP ==================
     function loadAgeChart() {
-      fetch(`${API_BASE}/api/admin/age-group`)
-        .then(res => res.json())
+      fetch(`${API_BASE}/api/admin/age-group`, {
+        headers: { "X-Admin-Secret": ADMIN_SECRET }
+      })
+        .then(res => res.ok ? res.json() : {})
         .then(data => {
           const labels = data.labels || [];
           const counts = data.counts || [];
           const ctx = document.getElementById("ageChart");
-          if (!ctx) return;
+          if (!ctx || !labels.length) return;
 
           const cols = chartColors();
 
@@ -816,8 +830,10 @@
 
     // ================== RECENT WISHLIST ACTIVITY ==================
     function loadWishlistActivity() {
-      fetch(`${API_BASE}/api/admin/recent-wishlist`)
-        .then(res => res.json())
+      fetch(`${API_BASE}/api/admin/recent-wishlist`, {
+        headers: { "X-Admin-Secret": ADMIN_SECRET }
+      })
+        .then(res => res.ok ? res.json() : [])
         .then(list => {
           const activityList = document.getElementById("activity-list");
           activityList.innerHTML = "";
@@ -881,8 +897,10 @@
     }
 
     function loadChatbotLogs() {
-      fetch(`${API_BASE}/api/admin/chatbot-logs`)
-        .then(res => res.json())
+      fetch(`${API_BASE}/api/admin/chatbot-logs`, {
+        headers: { "X-Admin-Secret": ADMIN_SECRET }
+      })
+        .then(res => res.ok ? res.json() : [])
         .then(logs => {
           const chatbotList = document.getElementById("chatbot-list");
           chatbotList.innerHTML = "";
@@ -942,7 +960,7 @@
       localStorage.removeItem("userEmail");
       localStorage.removeItem("isAdmin");
       localStorage.removeItem("isLoggedIn");
-      // darkMode ko rehne dete hain so theme stay
+      // darkMode setting ko rehne dete hain
       window.location.href = "login.html";
     }
 

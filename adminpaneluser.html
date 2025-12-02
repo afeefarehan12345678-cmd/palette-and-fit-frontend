@@ -681,6 +681,9 @@
         ? "http://127.0.0.1:5001"
         : "https://palette-and-fit-backend.onrender.com";
 
+    // 🔐 Admin secret (same as backend .env)
+    const ADMIN_SECRET = "palfit_admin_2025_supersecret";
+
     // ========= Simple admin guard =========
     (function guardAdminUsers() {
       const email = localStorage.getItem("userEmail");
@@ -748,7 +751,9 @@
     // ========= Fetch users =========
     async function fetchUsers() {
       try {
-        const res = await fetch(`${API_BASE}/api/users`);
+        const res = await fetch(`${API_BASE}/api/users`, {
+          headers: { "X-Admin-Secret": ADMIN_SECRET }
+        });
         if (!res.ok) throw new Error("Failed to fetch users");
         users = await res.json();
         renderUsersTable(searchInput.value);
@@ -761,7 +766,9 @@
     // ========= Fetch messages =========
     async function fetchMessages() {
       try {
-        const res = await fetch(`${API_BASE}/api/messages`);
+        const res = await fetch(`${API_BASE}/api/messages`, {
+          headers: { "X-Admin-Secret": ADMIN_SECRET }
+        });
         if (!res.ok) throw new Error("Failed to fetch messages");
         messages = await res.json();
 
@@ -862,7 +869,8 @@
         setTimeout(async () => {
           try {
             const res = await fetch(`${API_BASE}/api/users/${userIdToDelete}`, {
-              method: "DELETE"
+              method: "DELETE",
+              headers: { "X-Admin-Secret": ADMIN_SECRET }
             });
             if (!res.ok) throw new Error("Failed to delete user");
             users = users.filter(u => String(u.id) !== String(userIdToDelete));

@@ -1391,6 +1391,39 @@
         flex-direction: column;
       }
     }
+    @media (max-width: 1200px) {
+  header.guest-header {
+    padding: 0.8rem 1.2rem;
+    justify-content: flex-start;   /* ya is line ko rehne do, koi issue nahi */
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .header-actions {
+    gap: 0.4rem;
+    margin-left: auto;             /* ⭐ ye new line add karo */
+  }
+
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid rgba(173, 0, 226, 0.25);
+    background: transparent;
+  }
+
+  .header-actions .pill-btn {
+    min-width: 0;
+    padding-inline: 1.3rem;
+  }
+}
+
   </style>
 </head>
 <body>

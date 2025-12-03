@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
 
- 
-
   <style>
     :root {
       --sidebar-bg: #ffffff;
@@ -975,27 +973,6 @@
         <textarea id="editDesc" name="desc" maxlength="120" required></textarea>
       </div>
 
-      <!-- ✅ New: edit gender -->
-      <div class="form-group">
-        <label for="editGender">Gender</label>
-        <select id="editGender" name="gender" required>
-          <option value="">Select</option>
-          <option value="women">Women</option>
-          <option value="men">Men</option>
-        </select>
-      </div>
-
-      <!-- ✅ New: edit category -->
-      <div class="form-group">
-        <label for="editCategory">Category</label>
-        <select id="editCategory" name="category" required>
-          <option value="summer">Summer</option>
-          <option value="winter">Winter</option>
-          <option value="wedding">Wedding</option>
-          <option value="vacation">Vacation</option>
-        </select>
-      </div>
-
       <div class="form-group">
         <label for="editImage">Image URL</label>
         <input type="url" id="editImage" name="image_url" placeholder="Paste an image link…">
@@ -1312,18 +1289,7 @@
 
         Promise.all(uploads)
           .then(results => {
-            // robust: handle single objects or arrays from backend
-            let success = 0;
-            results.forEach(r => {
-              if (Array.isArray(r)) {
-                r.forEach(item => {
-                  if (item && item.id) success++;
-                });
-              } else if (r && r.id) {
-                success++;
-              }
-            });
-
+            const success = results.filter(r => r && r.id).length;
             if (success > 0) {
               loadProducts();
               modalBg.classList.remove("active");
@@ -1416,13 +1382,6 @@
       document.getElementById("editTitle").value = product.title || "";
       document.getElementById("editDesc").value = product.description || "";
       document.getElementById("editImage").value = product.image_url || "";
-
-      // ✅ set gender & category in edit modal
-      const editGender = document.getElementById("editGender");
-      const editCategory = document.getElementById("editCategory");
-      editGender.value = product.gender || "";
-      editCategory.value = product.category || "summer"; // default if empty
-
       editImageFileInput.value = "";
       editModalBg.classList.add("active");
     }
@@ -1446,21 +1405,12 @@
       const title = document.getElementById("editTitle").value.trim();
       const description = document.getElementById("editDesc").value.trim();
       const image_url = document.getElementById("editImage").value.trim();
-      const gender = document.getElementById("editGender").value;
-      const category = document.getElementById("editCategory").value;
-
-      if (!gender || !category) {
-        alert("Please select gender and category.");
-        return;
-      }
 
       if (editImageFileInput.files.length > 0) {
         const formData = new FormData();
         formData.append("image_file", editImageFileInput.files[0]);
         formData.append("title", title);
         formData.append("description", description);
-        formData.append("gender", gender);
-        formData.append("category", category);
 
         fetch(`${API_BASE}/api/products/${editingProductId}`, {
           method: "PUT",
@@ -1485,7 +1435,7 @@
             "Content-Type": "application/json",
             "X-Admin-Secret": ADMIN_SECRET
           },
-          body: JSON.stringify({ title, description, image_url, gender, category })
+          body: JSON.stringify({ title, description, image_url })
         })
           .then(res => res.json())
           .then(r => {

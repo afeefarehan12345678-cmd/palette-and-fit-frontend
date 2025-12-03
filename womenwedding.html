@@ -1458,7 +1458,7 @@
   </footer>
 
   <!-- ===================== JS ========================= -->
-  <script>
+<script>
   document.addEventListener('DOMContentLoaded', function () {
     // ===== API base (with optional global override) =====
     const API_BASE = window.API_BASE_URL || "https://palette-and-fit-backend.onrender.com";
@@ -1861,9 +1861,17 @@
         const html = products.map(product => {
           const pid = product.product_id || product.id || product._id;
           const safeTitle = (product.title || '').replace(/\"/g, '&quot;');
+
+          const rawImage = product.image_url || "";
+          // ✅ image URL ko backend base ke saath fix kiya
+          const imgUrl =
+            rawImage.startsWith("http://") || rawImage.startsWith("https://")
+              ? rawImage
+              : API_BASE + (rawImage.startsWith("/") ? rawImage : "/" + rawImage);
+
           return `
             <div class="product-card" data-product-id="${pid}">
-              <img src="${product.image_url}" alt="${safeTitle}">
+              <img src="${imgUrl}" alt="${safeTitle}">
               <div class="title">${product.title}</div>
               <div class="desc">${product.description || ""}</div>
               <button class="wishlist-btn" title="Add to Wishlist">
@@ -1884,5 +1892,6 @@
     loadProducts();
   });
 </script>
+
 </body>
 </html>

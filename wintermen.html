@@ -1176,7 +1176,7 @@
   </footer>
 
   <!-- JS -->
- <script>
+<script>
   document.addEventListener('DOMContentLoaded', function () {
     // ✅ Use Render backend (with optional global override)
     const API_BASE = window.API_BASE_URL || "https://palette-and-fit-backend.onrender.com";
@@ -1460,16 +1460,27 @@
           root.innerHTML = "<div style='color:#ad00e2; font-weight:600; text-align:center;'>No products found!<br>Add products using your admin panel.<br>(Use category: <b>winter</b>)</div>";
           return;
         }
-        const html = products.map(product => `
-          <div class="product-card" data-product-id="${product.id}">
-            <img src="${product.image_url}" alt="${product.title}">
-            <div class="title">${product.title}</div>
-            <div class="desc">${product.description || ""}</div>
-            <button class="wishlist-btn" title="Add to Wishlist">
-              <span class="wishlist-heart">♡</span>
-            </button>
-          </div>
-        `).join("");
+
+        const html = products.map(product => {
+          const rawImage = product.image_url || "";
+          // ✅ image URL ko backend base ke saath fix kiya
+          const imgUrl =
+            rawImage.startsWith("http://") || rawImage.startsWith("https://")
+              ? rawImage
+              : API_BASE + (rawImage.startsWith("/") ? rawImage : "/" + rawImage);
+
+          return `
+            <div class="product-card" data-product-id="${product.id}">
+              <img src="${imgUrl}" alt="${product.title}">
+              <div class="title">${product.title}</div>
+              <div class="desc">${product.description || ""}</div>
+              <button class="wishlist-btn" title="Add to Wishlist">
+                <span class="wishlist-heart">♡</span>
+              </button>
+            </div>
+          `;
+        }).join("");
+
         root.innerHTML = html;
         attachCardClicks();
         await markWishlistActive();
@@ -1484,5 +1495,6 @@
     window.syncAuthState = syncAuthState;
   });
 </script>
+
 </body>
 </html>

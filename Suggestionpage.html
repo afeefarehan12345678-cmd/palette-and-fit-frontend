@@ -1221,6 +1221,21 @@ body.dark-mode .nav-dropdown.open .nav-dropdown-toggle {
   color: var(--accent) !important; /* on hover / when dropdown open */
 }
 
+/* Mobile prompts spacing fix */
+@media (max-width: 540px) {
+  .prompt-panel {
+    flex-direction: column;     /* ek column mein aa jayen */
+    align-items: stretch;
+    gap: 0.6rem;                /* har prompt ke beech space */
+  }
+
+  .prompt-panel .prompt {
+    width: 100%;                /* poori width le */
+    text-align: left;
+    padding: 0.55rem 0.9rem;    /* thoda sa extra padding */
+  }
+}
+
   </style>
 </head>
 <body>
